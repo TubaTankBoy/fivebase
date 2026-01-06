@@ -663,7 +663,7 @@
             </a>
             <nav class="nav-links">
                 <a href="#start">Start</a>
-                <a href="#installation">Installation</a>
+                <a href="#installation">Einrichtung</a>
                 <a href="#module">Module</a>
                 <a href="#commands">Commands</a>
                 <a href="#faq">FAQ</a>
@@ -678,8 +678,7 @@
                 <div class="sidebar-title">Erste Schritte</div>
                 <ul class="sidebar-links">
                     <li><a href="#start"><span class="icon">🏠</span> Übersicht</a></li>
-                    <li><a href="#installation"><span class="icon">📦</span> Installation</a></li>
-                    <li><a href="#konfiguration"><span class="icon">⚙️</span> Konfiguration</a></li>
+                    <li><a href="#installation"><span class="icon">🚀</span> Bot einrichten</a></li>
                     <li><a href="#dashboard"><span class="icon">🌐</span> Dashboard</a></li>
                 </ul>
             </div>
@@ -698,17 +697,8 @@
                 <div class="sidebar-title">Referenz</div>
                 <ul class="sidebar-links">
                     <li><a href="#commands"><span class="icon">💬</span> Commands</a></li>
-                    <li><a href="#buttons"><span class="icon">🔘</span> Buttons</a></li>
                     <li><a href="#rollen"><span class="icon">👥</span> Rollen</a></li>
                     <li><a href="#faq"><span class="icon">❓</span> FAQ</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Erweitert</div>
-                <ul class="sidebar-links">
-                    <li><a href="#troubleshooting"><span class="icon">🔧</span> Troubleshooting</a></li>
-                    <li><a href="#updates"><span class="icon">🔄</span> Updates</a></li>
                 </ul>
             </div>
         </aside>
@@ -769,126 +759,47 @@
                 </div>
             </section>
 
-            <!-- Installation -->
+            <!-- Einrichtung -->
             <section class="section" id="installation">
                 <div class="section-header">
-                    <div class="section-icon">📦</div>
-                    <h2>Installation</h2>
+                    <div class="section-icon">🚀</div>
+                    <h2>Bot einrichten</h2>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">📋</span>
-                        <h3>Voraussetzungen</h3>
-                    </div>
-                    <ul style="margin-left: 20px; color: var(--text-muted);">
-                        <li>Node.js 18 oder höher</li>
-                        <li>Discord Bot Token (<a href="https://discord.com/developers/applications" target="_blank" style="color: var(--primary);">Discord Developer Portal</a>)</li>
-                        <li>Discord OAuth2 Credentials</li>
-                        <li>Server/Hosting mit Port-Zugriff (Standard: 25575)</li>
-                    </ul>
-                </div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    In nur 3 einfachen Schritten ist der Bot auf deinem Server einsatzbereit!
+                </p>
 
                 <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">🚀</span>
-                        <h3>Schritt-für-Schritt Anleitung</h3>
-                    </div>
-
                     <ol class="steps">
                         <li class="step">
-                            <h4>Dateien entpacken</h4>
-                            <p>Entpacke das Archiv in dein gewünschtes Verzeichnis.</p>
-                            <div class="code-block">
-                                <code>tar -xzf fullbot-v6.tar.gz --strip-components=1</code>
-                            </div>
+                            <h4>Website besuchen & Bot hinzufügen</h4>
+                            <p>Gehe auf unsere Website und klicke auf <strong>"Bot hinzufügen"</strong>. 
+                            Wähle deinen Discord-Server aus und bestätige die Berechtigungen.</p>
                         </li>
                         <li class="step">
-                            <h4>Konfiguration erstellen</h4>
-                            <p>Kopiere die Beispiel-Konfiguration und füge deine Daten ein.</p>
-                            <div class="code-block">
-                                <code>cp config.example.json config.json</code>
-                            </div>
+                            <h4>Im Dashboard anmelden</h4>
+                            <p>Klicke auf <strong>"Dashboard"</strong> und melde dich mit deinem Discord-Account an. 
+                            Du siehst dann alle Server auf denen du Admin bist.</p>
                         </li>
                         <li class="step">
-                            <h4>Dependencies installieren</h4>
-                            <p>Installiere alle benötigten Node.js Pakete.</p>
-                            <div class="code-block">
-                                <code>npm install</code>
-                            </div>
-                        </li>
-                        <li class="step">
-                            <h4>Bot starten</h4>
-                            <p>Starte den Bot und überprüfe die Konsole auf Fehler.</p>
-                            <div class="code-block">
-                                <code>npm start</code>
-                            </div>
+                            <h4>Module aktivieren & konfigurieren</h4>
+                            <p>Wähle deinen Server aus, aktiviere die gewünschten Module und stelle 
+                            Rollen, Kanäle und andere Optionen ein. Fertig!</p>
                         </li>
                     </ol>
                 </div>
-            </section>
 
-            <!-- Konfiguration -->
-            <section class="section" id="konfiguration">
-                <div class="section-header">
-                    <div class="section-icon">⚙️</div>
-                    <h2>Konfiguration</h2>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">📄</span>
-                        <h3>config.json</h3>
-                    </div>
-                    <p style="color: var(--text-muted); margin-bottom: 15px;">Die Hauptkonfigurationsdatei für den Bot.</p>
-
-                    <div class="code-block">
-<code>{
-  <span class="string">"token"</span>: <span class="string">"DEIN_BOT_TOKEN"</span>,
-  <span class="string">"oauth"</span>: {
-    <span class="string">"clientId"</span>: <span class="string">"DEINE_CLIENT_ID"</span>,
-    <span class="string">"clientSecret"</span>: <span class="string">"DEIN_CLIENT_SECRET"</span>,
-    <span class="string">"redirectUri"</span>: <span class="string">"http://deine-domain:25575/callback"</span>,
-    <span class="string">"sessionSecret"</span>: <span class="string">"ein-sicherer-geheimer-schluessel"</span>,
-    <span class="string">"baseUrl"</span>: <span class="string">"http://deine-domain:25575"</span>
-  }
-}</code>
-                    </div>
-                </div>
-
-                <div class="alert alert-warning">
-                    <span class="alert-icon">⚠️</span>
+                <div class="alert alert-success">
+                    <span class="alert-icon">✅</span>
                     <div>
-                        <strong>Wichtig:</strong> Teile niemals deinen Bot-Token oder Client-Secret! Diese Daten geben vollen Zugriff auf deinen Bot.
+                        <strong>Das war's!</strong> Der Bot ist sofort einsatzbereit. 
+                        Alle Änderungen im Dashboard werden direkt übernommen - kein Neustart nötig!
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">🔑</span>
-                        <h3>OAuth2 einrichten</h3>
-                    </div>
-                    <ol class="steps">
-                        <li class="step">
-                            <h4>Discord Developer Portal öffnen</h4>
-                            <p>Gehe zu <a href="https://discord.com/developers/applications" target="_blank" style="color: var(--primary);">discord.com/developers/applications</a></p>
-                        </li>
-                        <li class="step">
-                            <h4>Application auswählen</h4>
-                            <p>Wähle deine Bot-Application oder erstelle eine neue.</p>
-                        </li>
-                        <li class="step">
-                            <h4>OAuth2 Einstellungen</h4>
-                            <p>Gehe zu "OAuth2" → "General" und füge deinen Redirect URI hinzu:<br>
-                            <code>http://deine-domain:25575/callback</code></p>
-                        </li>
-                        <li class="step">
-                            <h4>Credentials kopieren</h4>
-                            <p>Kopiere Client ID und Client Secret in deine config.json.</p>
-                        </li>
-                    </ol>
                 </div>
             </section>
+
+
 
             <!-- Dashboard -->
             <section class="section" id="dashboard">
@@ -1581,109 +1492,19 @@
                 </div>
             </section>
 
-            <!-- Troubleshooting -->
-            <section class="section" id="troubleshooting">
-                <div class="section-header">
-                    <div class="section-icon">🔧</div>
-                    <h2>Troubleshooting</h2>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">❌</span>
-                        <h3>Häufige Fehler</h3>
-                    </div>
-
-                    <div class="alert alert-danger" style="margin-bottom: 15px;">
-                        <span class="alert-icon">🔴</span>
-                        <div>
-                            <strong>Bot startet nicht / Token invalid</strong><br>
-                            Prüfe ob dein Bot-Token in der config.json korrekt ist. Generiere ggf. einen neuen im Discord Developer Portal.
-                        </div>
-                    </div>
-
-                    <div class="alert alert-danger" style="margin-bottom: 15px;">
-                        <span class="alert-icon">🔴</span>
-                        <div>
-                            <strong>Dashboard zeigt keine Server</strong><br>
-                            Du musst Administrator-Berechtigung auf dem Server haben UND der Bot muss auf dem Server sein.
-                        </div>
-                    </div>
-
-                    <div class="alert alert-danger" style="margin-bottom: 15px;">
-                        <span class="alert-icon">🔴</span>
-                        <div>
-                            <strong>OAuth2 Fehler / Redirect mismatch</strong><br>
-                            Stelle sicher dass dein redirectUri in der config.json EXAKT dem im Discord Developer Portal entspricht.
-                        </div>
-                    </div>
-
-                    <div class="alert alert-danger">
-                        <span class="alert-icon">🔴</span>
-                        <div>
-                            <strong>Rollen werden nicht vergeben</strong><br>
-                            Der Bot braucht die "Manage Roles" Berechtigung und seine Rolle muss ÜBER der zu vergebenden Rolle sein.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Updates -->
-            <section class="section" id="updates">
-                <div class="section-header">
-                    <div class="section-icon">🔄</div>
-                    <h2>Updates</h2>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="emoji">📦</span>
-                        <h3>Update-Anleitung</h3>
-                    </div>
-                    
-                    <ol class="steps">
-                        <li class="step">
-                            <h4>Bot stoppen</h4>
-                            <p>Stoppe den laufenden Bot-Prozess</p>
-                        </li>
-                        <li class="step">
-                            <h4>Backup erstellen</h4>
-                            <p>Sichere deine <code>config.json</code> und den <code>data/</code> Ordner</p>
-                        </li>
-                        <li class="step">
-                            <h4>Neue Version entpacken</h4>
-                            <div class="code-block">
-                                <code>tar -xzf fullbot-vX.tar.gz --strip-components=1</code>
-                            </div>
-                        </li>
-                        <li class="step">
-                            <h4>Bot starten</h4>
-                            <div class="code-block">
-                                <code>npm start</code>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="alert alert-success">
-                    <span class="alert-icon">✅</span>
-                    <div>
-                        <strong>Tipp:</strong> Deine Daten in <code>data/database.json</code> und <code>config.json</code> bleiben beim Update erhalten, 
-                        solange du sie nicht überschreibst!
-                    </div>
-                </div>
-            </section>
 
             <!-- Footer -->
             <footer class="footer">
                 <div class="footer-links">
                     <a href="#start">Start</a>
-                    <a href="#installation">Installation</a>
-                    <a href="#module">Module</a>
+                    <a href="#installation">Einrichtung</a>
+                    <a href="#stempelsystem">Stempeln</a>
+                    <a href="#ticketsystem">Tickets</a>
                     <a href="#commands">Commands</a>
                     <a href="#faq">FAQ</a>
                 </div>
-                <p>FiveBase Bot Wiki • Erstellt mit ❤️</p>
+                <p>FiveBase Bot Wiki • Made with ❤️ for FiveM</p>
             </footer>
         </main>
     </div>
