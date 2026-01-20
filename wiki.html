@@ -574,6 +574,8 @@
                 <a href="#dashboard-tickets" class="sidebar-link"><i class="fa-solid fa-ticket"></i> Ticketsystem</a>
                 <a href="#dashboard-dienstnummern" class="sidebar-link"><i class="fa-solid fa-list-ol"></i> Dienstnummern</a>
                 <a href="#dashboard-personal" class="sidebar-link"><i class="fa-solid fa-folder-open"></i> Personal</a>
+                <a href="#dashboard-teamlist" class="sidebar-link"><i class="fa-solid fa-users-rectangle"></i> Teamliste</a>
+                <a href="#dashboard-einstellung" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Einstellung</a>
             </div>
 
             <div class="sidebar-section">
@@ -584,6 +586,8 @@
                 <a href="#personalverwaltung" class="sidebar-link"><i class="fa-solid fa-users"></i> Personalverwaltung</a>
                 <a href="#urlaubssystem" class="sidebar-link"><i class="fa-solid fa-umbrella-beach"></i> Urlaubssystem</a>
                 <a href="#verwarnungen" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Verwarnungen</a>
+                <a href="#teamlistsystem" class="sidebar-link"><i class="fa-solid fa-users-rectangle"></i> Teamliste</a>
+                <a href="#einstellungssystem" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Einstellungssystem</a>
             </div>
 
             <div class="sidebar-section">
@@ -616,7 +620,7 @@
                 <p class="lead">Willkommen zur offiziellen Dokumentation des FiveBase Discord Bots. Hier findest du alles, was du wissen musst, um den Bot optimal für deine Fraktion einzurichten und zu nutzen.</p>
 
                 <div class="info-box success">
-                    <div class="info-box-title"><i class="fa-solid fa-circle-check"></i> Kostenlos </div>
+                    <div class="info-box-title"><i class="fa-solid fa-circle-check"></i> Kostenlos</div>
                     <p>FiveBase ist komplett kostenlos nutzbar. Alle Funktionen stehen dir ohne Einschränkungen zur Verfügung.</p>
                 </div>
 
@@ -630,6 +634,8 @@
                     <li><strong>Personalverwaltung</strong> - Digitale Personalakten mit Statistiken</li>
                     <li><strong>Urlaubssystem</strong> - Urlaubsanträge über Discord</li>
                     <li><strong>Verwarnungssystem</strong> - Abmahnungen dokumentieren und verwalten</li>
+                    <li><strong>Teamliste</strong> - Live-Übersicht aller Mitarbeiter nach Rängen sortiert</li>
+                    <li><strong>Einstellungssystem</strong> - Automatische Einstellung mit DN-Vergabe</li>
                 </ul>
 
                 <h3>Wichtige Links</h3>
@@ -802,6 +808,20 @@
                     </div>
                     <div class="field-desc">Aktiviert die digitale Personalakte, Urlaubsverwaltung und das Abmahnungssystem.</div>
                 </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        <i class="fa-solid fa-users-rectangle"></i> Teamliste aktivieren
+                    </div>
+                    <div class="field-desc">Aktiviert die automatisch aktualisierte Teamliste, die alle Mitarbeiter nach Rängen sortiert anzeigt.</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        <i class="fa-solid fa-user-plus"></i> Einstellungssystem aktivieren
+                    </div>
+                    <div class="field-desc">Aktiviert das /einstellung Command zur automatischen Einstellung neuer Mitarbeiter mit DN-Vergabe und Rollenzuweisung.</div>
+                </div>
             </section>
 
             <!-- Dashboard Stempel -->
@@ -933,6 +953,47 @@
                         Mitarbeiter-Rolle <span class="badge required">Für Mitarbeiter-Panel</span>
                     </div>
                     <div class="field-desc">Nur Nutzer mit dieser Rolle sehen das interne Mitarbeiter-Ticketpanel.</div>
+                </div>
+
+                <h3>Kategoriespezifische Handler-Rollen</h3>
+                <p>Für jede Ticket-Kategorie kannst du eine eigene Handler-Rolle festlegen. Diese Rolle kann das Ticket sehen und wird bei Erstellung gepingt. Falls keine Rolle angegeben wird, wird die allgemeine Support-Rolle verwendet.</p>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: Bewerbungen</div>
+                    <div class="field-desc">Nur diese Rolle kann Bewerbungs-Tickets sehen und bearbeiten.</div>
+                    <div class="field-example"><span>Beispiel:</span> @Personalamt, @Recruiter</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: Bürger Dienstbeschwerde</div>
+                    <div class="field-desc">Zuständig für Beschwerden von Bürgern über Mitarbeiter.</div>
+                    <div class="field-example"><span>Beispiel:</span> @IA (Internal Affairs)</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: Bürger Sonstiges</div>
+                    <div class="field-desc">Zuständig für allgemeine Bürgeranfragen.</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: MA Beschwerde</div>
+                    <div class="field-desc">Zuständig für interne Mitarbeiterbeschwerden.</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: Ausbildung</div>
+                    <div class="field-desc">Zuständig für Ausbildungsanfragen.</div>
+                    <div class="field-example"><span>Beispiel:</span> @Ausbilder, @Training</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">Handler-Rolle: MA Sonstiges</div>
+                    <div class="field-desc">Zuständig für sonstige interne Anfragen.</div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Fallback</div>
+                    <p>Wenn keine kategoriespezifische Rolle eingestellt ist, wird automatisch die allgemeine Support-Rolle verwendet.</p>
                 </div>
 
                 <h3>Kategorien (Bürger-Tickets)</h3>
@@ -1177,6 +1238,178 @@
                 </div>
             </section>
 
+            <!-- Dashboard Teamlist -->
+            <section id="dashboard-teamlist">
+                <h2><i class="fa-solid fa-users-rectangle"></i> Tab: Teamliste</h2>
+                <p>Die Teamliste zeigt alle Mitarbeiter sortiert nach Rängen in einem Live-Embed an.</p>
+
+                <h3>Einstellungen</h3>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Kanal <span class="badge required">Erforderlich</span>
+                    </div>
+                    <div class="field-desc">In diesem Kanal wird die Teamliste angezeigt und automatisch aktualisiert.</div>
+                    <div class="field-example">
+                        <span>Empfehlung:</span> Ein eigener Kanal #teamliste oder #mitarbeiter
+                    </div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Titel
+                    </div>
+                    <div class="field-desc">Der Titel des Embeds.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> "🏛️ Unser Team" oder "👮 Mitarbeiter-Übersicht"
+                    </div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Farbe (Hex)
+                    </div>
+                    <div class="field-desc">Die Farbe des Embed-Balkens als Hex-Code.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> #3498db (Blau), #e74c3c (Rot)
+                    </div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Update-Intervall (Minuten)
+                    </div>
+                    <div class="field-desc">Alle X Minuten wird die Liste automatisch aktualisiert.</div>
+                    <div class="field-example">
+                        <span>Empfehlung:</span> 10-30 Minuten (Standard: 10)
+                    </div>
+                </div>
+
+                <h3>Ränge konfigurieren</h3>
+                <p>Definiere die Ränge die in der Teamliste angezeigt werden sollen. Die Reihenfolge bestimmt die Sortierung (von oben nach unten).</p>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feld</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiel</th>
+                        </tr>
+                        <tr>
+                            <td>Emoji</td>
+                            <td>Emoji vor dem Rang-Namen</td>
+                            <td>👑, ⭐, 🏅</td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>Bezeichnung des Rangs</td>
+                            <td>"Direktor", "Captain"</td>
+                        </tr>
+                        <tr>
+                            <td>Discord-Rolle</td>
+                            <td>Die zugehörige Discord-Rolle</td>
+                            <td>@Direktor, @Captain</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title"><i class="fa-solid fa-info-circle"></i> Multi-Message Support</div>
+                    <p>Bei sehr großen Teams wird die Liste automatisch auf mehrere Nachrichten aufgeteilt, um Discord's Zeichenlimit einzuhalten.</p>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-title"><i class="fa-solid fa-sync"></i> Manuelles Update</div>
+                    <p>Du kannst die Liste jederzeit manuell aktualisieren mit dem Befehl <code>/teamlist update</code></p>
+                </div>
+            </section>
+
+            <!-- Dashboard Einstellung -->
+            <section id="dashboard-einstellung">
+                <h2><i class="fa-solid fa-user-plus"></i> Tab: Einstellung</h2>
+                <p>Das Einstellungssystem ermöglicht die schnelle Einstellung neuer Mitarbeiter mit automatischer DN-Vergabe.</p>
+
+                <h3>Berechtigungen</h3>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Berechtigte Rolle <span class="badge required">Erforderlich</span>
+                    </div>
+                    <div class="field-desc">Nur Nutzer mit dieser Rolle können den /einstellung Befehl nutzen.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> @Personalamt, @Leitung
+                    </div>
+                </div>
+
+                <h3>Rollen-Zuweisung</h3>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Mitarbeiter-Rolle <span class="badge required">Erforderlich</span>
+                    </div>
+                    <div class="field-desc">Diese Rolle wird automatisch bei der Einstellung vergeben.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> @Mitarbeiter, @Officer
+                    </div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        PMA-Rolle
+                    </div>
+                    <div class="field-desc">Zusätzliche Rolle für neue Mitarbeiter (z.B. "Probemitarbeiter").</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> @Probezeit, @Anwärter
+                    </div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Zusätzliche Rollen (Multi-Select)
+                    </div>
+                    <div class="field-desc">Weitere Rollen die automatisch vergeben werden sollen. Halte Strg gedrückt für Mehrfachauswahl.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> @Zugang Basis, @Funkgerät
+                    </div>
+                </div>
+
+                <h3>Dienstnummern</h3>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Auto-DN aktivieren
+                    </div>
+                    <div class="field-desc">Wenn aktiviert, wird automatisch die nächste freie Dienstnummer gesucht und vergeben.</div>
+                </div>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        DN-Bereich (Min - Max)
+                    </div>
+                    <div class="field-desc">Der Bereich in dem nach freien Dienstnummern gesucht wird.</div>
+                    <div class="field-example">
+                        <span>Beispiel:</span> 1-999 oder 100-199
+                    </div>
+                </div>
+
+                <h3>Logging</h3>
+
+                <div class="field-card">
+                    <div class="field-name">
+                        Einstellungs-Kanal
+                    </div>
+                    <div class="field-desc">In diesem Kanal wird jede Einstellung protokolliert mit allen Details.</div>
+                    <div class="field-example">
+                        <span>Empfehlung:</span> #einstellungen-log oder #personal-log
+                    </div>
+                </div>
+
+                <div class="info-box success">
+                    <div class="info-box-title"><i class="fa-solid fa-magic"></i> Automatisierung</div>
+                    <p>Mit einem einzigen Befehl werden automatisch: Rollen vergeben, Dienstnummer zugewiesen (falls aktiviert), Nickname gesetzt und die Einstellung geloggt.</p>
+                </div>
+            </section>
+
             <!-- Stempelsystem -->
             <section id="stempelsystem">
                 <h2><i class="fa-solid fa-stopwatch"></i> Stempelsystem</h2>
@@ -1273,6 +1506,16 @@
                         </tr>
                     </table>
                 </div>
+
+                <h3>Kategoriespezifische Handler-Rollen</h3>
+                <p>Für jede Ticket-Kategorie kann eine eigene Handler-Rolle definiert werden:</p>
+                <ul style="color: var(--text-secondary); margin-left: 20px;">
+                    <li>✅ Bewerbungen → Eigene Rolle (z.B. @Personalamt)</li>
+                    <li>✅ Bürger-Beschwerden → Eigene Rolle (z.B. @IA)</li>
+                    <li>✅ Ausbildungen → Eigene Rolle (z.B. @Ausbilder)</li>
+                    <li>✅ Alle anderen Kategorien → Eigene Rollen möglich</li>
+                    <li>✅ Fallback auf Support-Rolle falls keine spezifische Rolle definiert</li>
+                </ul>
             </section>
 
             <!-- Dienstnummern -->
@@ -1467,6 +1710,121 @@
                 </div>
             </section>
 
+            <!-- Teamlistsystem -->
+            <section id="teamlistsystem">
+                <h2><i class="fa-solid fa-users-rectangle"></i> Teamliste</h2>
+                <p>Die Teamliste zeigt alle Mitarbeiter nach Rängen sortiert in einem Live-Embed an.</p>
+
+                <h3>So funktioniert's</h3>
+                <p>Die Liste liest automatisch alle Mitglieder mit den konfigurierten Rang-Rollen aus und sortiert sie hierarchisch.</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Ränge konfigurieren</div>
+                        <div class="step-desc">Im Dashboard unter "Teamliste" legst du die Ränge mit Emoji, Name und Discord-Rolle fest.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Kanal auswählen</div>
+                        <div class="step-desc">Wähle den Kanal in dem die Liste angezeigt werden soll und speichere.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Automatische Updates</div>
+                        <div class="step-desc">Die Liste aktualisiert sich automatisch im konfigurierten Intervall (Standard: 10 Minuten).</div>
+                    </div>
+                </div>
+
+                <h3>Anzeige-Format</h3>
+                <p>Für jeden Rang wird angezeigt:</p>
+                <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
+                    <li><strong>Emoji + Rang-Name</strong> als Überschrift</li>
+                    <li><strong>Liste aller Mitarbeiter</strong> in diesem Rang</li>
+                    <li><strong>Dienstnummer</strong> wird aus dem Nickname extrahiert ([XX] Name)</li>
+                    <li><strong>Sortierung</strong> nach Dienstnummer aufsteigend</li>
+                </ul>
+
+                <div class="info-box">
+                    <div class="info-box-title"><i class="fa-solid fa-user"></i> Nickname-Format</div>
+                    <p>Wenn der Nickname das Format <code>[XX] Name</code> hat, wird die DN vor dem Namen angezeigt. Sonst nur der Name.</p>
+                </div>
+
+                <h3>Befehle</h3>
+
+                <div class="command-card">
+                    <div class="command-syntax">
+                        <span class="cmd">/teamlist update</span>
+                    </div>
+                    <div class="command-desc">Aktualisiert die Teamliste manuell sofort.</div>
+                </div>
+
+                <h3>Features</h3>
+                <ul style="color: var(--text-secondary); margin-left: 20px;">
+                    <li>✅ Automatische Updates im konfigurierten Intervall</li>
+                    <li>✅ Multi-Message Support bei großen Teams</li>
+                    <li>✅ Hierarchische Sortierung nach Rängen</li>
+                    <li>✅ DN-Erkennung aus Nickname</li>
+                    <li>✅ Anpassbare Farbe und Titel</li>
+                </ul>
+            </section>
+
+            <!-- Einstellungssystem -->
+            <section id="einstellungssystem">
+                <h2><i class="fa-solid fa-user-plus"></i> Einstellungssystem</h2>
+                <p>Stelle neue Mitarbeiter mit einem einzigen Befehl ein - inklusive automatischer DN-Vergabe und Rollenzuweisung.</p>
+
+                <h3>So funktioniert's</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-title">Befehl ausführen</div>
+                        <div class="step-desc">Nutze <code>/einstellung</code> mit Discord-User, IC-Name und optional einer Dienstnummer.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Automatische DN-Vergabe</div>
+                        <div class="step-desc">Wenn Auto-DN aktiviert ist und keine DN angegeben wird, wird automatisch die nächste freie DN gesucht.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Rollen & Nickname</div>
+                        <div class="step-desc">Alle konfigurierten Rollen werden vergeben, der Nickname wird gesetzt: [XX] IC-Name</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title">Logging</div>
+                        <div class="step-desc">Die Einstellung wird im Log-Kanal dokumentiert mit allen Details.</div>
+                    </div>
+                </div>
+
+                <h3>Befehle</h3>
+
+                <div class="command-card">
+                    <div class="command-syntax">
+                        <span class="cmd">/einstellung</span> <span class="param">user:@User</span> <span class="param">ic_name:Max_Mustermann</span> <span class="optional-param">dienstnummer:01</span>
+                    </div>
+                    <div class="command-desc">Stellt einen neuen Mitarbeiter ein. Dienstnummer ist optional wenn Auto-DN aktiviert ist.</div>
+                </div>
+
+                <h3>Was passiert automatisch?</h3>
+                <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
+                    <li>✅ <strong>Mitarbeiter-Rolle</strong> wird vergeben</li>
+                    <li>✅ <strong>PMA-Rolle</strong> wird vergeben (falls konfiguriert)</li>
+                    <li>✅ <strong>Zusätzliche Rollen</strong> werden vergeben</li>
+                    <li>✅ <strong>Dienstnummer</strong> wird automatisch gesucht (falls aktiviert) oder manuell vergeben</li>
+                    <li>✅ <strong>Nickname</strong> wird gesetzt: [XX] IC_Name</li>
+                    <li>✅ <strong>Log-Message</strong> wird erstellt mit allen Details</li>
+                    <li>✅ <strong>Bestätigung</strong> an den Ausführenden</li>
+                </ul>
+
+                <h3>Auto-DN Vergabe</h3>
+                <p>Das System durchsucht automatisch alle Mitglieder mit der Mitarbeiter-Rolle und findet die nächste freie Dienstnummer im konfigurierten Bereich.</p>
+
+                <div class="info-box warning">
+                    <div class="info-box-title"><i class="fa-solid fa-clock"></i> Performance</div>
+                    <p>Bei großen Servern kann die DN-Suche einige Sekunden dauern. Das System hat einen Timeout-Schutz und nutzt zwischengespeicherte Daten als Fallback.</p>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title"><i class="fa-solid fa-shield-halved"></i> Berechtigung</div>
+                    <p>Nur Nutzer mit der im Dashboard konfigurierten "Berechtigte Rolle" können diesen Befehl nutzen.</p>
+                </div>
+            </section>
+
             <!-- Befehle Übersicht -->
             <section id="befehle-uebersicht">
                 <h2><i class="fa-solid fa-terminal"></i> Alle Befehle</h2>
@@ -1574,6 +1932,34 @@
                         <tr>
                             <td><code>/setup-tickets-mitarbeiter</code></td>
                             <td>Erstellt das Mitarbeiter-Ticketpanel</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Teamliste-Befehle</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Befehl</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                        <tr>
+                            <td><code>/teamlist update</code></td>
+                            <td>Aktualisiert die Teamliste manuell</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Einstellungs-Befehle</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Befehl</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                        <tr>
+                            <td><code>/einstellung</code></td>
+                            <td>Stellt einen neuen Mitarbeiter ein (mit Auto-DN und Rollenvergabe)</td>
                         </tr>
                     </table>
                 </div>
