@@ -54,483 +54,122 @@
             justify-content: space-between;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
         .logo span { color: var(--accent); }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 
         /* Layout */
-        .wiki-layout {
-            display: flex;
-            margin-top: 70px;
-            min-height: calc(100vh - 70px);
-        }
+        .wiki-layout { display: flex; margin-top: 70px; min-height: calc(100vh - 70px); }
 
         /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            position: fixed;
-            top: 70px;
-            left: 0;
-            bottom: 0;
-            overflow-y: auto;
-            padding: 25px 0;
-        }
+        .sidebar { width: 280px; background: var(--bg-secondary); border-right: 1px solid var(--border); position: fixed; top: 70px; left: 0; bottom: 0; overflow-y: auto; padding: 25px 0; }
 
-        .sidebar-section {
-            margin-bottom: 25px;
-        }
-
-        .sidebar-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-secondary);
-            padding: 0 25px;
-            margin-bottom: 10px;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 25px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-link:hover {
-            background: rgba(102,126,234,0.1);
-            color: var(--text-primary);
-        }
-
-        .sidebar-link.active {
-            background: rgba(102,126,234,0.15);
-            color: var(--accent);
-            border-left-color: var(--accent);
-        }
-
+        .sidebar-section { margin-bottom: 25px; }
+        .sidebar-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); padding: 0 25px; margin-bottom: 10px; }
+        .sidebar-link { display: flex; align-items: center; gap: 10px; padding: 10px 25px; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s; border-left: 3px solid transparent; }
+        .sidebar-link:hover { background: rgba(102,126,234,0.1); color: var(--text-primary); }
+        .sidebar-link.active { background: rgba(102,126,234,0.15); color: var(--accent); border-left-color: var(--accent); }
         .sidebar-link i { width: 20px; text-align: center; }
 
         /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: 280px;
-            padding: 40px 60px;
-            max-width: 1000px;
-        }
+        .main-content { flex: 1; margin-left: 280px; padding: 40px 60px; max-width: 1000px; }
 
         /* Typography */
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin: 50px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin: 35px 0 15px;
-            color: var(--accent);
-        }
-
-        h4 {
-            font-size: 1.1rem;
-            margin: 25px 0 10px;
-        }
-
-        p { 
-            margin-bottom: 15px; 
-            color: var(--text-secondary);
-        }
-
-        .lead {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-        }
+        h1 { font-size: 2.5rem; margin-bottom: 15px; background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.8rem; margin: 50px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        h3 { font-size: 1.3rem; margin: 35px 0 15px; color: var(--accent); }
+        h4 { font-size: 1.1rem; margin: 25px 0 10px; }
+        p { margin-bottom: 15px; color: var(--text-secondary); }
+        .lead { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 30px; }
 
         /* Info Boxes */
-        .info-box {
-            background: rgba(102,126,234,0.1);
-            border: 1px solid rgba(102,126,234,0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .info-box.warning {
-            background: rgba(243,156,18,0.1);
-            border-color: rgba(243,156,18,0.3);
-        }
-
-        .info-box.success {
-            background: rgba(0,184,148,0.1);
-            border-color: rgba(0,184,148,0.3);
-        }
-
-        .info-box.danger {
-            background: rgba(231,76,60,0.1);
-            border-color: rgba(231,76,60,0.3);
-        }
-
-        .info-box-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .info-box { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .info-box.warning { background: rgba(243,156,18,0.1); border-color: rgba(243,156,18,0.3); }
+        .info-box.success { background: rgba(0,184,148,0.1); border-color: rgba(0,184,148,0.3); }
+        .info-box.danger { background: rgba(231,76,60,0.1); border-color: rgba(231,76,60,0.3); }
+        .info-box-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .info-box p { margin: 0; }
 
         /* Code */
-        code {
-            background: rgba(0,0,0,0.4);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9em;
-            color: var(--accent);
-        }
-
-        pre {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            color: var(--text-primary);
-        }
+        code { background: rgba(0,0,0,0.4); padding: 3px 8px; border-radius: 5px; font-family: 'Fira Code', monospace; font-size: 0.9em; color: var(--accent); }
+        pre { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 12px; padding: 20px; overflow-x: auto; margin: 20px 0; }
+        pre code { background: none; padding: 0; color: var(--text-primary); }
 
         /* Tables */
-        .table-container {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: rgba(102,126,234,0.1);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
+        .table-container { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 12px; overflow: hidden; }
+        th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: rgba(102,126,234,0.1); font-weight: 600; color: var(--text-primary); }
         td { color: var(--text-secondary); }
-
         tr:last-child td { border-bottom: none; }
 
         /* Field Descriptions */
-        .field-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .field-name {
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .field-name .badge {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .field-name .required {
-            background: rgba(231,76,60,0.2);
-            color: var(--danger);
-        }
-
-        .field-name .optional {
-            background: rgba(136,146,176,0.2);
-            color: var(--text-secondary);
-        }
-
+        .field-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .field-name { font-weight: 600; color: var(--accent); margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .field-name .badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
+        .field-name .required { background: rgba(231,76,60,0.2); color: var(--danger); }
+        .field-name .optional { background: rgba(136,146,176,0.2); color: var(--text-secondary); }
         .field-desc { color: var(--text-secondary); margin: 8px 0; }
-
-        .field-example {
-            background: rgba(0,0,0,0.3);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin-top: 10px;
-        }
-
+        .field-example { background: rgba(0,0,0,0.3); padding: 10px 15px; border-radius: 8px; font-size: 0.85rem; margin-top: 10px; }
         .field-example span { color: var(--text-secondary); }
 
         /* Steps */
-        .steps {
-            counter-reset: step;
-            margin: 25px 0;
-        }
-
-        .step {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 30px;
-        }
-
-        .step::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .step-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
+        .steps { counter-reset: step; margin: 25px 0; }
+        .step { position: relative; padding-left: 60px; margin-bottom: 30px; }
+        .step::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+        .step-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
         .step-desc { color: var(--text-secondary); }
 
         /* Screenshots */
-        .screenshot {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .screenshot img {
-            width: 100%;
-            display: block;
-        }
-
-        .screenshot-caption {
-            padding: 12px 15px;
-            background: var(--bg-card);
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-align: center;
-        }
+        .screenshot { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
+        .screenshot img { width: 100%; display: block; }
+        .screenshot-caption { padding: 12px 15px; background: var(--bg-card); font-size: 0.85rem; color: var(--text-secondary); text-align: center; }
 
         /* Command Cards */
-        .command-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .command-syntax {
-            font-family: 'Fira Code', monospace;
-            background: rgba(0,0,0,0.4);
-            padding: 12px 18px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
+        .command-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .command-syntax { font-family: 'Fira Code', monospace; background: rgba(0,0,0,0.4); padding: 12px 18px; border-radius: 8px; margin-bottom: 12px; font-size: 0.95rem; }
         .command-syntax .cmd { color: var(--accent); }
         .command-syntax .param { color: var(--warning); }
         .command-syntax .optional-param { color: var(--text-secondary); }
-
         .command-desc { color: var(--text-secondary); }
 
         /* FAQ */
-        .faq-item {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 18px 20px;
-            background: var(--bg-card);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 500;
-        }
-
+        .faq-item { border: 1px solid var(--border); border-radius: 12px; margin: 15px 0; overflow: hidden; }
+        .faq-question { padding: 18px 20px; background: var(--bg-card); cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 500; }
         .faq-question:hover { background: rgba(255,255,255,0.05); }
-
         .faq-question i { transition: transform 0.3s; }
-
         .faq-item.active .faq-question i { transform: rotate(180deg); }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 20px;
-            max-height: 500px;
-        }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s; }
+        .faq-item.active .faq-answer { padding: 20px; max-height: 500px; }
 
         /* Breadcrumb */
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
+        .breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 0.9rem; }
+        .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
         .breadcrumb a:hover { color: var(--accent); }
-
         .breadcrumb span { color: var(--text-secondary); }
 
         /* Search */
-        .search-box {
-            padding: 15px 25px;
-            margin-bottom: 15px;
-        }
-
-        .search-input {
-            width: 100%;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
+        .search-box { padding: 15px 25px; margin-bottom: 15px; }
+        .search-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 15px; color: var(--text-primary); font-size: 0.9rem; }
+        .search-input:focus { outline: none; border-color: var(--accent); }
         .search-input::placeholder { color: var(--text-secondary); }
 
         /* Mobile */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
         @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-                z-index: 999;
-            }
-
+            .sidebar { transform: translateX(-100%); transition: transform 0.3s; z-index: 999; }
             .sidebar.active { transform: translateX(0); }
-
-            .main-content {
-                margin-left: 0;
-                padding: 30px 20px;
-            }
-
+            .main-content { margin-left: 0; padding: 30px 20px; }
             .mobile-menu-btn { display: block; }
-
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
+            h1 { font-size: 2rem; } h2 { font-size: 1.5rem; }
         }
 
         /* Back to top */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
         .back-to-top:hover { transform: translateY(-3px); }
     </style>
 </head>
@@ -576,6 +215,7 @@
                 <a href="#dashboard-personal" class="sidebar-link"><i class="fa-solid fa-folder-open"></i> Personal</a>
                 <a href="#dashboard-teamlist" class="sidebar-link"><i class="fa-solid fa-users-rectangle"></i> Teamliste</a>
                 <a href="#dashboard-einstellung" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Einstellung</a>
+                <a href="#dashboard-moderation" class="sidebar-link"><i class="fa-solid fa-shield-halved"></i> Moderation</a>
             </div>
 
             <div class="sidebar-section">
@@ -588,6 +228,7 @@
                 <a href="#verwarnungen" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Verwarnungen</a>
                 <a href="#teamlistsystem" class="sidebar-link"><i class="fa-solid fa-users-rectangle"></i> Teamliste</a>
                 <a href="#einstellungssystem" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Einstellungssystem</a>
+                <a href="#moderationsystem" class="sidebar-link"><i class="fa-solid fa-shield-halved"></i> Moderationssystem</a>
             </div>
 
             <div class="sidebar-section">
@@ -595,6 +236,12 @@
                 <a href="#befehle-uebersicht" class="sidebar-link"><i class="fa-solid fa-terminal"></i> Übersicht</a>
                 <a href="#befehle-stempel" class="sidebar-link"><i class="fa-solid fa-clock"></i> Stempel-Befehle</a>
                 <a href="#befehle-personal" class="sidebar-link"><i class="fa-solid fa-user"></i> Personal-Befehle</a>
+                <a href="#befehle-moderation" class="sidebar-link"><i class="fa-solid fa-gavel"></i> Moderation-Befehle</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Updates</div>
+                <a href="#changelog" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
             </div>
 
             <div class="sidebar-section">
@@ -607,830 +254,275 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            
             <!-- Einführung -->
             <section id="einfuehrung">
-                <div class="breadcrumb">
-                    <a href="#"><i class="fa-solid fa-house"></i></a>
-                    <span>/</span>
-                    <span>Einführung</span>
-                </div>
-
+                <div class="breadcrumb"><a href="#"><i class="fa-solid fa-house"></i></a><span>/</span><span>Einführung</span></div>
                 <h1>FiveBase Wiki</h1>
                 <p class="lead">Willkommen zur offiziellen Dokumentation des FiveBase Discord Bots. Hier findest du alles, was du wissen musst, um den Bot optimal für deine Fraktion einzurichten und zu nutzen.</p>
-
-                <div class="info-box success">
-                    <div class="info-box-title"><i class="fa-solid fa-circle-check"></i> Kostenlos</div>
-                    <p>FiveBase ist komplett kostenlos nutzbar. Alle Funktionen stehen dir ohne Einschränkungen zur Verfügung.</p>
-                </div>
-
+                <div class="info-box success"><div class="info-box-title"><i class="fa-solid fa-circle-check"></i> Kostenlos</div><p>FiveBase ist komplett kostenlos nutzbar. Alle Funktionen stehen dir ohne Einschränkungen zur Verfügung.</p></div>
                 <h3>Was ist FiveBase?</h3>
                 <p>FiveBase ist ein speziell für staatliche Fraktionen auf GTA RP Servern entwickelter Discord Bot. Er bietet dir:</p>
-                
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
                     <li><strong>Stempelsystem</strong> - Automatische Zeiterfassung für Mitarbeiter</li>
                     <li><strong>Ticketsystem</strong> - Bewerbungen, Beschwerden und interne Anfragen</li>
                     <li><strong>Dienstnummern</strong> - Live-Übersicht aller vergebenen Nummern</li>
                     <li><strong>Personalverwaltung</strong> - Digitale Personalakten mit Statistiken</li>
                     <li><strong>Urlaubssystem</strong> - Urlaubsanträge über Discord</li>
-                    <li><strong>Verwarnungssystem</strong> - Abmahnungen dokumentieren und verwalten</li>
                     <li><strong>Teamliste</strong> - Live-Übersicht aller Mitarbeiter nach Rängen sortiert</li>
                     <li><strong>Einstellungssystem</strong> - Automatische Einstellung mit DN-Vergabe</li>
+                    <li><strong>Moderationssystem</strong> - Auto-Mod, Welcome, Logging, Auto-Rollen, Commands</li>
                 </ul>
-
                 <h3>Wichtige Links</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Link</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a></td>
-                            <td>Einstellungs-Dashboard (Bot konfigurieren)</td>
-                        </tr>
-                        <tr>
-                            <td><a href="http://personal.5base.de" style="color: var(--accent);">personal.5base.de</a></td>
-                            <td>Personalverwaltung (Akten, Urlaub, etc.)</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Discord Support</a></td>
-                            <td>Hilfe & Support Server</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Link</th><th>Beschreibung</th></tr>
+                    <tr><td><a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a></td><td>Einstellungs-Dashboard (Bot konfigurieren)</td></tr>
+                    <tr><td><a href="http://personal.5base.de" style="color: var(--accent);">personal.5base.de</a></td><td>Personalverwaltung (Akten, Urlaub, etc.)</td></tr>
+                    <tr><td><a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Discord Support</a></td><td>Hilfe & Support Server</td></tr>
+                </table></div>
             </section>
 
             <!-- Schnellstart -->
             <section id="schnellstart">
                 <h2><i class="fa-solid fa-rocket"></i> Schnellstart</h2>
                 <p>In nur 5 Minuten ist FiveBase einsatzbereit. Folge diesen Schritten:</p>
-
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Bot einladen</div>
-                        <div class="step-desc">Lade den Bot auf deinen Discord Server ein. Du benötigst Administrator-Rechte.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Dashboard öffnen</div>
-                        <div class="step-desc">Gehe zu <a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a> und melde dich mit Discord an.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Server auswählen</div>
-                        <div class="step-desc">Wähle den Server aus, den du konfigurieren möchtest.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Module aktivieren</div>
-                        <div class="step-desc">Aktiviere die gewünschten Module (Stempeln, Tickets, etc.) im Tab "Allgemein".</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Einstellungen anpassen</div>
-                        <div class="step-desc">Konfiguriere die einzelnen Module nach deinen Wünschen und speichere.</div>
-                    </div>
+                    <div class="step"><div class="step-title">Bot einladen</div><div class="step-desc">Lade den Bot auf deinen Discord Server ein. Du benötigst Administrator-Rechte.</div></div>
+                    <div class="step"><div class="step-title">Dashboard öffnen</div><div class="step-desc">Gehe zu <a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a> und melde dich mit Discord an.</div></div>
+                    <div class="step"><div class="step-title">Server auswählen</div><div class="step-desc">Wähle den Server aus, den du konfigurieren möchtest.</div></div>
+                    <div class="step"><div class="step-title">Module aktivieren</div><div class="step-desc">Aktiviere die gewünschten Module (Stempeln, Tickets, Moderation, etc.) im Tab "Allgemein".</div></div>
+                    <div class="step"><div class="step-title">Einstellungen anpassen</div><div class="step-desc">Konfiguriere die einzelnen Module nach deinen Wünschen und speichere.</div></div>
                 </div>
-
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Wichtig</div>
-                    <p>Stelle sicher, dass der Bot eine Rolle hat, die ÜBER den Rollen liegt, die er verwalten soll. Sonst kann er keine Rollen vergeben/entfernen!</p>
-                </div>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Wichtig</div><p>Stelle sicher, dass die Bot-Rolle ÜBER den Rollen liegt, die er verwalten soll. Sonst kann er keine Rollen vergeben/entfernen!</p></div>
             </section>
 
             <!-- Bot einladen -->
             <section id="bot-einladen">
                 <h2><i class="fa-solid fa-plus"></i> Bot einladen</h2>
                 <p>Um FiveBase auf deinen Server einzuladen, benötigst du Administrator-Rechte auf dem Zielserver.</p>
-
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Einladungslink öffnen</div>
-                        <div class="step-desc">Kontaktiere uns im <a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Support Discord</a> um den Einladungslink zu erhalten.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Server auswählen</div>
-                        <div class="step-desc">Wähle im Dropdown den Server aus, auf den der Bot eingeladen werden soll.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Berechtigungen bestätigen</div>
-                        <div class="step-desc">Bestätige die angeforderten Berechtigungen. Der Bot benötigt diese für seine Funktionen.</div>
-                    </div>
+                    <div class="step"><div class="step-title">Einladungslink öffnen</div><div class="step-desc">Kontaktiere uns im <a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Support Discord</a> um den Einladungslink zu erhalten.</div></div>
+                    <div class="step"><div class="step-title">Server auswählen</div><div class="step-desc">Wähle im Dropdown den Server aus, auf den der Bot eingeladen werden soll.</div></div>
+                    <div class="step"><div class="step-title">Berechtigungen bestätigen</div><div class="step-desc">Bestätige die angeforderten Berechtigungen. Der Bot benötigt diese für seine Funktionen.</div></div>
                 </div>
-
                 <h3>Benötigte Berechtigungen</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Berechtigung</th>
-                            <th>Wofür benötigt</th>
-                        </tr>
-                        <tr>
-                            <td>Rollen verwalten</td>
-                            <td>Im-Dienst-Rolle, Urlaubs-Rolle vergeben</td>
-                        </tr>
-                        <tr>
-                            <td>Kanäle verwalten</td>
-                            <td>Ticket-Kanäle erstellen</td>
-                        </tr>
-                        <tr>
-                            <td>Nachrichten senden</td>
-                            <td>Bot-Antworten, Logs, Embeds</td>
-                        </tr>
-                        <tr>
-                            <td>Nachrichten verwalten</td>
-                            <td>Urlaubs-Nachrichten löschen bei Ablauf</td>
-                        </tr>
-                        <tr>
-                            <td>Mitglieder verwalten</td>
-                            <td>Nicknames für Dienstnummern ändern</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Berechtigung</th><th>Wofür benötigt</th></tr>
+                    <tr><td>Rollen verwalten</td><td>Im-Dienst-Rolle, Urlaubs-Rolle vergeben</td></tr>
+                    <tr><td>Kanäle verwalten</td><td>Ticket-Kanäle erstellen</td></tr>
+                    <tr><td>Nachrichten senden</td><td>Bot-Antworten, Logs, Embeds</td></tr>
+                    <tr><td>Nachrichten verwalten</td><td>Auto-Mod und Clear-Befehle</td></tr>
+                    <tr><td>Mitglieder verwalten</td><td>Timeouts, Kicks, Bans, Nicknames setzen</td></tr>
+                </table></div>
             </section>
 
             <!-- Dashboard Login -->
             <section id="dashboard-login">
                 <h2><i class="fa-solid fa-right-to-bracket"></i> Dashboard Login</h2>
                 <p>Das Dashboard ermöglicht dir, alle Einstellungen des Bots bequem über den Browser zu verwalten.</p>
-
                 <h3>So meldest du dich an</h3>
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Dashboard öffnen</div>
-                        <div class="step-desc">Gehe zu <a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a></div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Mit Discord anmelden</div>
-                        <div class="step-desc">Klicke auf "Mit Discord anmelden" und autorisiere die Anwendung.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Server auswählen</div>
-                        <div class="step-desc">Du siehst alle Server auf denen du Admin bist UND der Bot ist. Klicke auf "Verwalten".</div>
-                    </div>
+                    <div class="step"><div class="step-title">Dashboard öffnen</div><div class="step-desc">Gehe zu <a href="http://dashboard.5base.de" style="color: var(--accent);">dashboard.5base.de</a></div></div>
+                    <div class="step"><div class="step-title">Mit Discord anmelden</div><div class="step-desc">Klicke auf "Mit Discord anmelden" und autorisiere die Anwendung.</div></div>
+                    <div class="step"><div class="step-title">Server auswählen</div><div class="step-desc">Du siehst alle Server auf denen du Admin bist UND der Bot ist. Klicke auf "Verwalten".</div></div>
                 </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-shield-halved"></i> Wer hat Zugriff?</div>
-                    <p>Nur Nutzer mit Administrator-Berechtigung auf dem jeweiligen Server können das Dashboard nutzen.</p>
-                </div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-shield-halved"></i> Wer hat Zugriff?</div><p>Nur Nutzer mit Administrator-Berechtigung auf dem jeweiligen Server können das Dashboard nutzen.</p></div>
             </section>
 
             <!-- Dashboard Allgemein -->
             <section id="dashboard-allgemein">
                 <h2><i class="fa-solid fa-gear"></i> Tab: Allgemein</h2>
                 <p>Im Tab "Allgemein" findest du die grundlegenden Einstellungen und kannst Module aktivieren/deaktivieren.</p>
-
                 <h3>Module aktivieren</h3>
                 <p>Jedes Modul muss erst aktiviert werden, bevor es genutzt werden kann:</p>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-clock"></i> Stempelsystem aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert das Zeiterfassungssystem. Mitarbeiter können sich ein- und ausstempeln, Zeiten werden erfasst und Toplisten erstellt.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-ticket"></i> Ticketsystem aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert das Ticket-System für Bewerbungen, Beschwerden und interne Anfragen. Erstellt Ticket-Panels in Discord.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-list-ol"></i> Dienstnummern aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert die Live-Übersicht der Dienstnummern. Zeigt alle freien und vergebenen Nummern in einem Embed an.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-folder-open"></i> Personalverwaltung aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert die digitale Personalakte, Urlaubsverwaltung und das Abmahnungssystem.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-users-rectangle"></i> Teamliste aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert die automatisch aktualisierte Teamliste, die alle Mitarbeiter nach Rängen sortiert anzeigt.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        <i class="fa-solid fa-user-plus"></i> Einstellungssystem aktivieren
-                    </div>
-                    <div class="field-desc">Aktiviert das /einstellung Command zur automatischen Einstellung neuer Mitarbeiter mit DN-Vergabe und Rollenzuweisung.</div>
-                </div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-clock"></i> Stempelsystem aktivieren</div><div class="field-desc">Aktiviert das Zeiterfassungssystem. Mitarbeiter können sich ein- und ausstempeln, Zeiten werden erfasst und Toplisten erstellt.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-ticket"></i> Ticketsystem aktivieren</div><div class="field-desc">Aktiviert das Ticket-System für Bewerbungen, Beschwerden und interne Anfragen. Erstellt Ticket-Panels in Discord.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-list-ol"></i> Dienstnummern aktivieren</div><div class="field-desc">Aktiviert die Live-Übersicht der Dienstnummern. Zeigt alle freien und vergebenen Nummern in einem Embed an.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-folder-open"></i> Personalverwaltung aktivieren</div><div class="field-desc">Aktiviert die digitale Personalakte, Urlaubsverwaltung und das Abmahnungssystem.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-users-rectangle"></i> Teamliste aktivieren</div><div class="field-desc">Aktiviert die automatisch aktualisierte Teamliste, die alle Mitarbeiter nach Rängen sortiert anzeigt.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-user-plus"></i> Einstellungssystem aktivieren</div><div class="field-desc">Aktiviert das /einstellung Command zur automatischen Einstellung neuer Mitarbeiter mit DN-Vergabe und Rollenzuweisung.</div></div>
+                <div class="field-card"><div class="field-name"><i class="fa-solid fa-shield-halved"></i> Moderationssystem aktivieren</div><div class="field-desc">Aktiviert Auto-Mod, Welcome, Logging, Auto-Rollen und Moderations-Befehle.</div></div>
             </section>
 
             <!-- Dashboard Stempel -->
             <section id="dashboard-stempel">
                 <h2><i class="fa-solid fa-clock"></i> Tab: Stempelsystem</h2>
                 <p>Hier konfigurierst du das Zeiterfassungssystem für deine Mitarbeiter.</p>
-
                 <h3>Rollen-Einstellungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Im-Dienst Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Diese Rolle wird automatisch vergeben, wenn jemand den Dienst beginnt, und entfernt, wenn der Dienst beendet wird.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> Eine Rolle namens "🟢 Im Dienst" oder "On Duty"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Admin-Rolle <span class="badge optional">Optional</span>
-                    </div>
-                    <div class="field-desc">Nutzer mit dieser Rolle können Zeiten anderer Mitarbeiter einsehen und bearbeiten.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "Leitung" oder "Personalamt"
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Im-Dienst Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Diese Rolle wird automatisch vergeben, wenn jemand den Dienst beginnt, und entfernt, wenn der Dienst beendet wird.</div><div class="field-example"><span>Beispiel:</span> Eine Rolle namens "🟢 Im Dienst" oder "On Duty"</div></div>
+                <div class="field-card"><div class="field-name">Admin-Rolle <span class="badge optional">Optional</span></div><div class="field-desc">Nutzer mit dieser Rolle können Zeiten anderer Mitarbeiter einsehen und bearbeiten.</div><div class="field-example"><span>Beispiel:</span> "Leitung" oder "Personalamt"</div></div>
                 <h3>Kanal-Einstellungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Log-Kanal <span class="badge optional">Optional</span>
-                    </div>
-                    <div class="field-desc">Hier werden alle Dienstbeginn/Dienstende-Aktionen protokolliert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> Erstelle einen Kanal #stempel-log den nur Admins sehen können
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Toplisten-Kanal <span class="badge optional">Optional</span>
-                    </div>
-                    <div class="field-desc">Ein Embed zeigt hier die Top-Mitarbeiter nach Arbeitszeit sortiert an. Wird automatisch aktualisiert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> #topliste oder #leistungsübersicht
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Log-Kanal <span class="badge optional">Optional</span></div><div class="field-desc">Hier werden alle Dienstbeginn/Dienstende-Aktionen protokolliert.</div><div class="field-example"><span>Empfehlung:</span> Erstelle einen Kanal #stempel-log den nur Admins sehen können</div></div>
+                <div class="field-card"><div class="field-name">Toplisten-Kanal <span class="badge optional">Optional</span></div><div class="field-desc">Ein Embed zeigt hier die Top-Mitarbeiter nach Arbeitszeit sortiert an. Wird automatisch aktualisiert.</div><div class="field-example"><span>Empfehlung:</span> #topliste oder #leistungsübersicht</div></div>
                 <h3>Weitere Einstellungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        AFK-Check Intervall (Minuten) <span class="badge optional">Optional</span>
-                    </div>
-                    <div class="field-desc">Alle X Minuten wird geprüft, ob Mitarbeiter noch aktiv sind. Bei Inaktivität werden sie automatisch ausgestempelt. 0 = deaktiviert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> 120 (alle 2 Stunden)
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Maximale Session-Dauer (Stunden)
-                    </div>
-                    <div class="field-desc">Nach dieser Zeit wird die Person automatisch ausgestempelt, um vergessene Sessions zu beenden.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> 12 Stunden
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">AFK-Check Intervall (Minuten) <span class="badge optional">Optional</span></div><div class="field-desc">Alle X Minuten wird geprüft, ob Mitarbeiter noch aktiv sind. Bei Inaktivität werden sie automatisch ausgestempelt. 0 = deaktiviert.</div><div class="field-example"><span>Empfehlung:</span> 120 (alle 2 Stunden)</div></div>
+                <div class="field-card"><div class="field-name">Maximale Session-Dauer (Stunden)</div><div class="field-desc">Nach dieser Zeit wird die Person automatisch ausgestempelt, um vergessene Sessions zu beenden.</div><div class="field-example"><span>Empfehlung:</span> 12 Stunden</div></div>
                 <h3>Mitarbeiter-Ränge</h3>
                 <p>Hier definierst du die Ränge für die Topliste und Reports. Jeder Rang besteht aus:</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Feld</th>
-                            <th>Beschreibung</th>
-                            <th>Beispiel</th>
-                        </tr>
-                        <tr>
-                            <td>Emoji</td>
-                            <td>Ein Emoji zur Darstellung</td>
-                            <td>👮 oder 🎖️</td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Bezeichnung des Rangs</td>
-                            <td>"Officer", "Sergeant"</td>
-                        </tr>
-                        <tr>
-                            <td>Discord-Rolle</td>
-                            <td>Die zugehörige Rolle</td>
-                            <td>@Officer</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Feld</th><th>Beschreibung</th><th>Beispiel</th></tr>
+                    <tr><td>Emoji</td><td>Ein Emoji zur Darstellung</td><td>👮 oder 🎖️</td></tr>
+                    <tr><td>Name</td><td>Bezeichnung des Rangs</td><td>"Officer", "Sergeant"</td></tr>
+                    <tr><td>Discord-Rolle</td><td>Die zugehörige Rolle</td><td>@Officer</td></tr>
+                </table></div>
             </section>
 
             <!-- Dashboard Tickets -->
             <section id="dashboard-tickets">
                 <h2><i class="fa-solid fa-ticket"></i> Tab: Ticketsystem</h2>
                 <p>Das Ticketsystem ermöglicht Bewerbungen, Beschwerden und interne Anfragen.</p>
-
                 <h3>Rollen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Support-Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Nutzer mit dieser Rolle können alle Tickets sehen und bearbeiten.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "Personalamt" oder "Support Team"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Admin-Rolle <span class="badge optional">Optional</span>
-                    </div>
-                    <div class="field-desc">Erweiterte Berechtigungen wie Tickets löschen oder Bewerbungen final annehmen.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Mitarbeiter-Rolle <span class="badge required">Für Mitarbeiter-Panel</span>
-                    </div>
-                    <div class="field-desc">Nur Nutzer mit dieser Rolle sehen das interne Mitarbeiter-Ticketpanel.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Support-Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Nutzer mit dieser Rolle können alle Tickets sehen und bearbeiten.</div><div class="field-example"><span>Beispiel:</span> "Personalamt" oder "Support Team"</div></div>
+                <div class="field-card"><div class="field-name">Admin-Rolle <span class="badge optional">Optional</span></div><div class="field-desc">Erweiterte Berechtigungen wie Tickets löschen oder Bewerbungen final annehmen.</div></div>
+                <div class="field-card"><div class="field-name">Mitarbeiter-Rolle <span class="badge required">Für Mitarbeiter-Panel</span></div><div class="field-desc">Nur Nutzer mit dieser Rolle sehen das interne Mitarbeiter-Ticketpanel.</div></div>
                 <h3>Kategoriespezifische Handler-Rollen</h3>
                 <p>Für jede Ticket-Kategorie kannst du eine eigene Handler-Rolle festlegen. Diese Rolle kann das Ticket sehen und wird bei Erstellung gepingt. Falls keine Rolle angegeben wird, wird die allgemeine Support-Rolle verwendet.</p>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: Bewerbungen</div>
-                    <div class="field-desc">Nur diese Rolle kann Bewerbungs-Tickets sehen und bearbeiten.</div>
-                    <div class="field-example"><span>Beispiel:</span> @Personalamt, @Recruiter</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: Bürger Dienstbeschwerde</div>
-                    <div class="field-desc">Zuständig für Beschwerden von Bürgern über Mitarbeiter.</div>
-                    <div class="field-example"><span>Beispiel:</span> @IA (Internal Affairs)</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: Bürger Sonstiges</div>
-                    <div class="field-desc">Zuständig für allgemeine Bürgeranfragen.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: MA Beschwerde</div>
-                    <div class="field-desc">Zuständig für interne Mitarbeiterbeschwerden.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: Ausbildung</div>
-                    <div class="field-desc">Zuständig für Ausbildungsanfragen.</div>
-                    <div class="field-example"><span>Beispiel:</span> @Ausbilder, @Training</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Handler-Rolle: MA Sonstiges</div>
-                    <div class="field-desc">Zuständig für sonstige interne Anfragen.</div>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Fallback</div>
-                    <p>Wenn keine kategoriespezifische Rolle eingestellt ist, wird automatisch die allgemeine Support-Rolle verwendet.</p>
-                </div>
-
+                <div class="field-card"><div class="field-name">Handler-Rolle: Bewerbungen</div><div class="field-desc">Nur diese Rolle kann Bewerbungs-Tickets sehen und bearbeiten.</div><div class="field-example"><span>Beispiel:</span> @Personalamt, @Recruiter</div></div>
+                <div class="field-card"><div class="field-name">Handler-Rolle: Bürger Dienstbeschwerde</div><div class="field-desc">Zuständig für Beschwerden von Bürgern über Mitarbeiter.</div><div class="field-example"><span>Beispiel:</span> @IA (Internal Affairs)</div></div>
+                <div class="field-card"><div class="field-name">Handler-Rolle: Bürger Sonstiges</div><div class="field-desc">Zuständig für allgemeine Bürgeranfragen.</div></div>
+                <div class="field-card"><div class="field-name">Handler-Rolle: MA Beschwerde</div><div class="field-desc">Zuständig für interne Mitarbeiterbeschwerden.</div></div>
+                <div class="field-card"><div class="field-name">Handler-Rolle: Ausbildung</div><div class="field-desc">Zuständig für Ausbildungsanfragen.</div><div class="field-example"><span>Beispiel:</span> @Ausbilder, @Training</div></div>
+                <div class="field-card"><div class="field-name">Handler-Rolle: MA Sonstiges</div><div class="field-desc">Zuständig für sonstige interne Anfragen.</div></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Fallback</div><p>Wenn keine kategoriespezifische Rolle eingestellt ist, wird automatisch die allgemeine Support-Rolle verwendet.</p></div>
                 <h3>Kategorien (Bürger-Tickets)</h3>
                 <p>Wähle für jede Ticket-Art eine Discord-Kategorie, in der die Ticket-Kanäle erstellt werden:</p>
-
-                <div class="field-card">
-                    <div class="field-name">Kategorie: Bewerbungen</div>
-                    <div class="field-desc">Hier werden Bewerbungs-Tickets erstellt.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Kategorie: Dienstbeschwerden</div>
-                    <div class="field-desc">Für Beschwerden von Bürgern über Mitarbeiter.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Kategorie: Sonstiges</div>
-                    <div class="field-desc">Allgemeine Anfragen.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Kategorie: Bewerbungen</div><div class="field-desc">Hier werden Bewerbungs-Tickets erstellt.</div></div>
+                <div class="field-card"><div class="field-name">Kategorie: Dienstbeschwerden</div><div class="field-desc">Für Beschwerden von Bürgern über Mitarbeiter.</div></div>
+                <div class="field-card"><div class="field-name">Kategorie: Sonstiges</div><div class="field-desc">Allgemeine Anfragen.</div></div>
                 <h3>Kategorien (Mitarbeiter-Tickets)</h3>
-
-                <div class="field-card">
-                    <div class="field-name">Kategorie: Interne Beschwerden</div>
-                    <div class="field-desc">Für Beschwerden von Mitarbeitern untereinander.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Kategorie: Ausbildungen</div>
-                    <div class="field-desc">Anfragen für Ausbildungen oder Schulungen.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Kategorie: Interne Beschwerden</div><div class="field-desc">Für Beschwerden von Mitarbeitern untereinander.</div></div>
+                <div class="field-card"><div class="field-name">Kategorie: Ausbildungen</div><div class="field-desc">Anfragen für Ausbildungen oder Schulungen.</div></div>
                 <h3>Quiz-System (Bewerbungen)</h3>
-
-                <div class="field-card">
-                    <div class="field-name">Quiz aktivieren</div>
-                    <div class="field-desc">Wenn aktiviert, müssen Bewerber nach dem Formular ein Quiz bestehen.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Maximale Fehler</div>
-                    <div class="field-desc">Wie viele falsche Antworten erlaubt sind. Bei Überschreitung wird die Bewerbung abgelehnt.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> 1-2 Fehler
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">Regelwerk-Link</div>
-                    <div class="field-desc">Link zu eurem Regelwerk, das vor dem Quiz angezeigt wird.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Quiz aktivieren</div><div class="field-desc">Wenn aktiviert, müssen Bewerber nach dem Formular ein Quiz bestehen.</div></div>
+                <div class="field-card"><div class="field-name">Maximale Fehler</div><div class="field-desc">Wie viele falsche Antworten erlaubt sind. Bei Überschreitung wird die Bewerbung abgelehnt.</div><div class="field-example"><span>Empfehlung:</span> 1-2 Fehler</div></div>
+                <div class="field-card"><div class="field-name">Regelwerk-Link</div><div class="field-desc">Link zu eurem Regelwerk, das vor dem Quiz angezeigt wird.</div></div>
                 <h3>Bewerbungsformular</h3>
                 <p>Definiere die Fragen, die Bewerber ausfüllen müssen:</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Feld</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td>ID</td>
-                            <td>Interner Name (z.B. "name", "age")</td>
-                        </tr>
-                        <tr>
-                            <td>Beschriftung</td>
-                            <td>Die Frage die angezeigt wird (z.B. "Wie heißen Sie?")</td>
-                        </tr>
-                    </table>
-                </div>
-
+                <div class="table-container"><table>
+                    <tr><th>Feld</th><th>Beschreibung</th></tr>
+                    <tr><td>ID</td><td>Interner Name (z.B. "name", "age")</td></tr>
+                    <tr><td>Beschriftung</td><td>Die Frage die angezeigt wird (z.B. "Wie heißen Sie?")</td></tr>
+                </table></div>
                 <h3>Quiz-Fragen</h3>
                 <p>Erstelle Multiple-Choice Fragen für das Bewerbungs-Quiz:</p>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Tipp</div>
-                    <p>Markiere genau EINE Antwort pro Frage als "Richtig". Der Bewerber muss die richtige Antwort auswählen.</p>
-                </div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Tipp</div><p>Markiere genau EINE Antwort pro Frage als "Richtig". Der Bewerber muss die richtige Antwort auswählen.</p></div>
             </section>
 
             <!-- Dashboard Dienstnummern -->
             <section id="dashboard-dienstnummern">
                 <h2><i class="fa-solid fa-list-ol"></i> Tab: Dienstnummern</h2>
                 <p>Die Dienstnummern-Übersicht zeigt live an, welche Nummern vergeben und welche frei sind.</p>
-
                 <h3>Einstellungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Kanal <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">In diesem Kanal wird das Dienstnummern-Embed angezeigt und automatisch aktualisiert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> Ein eigener Kanal #dienstnummern
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Mitarbeiter-Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Nur Nutzer mit dieser Rolle werden in der Liste angezeigt. Das System liest die Dienstnummer aus dem Nickname: [XX] Name</div>
-                    <div class="field-example">
-                        <span>Format:</span> Der Nickname muss das Format "[01] Max Mustermann" haben
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Nummernbereich (Min - Max)
-                    </div>
-                    <div class="field-desc">Definiert den Bereich der möglichen Dienstnummern.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> 1 bis 99 = Nummern [01] bis [99]
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Kanal <span class="badge required">Erforderlich</span></div><div class="field-desc">In diesem Kanal wird das Dienstnummern-Embed angezeigt und automatisch aktualisiert.</div><div class="field-example"><span>Empfehlung:</span> Ein eigener Kanal #dienstnummern</div></div>
+                <div class="field-card"><div class="field-name">Mitarbeiter-Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Nur Nutzer mit dieser Rolle werden in der Liste angezeigt. Das System liest die Dienstnummer aus dem Nickname: [XX] Name</div><div class="field-example"><span>Format:</span> Der Nickname muss das Format "[01] Max Mustermann" haben</div></div>
+                <div class="field-card"><div class="field-name">Nummernbereich (Min - Max)</div><div class="field-desc">Definiert den Bereich der möglichen Dienstnummern.</div><div class="field-example"><span>Beispiel:</span> 1 bis 99 = Nummern [01] bis [99]</div></div>
                 <h3>Blacklist</h3>
                 <p>Hier kannst du Nummern sperren, die nicht vergeben werden sollen (z.B. reservierte Nummern für die Leitung).</p>
-
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Wichtig</div>
-                    <p>Gesperrte Nummern werden als "🔒 Reserviert" angezeigt und können nicht vergeben werden.</p>
-                </div>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Wichtig</div><p>Gesperrte Nummern werden als "🔒 Reserviert" angezeigt und können nicht vergeben werden.</p></div>
             </section>
 
             <!-- Dashboard Personal -->
             <section id="dashboard-personal">
                 <h2><i class="fa-solid fa-folder-open"></i> Tab: Personal</h2>
                 <p>Die Personalverwaltung ermöglicht digitale Akten, Urlaubsanträge und Abmahnungen.</p>
-
                 <h3>Rollen-Berechtigungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        👑 Management-Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Vollzugriff: Kann Akten erstellen, bearbeiten, löschen. Kann Verwarnungen erteilen und löschen.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "Leitung" oder "Direktion"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        📋 Personal-Rolle
-                    </div>
-                    <div class="field-desc">Kann Akten bearbeiten und Verwarnungen erteilen, aber keine Akten löschen.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "Personalamt" oder "HR"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        👤 Mitarbeiter-Rolle
-                    </div>
-                    <div class="field-desc">Kann Akten nur ansehen (Lesezugriff). Keine Bearbeitungsrechte.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> Allgemeine Mitarbeiter-Rolle
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">👑 Management-Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Vollzugriff: Kann Akten erstellen, bearbeiten, löschen. Kann Verwarnungen erteilen und löschen.</div><div class="field-example"><span>Beispiel:</span> "Leitung" oder "Direktion"</div></div>
+                <div class="field-card"><div class="field-name">📋 Personal-Rolle</div><div class="field-desc">Kann Akten bearbeiten und Verwarnungen erteilen, aber keine Akten löschen.</div><div class="field-example"><span>Beispiel:</span> "Personalamt" oder "HR"</div></div>
+                <div class="field-card"><div class="field-name">👤 Mitarbeiter-Rolle</div><div class="field-desc">Kann Akten nur ansehen (Lesezugriff). Keine Bearbeitungsrechte.</div><div class="field-example"><span>Beispiel:</span> Allgemeine Mitarbeiter-Rolle</div></div>
                 <h3>Urlaub-System</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Urlaub-Rolle
-                    </div>
-                    <div class="field-desc">Diese Rolle wird automatisch vergeben wenn ein Mitarbeiter Urlaub hat, und entfernt wenn der Urlaub endet.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "🏖️ Urlaub" oder "Abwesend"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Urlaub-Log Kanal
-                    </div>
-                    <div class="field-desc">Hier werden Urlaubs-Einträge gepostet. Die Nachricht wird automatisch gelöscht wenn der Urlaub endet.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Urlaub-Rolle</div><div class="field-desc">Diese Rolle wird automatisch vergeben wenn ein Mitarbeiter Urlaub hat, und entfernt wenn der Urlaub endet.</div><div class="field-example"><span>Beispiel:</span> "🏖️ Urlaub" oder "Abwesend"</div></div>
+                <div class="field-card"><div class="field-name">Urlaub-Log Kanal</div><div class="field-desc">Hier werden Urlaubs-Einträge gepostet. Die Nachricht wird automatisch gelöscht wenn der Urlaub endet.</div></div>
                 <h3>Automatisierung</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Akten automatisch erstellen
-                    </div>
-                    <div class="field-desc">Wenn aktiviert, wird automatisch eine Personalakte erstellt sobald jemand eine der konfigurierten Rang-Rollen erhält.</div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Akten automatisch erstellen</div><div class="field-desc">Wenn aktiviert, wird automatisch eine Personalakte erstellt sobald jemand eine der konfigurierten Rang-Rollen erhält.</div></div>
                 <h3>Abmahnungsstufen</h3>
                 <p>Definiere verschiedene Verwarnungsstufen für dein Abmahnungssystem:</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Feld</th>
-                            <th>Beschreibung</th>
-                            <th>Beispiel</th>
-                        </tr>
-                        <tr>
-                            <td>Emoji</td>
-                            <td>Symbol für die Stufe</td>
-                            <td>⚠️, 🔶, 🔴, ❌</td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Bezeichnung der Stufe</td>
-                            <td>"1. Abmahnung"</td>
-                        </tr>
-                        <tr>
-                            <td>Rolle</td>
-                            <td>Optional: Rolle die vergeben wird</td>
-                            <td>@Abgemahnt</td>
-                        </tr>
-                        <tr>
-                            <td>Tage</td>
-                            <td>Gültigkeit in Tagen (0 = permanent)</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                            <td>Punkte</td>
-                            <td>Punktwert für Statistiken</td>
-                            <td>1, 2, 3...</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Vorkonfiguriert</div>
-                    <p>Bei neuen Servern sind bereits 4 Standard-Stufen eingerichtet: 1. Abmahnung (30 Tage), 2. Abmahnung (60 Tage), 3. Abmahnung (90 Tage), Kündigung (permanent).</p>
-                </div>
-
+                <div class="table-container"><table>
+                    <tr><th>Feld</th><th>Beschreibung</th><th>Beispiel</th></tr>
+                    <tr><td>Emoji</td><td>Symbol für die Stufe</td><td>⚠️, 🔶, 🔴, ❌</td></tr>
+                    <tr><td>Name</td><td>Bezeichnung der Stufe</td><td>"1. Abmahnung"</td></tr>
+                    <tr><td>Rolle</td><td>Optional: Rolle die vergeben wird</td><td>@Abgemahnt</td></tr>
+                    <tr><td>Tage</td><td>Gültigkeit in Tagen (0 = permanent)</td><td>30</td></tr>
+                    <tr><td>Punkte</td><td>Punktwert für Statistiken</td><td>1, 2, 3...</td></tr>
+                </table></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Vorkonfiguriert</div><p>Bei neuen Servern sind bereits 4 Standard-Stufen eingerichtet: 1. Abmahnung (30 Tage), 2. Abmahnung (60 Tage), 3. Abmahnung (90 Tage), Kündigung (permanent).</p></div>
                 <h3>Ränge konfigurieren</h3>
                 <p>Hier definierst du die Ränge deiner Fraktion. Diese werden für die automatische Akten-Erstellung und Rang-Synchronisierung verwendet.</p>
-
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Reihenfolge wichtig!</div>
-                    <p>Die Reihenfolge bestimmt die Hierarchie. Der erste Rang ist der höchste. Wenn jemand mehrere Rang-Rollen hat, wird der höchste genommen.</p>
-                </div>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Reihenfolge wichtig!</div><p>Die Reihenfolge bestimmt die Hierarchie. Der erste Rang ist der höchste. Wenn jemand mehrere Rang-Rollen hat, wird der höchste genommen.</p></div>
             </section>
 
             <!-- Dashboard Teamlist -->
             <section id="dashboard-teamlist">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Tab: Teamliste</h2>
                 <p>Die Teamliste zeigt alle Mitarbeiter sortiert nach Rängen in einem Live-Embed an.</p>
-
                 <h3>Einstellungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Kanal <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">In diesem Kanal wird die Teamliste angezeigt und automatisch aktualisiert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> Ein eigener Kanal #teamliste oder #mitarbeiter
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Titel
-                    </div>
-                    <div class="field-desc">Der Titel des Embeds.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> "🏛️ Unser Team" oder "👮 Mitarbeiter-Übersicht"
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Farbe (Hex)
-                    </div>
-                    <div class="field-desc">Die Farbe des Embed-Balkens als Hex-Code.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> #3498db (Blau), #e74c3c (Rot)
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Update-Intervall (Minuten)
-                    </div>
-                    <div class="field-desc">Alle X Minuten wird die Liste automatisch aktualisiert.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> 10-30 Minuten (Standard: 10)
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Kanal <span class="badge required">Erforderlich</span></div><div class="field-desc">In diesem Kanal wird die Teamliste angezeigt und automatisch aktualisiert.</div><div class="field-example"><span>Empfehlung:</span> Ein eigener Kanal #teamliste oder #mitarbeiter</div></div>
+                <div class="field-card"><div class="field-name">Titel</div><div class="field-desc">Der Titel des Embeds.</div><div class="field-example"><span>Beispiel:</span> "🏛️ Unser Team" oder "👮 Mitarbeiter-Übersicht"</div></div>
+                <div class="field-card"><div class="field-name">Farbe (Hex)</div><div class="field-desc">Die Farbe des Embed-Balkens als Hex-Code.</div><div class="field-example"><span>Beispiel:</span> #3498db (Blau), #e74c3c (Rot)</div></div>
+                <div class="field-card"><div class="field-name">Update-Intervall (Minuten)</div><div class="field-desc">Alle X Minuten wird die Liste automatisch aktualisiert.</div><div class="field-example"><span>Empfehlung:</span> 10-30 Minuten (Standard: 10)</div></div>
                 <h3>Ränge konfigurieren</h3>
                 <p>Definiere die Ränge die in der Teamliste angezeigt werden sollen. Die Reihenfolge bestimmt die Sortierung (von oben nach unten).</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Feld</th>
-                            <th>Beschreibung</th>
-                            <th>Beispiel</th>
-                        </tr>
-                        <tr>
-                            <td>Emoji</td>
-                            <td>Emoji vor dem Rang-Namen</td>
-                            <td>👑, ⭐, 🏅</td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Bezeichnung des Rangs</td>
-                            <td>"Direktor", "Captain"</td>
-                        </tr>
-                        <tr>
-                            <td>Discord-Rolle</td>
-                            <td>Die zugehörige Discord-Rolle</td>
-                            <td>@Direktor, @Captain</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-info-circle"></i> Multi-Message Support</div>
-                    <p>Bei sehr großen Teams wird die Liste automatisch auf mehrere Nachrichten aufgeteilt, um Discord's Zeichenlimit einzuhalten.</p>
-                </div>
-
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-sync"></i> Manuelles Update</div>
-                    <p>Du kannst die Liste jederzeit manuell aktualisieren mit dem Befehl <code>/teamlist update</code></p>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Feld</th><th>Beschreibung</th><th>Beispiel</th></tr>
+                    <tr><td>Emoji</td><td>Emoji vor dem Rang-Namen</td><td>👑, ⭐, 🏅</td></tr>
+                    <tr><td>Name</td><td>Bezeichnung des Rangs</td><td>"Direktor", "Captain"</td></tr>
+                    <tr><td>Discord-Rolle</td><td>Die zugehörige Discord-Rolle</td><td>@Direktor, @Captain</td></tr>
+                </table></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-info-circle"></i> Multi-Message Support</div><p>Bei sehr großen Teams wird die Liste automatisch auf mehrere Nachrichten aufgeteilt, um Discord's Zeichenlimit einzuhalten.</p></div>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-sync"></i> Manuelles Update</div><p>Du kannst die Liste jederzeit manuell aktualisieren mit dem Befehl <code>/teamlist update</code></p></div>
             </section>
 
             <!-- Dashboard Einstellung -->
             <section id="dashboard-einstellung">
                 <h2><i class="fa-solid fa-user-plus"></i> Tab: Einstellung</h2>
                 <p>Das Einstellungssystem ermöglicht die schnelle Einstellung neuer Mitarbeiter mit automatischer DN-Vergabe.</p>
-
                 <h3>Berechtigungen</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Berechtigte Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Nur Nutzer mit dieser Rolle können den /einstellung Befehl nutzen.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> @Personalamt, @Leitung
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Berechtigte Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Nur Nutzer mit dieser Rolle können den /einstellung Befehl nutzen.</div><div class="field-example"><span>Beispiel:</span> @Personalamt, @Leitung</div></div>
                 <h3>Rollen-Zuweisung</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Mitarbeiter-Rolle <span class="badge required">Erforderlich</span>
-                    </div>
-                    <div class="field-desc">Diese Rolle wird automatisch bei der Einstellung vergeben.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> @Mitarbeiter, @Officer
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        PMA-Rolle
-                    </div>
-                    <div class="field-desc">Zusätzliche Rolle für neue Mitarbeiter (z.B. "Probemitarbeiter").</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> @Probezeit, @Anwärter
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Zusätzliche Rollen (Multi-Select)
-                    </div>
-                    <div class="field-desc">Weitere Rollen die automatisch vergeben werden sollen. Halte Strg gedrückt für Mehrfachauswahl.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> @Zugang Basis, @Funkgerät
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Mitarbeiter-Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Diese Rolle wird automatisch bei der Einstellung vergeben.</div><div class="field-example"><span>Beispiel:</span> @Mitarbeiter, @Officer</div></div>
+                <div class="field-card"><div class="field-name">PMA-Rolle</div><div class="field-desc">Zusätzliche Rolle für neue Mitarbeiter (z.B. "Probemitarbeiter").</div><div class="field-example"><span>Beispiel:</span> @Probezeit, @Anwärter</div></div>
+                <div class="field-card"><div class="field-name">Zusätzliche Rollen (Multi-Select)</div><div class="field-desc">Weitere Rollen die automatisch vergeben werden sollen. Halte Strg gedrückt für Mehrfachauswahl.</div><div class="field-example"><span>Beispiel:</span> @Zugang Basis, @Funkgerät</div></div>
                 <h3>Dienstnummern</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Auto-DN aktivieren
-                    </div>
-                    <div class="field-desc">Wenn aktiviert, wird automatisch die nächste freie Dienstnummer gesucht und vergeben.</div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        DN-Bereich (Min - Max)
-                    </div>
-                    <div class="field-desc">Der Bereich in dem nach freien Dienstnummern gesucht wird.</div>
-                    <div class="field-example">
-                        <span>Beispiel:</span> 1-999 oder 100-199
-                    </div>
-                </div>
-
+                <div class="field-card"><div class="field-name">Auto-DN aktivieren</div><div class="field-desc">Wenn aktiviert, wird automatisch die nächste freie Dienstnummer gesucht und vergeben.</div></div>
+                <div class="field-card"><div class="field-name">DN-Bereich (Min - Max)</div><div class="field-desc">Der Bereich in dem nach freien Dienstnummern gesucht wird.</div><div class="field-example"><span>Beispiel:</span> 1-999 oder 100-199</div></div>
                 <h3>Logging</h3>
-
-                <div class="field-card">
-                    <div class="field-name">
-                        Einstellungs-Kanal
-                    </div>
-                    <div class="field-desc">In diesem Kanal wird jede Einstellung protokolliert mit allen Details.</div>
-                    <div class="field-example">
-                        <span>Empfehlung:</span> #einstellungen-log oder #personal-log
-                    </div>
-                </div>
-
-                <div class="info-box success">
-                    <div class="info-box-title"><i class="fa-solid fa-magic"></i> Automatisierung</div>
-                    <p>Mit einem einzigen Befehl werden automatisch: Rollen vergeben, Dienstnummer zugewiesen (falls aktiviert), Nickname gesetzt und die Einstellung geloggt.</p>
-                </div>
+                <div class="field-card"><div class="field-name">Einstellungs-Kanal</div><div class="field-desc">In diesem Kanal wird jede Einstellung protokolliert mit allen Details.</div><div class="field-example"><span>Empfehlung:</span> #einstellungen-log oder #personal-log</div></div>
+                <div class="info-box success"><div class="info-box-title"><i class="fa-solid fa-magic"></i> Automatisierung</div><p>Mit einem einzigen Befehl werden automatisch: Rollen vergeben, Dienstnummer zugewiesen (falls aktiviert), Nickname gesetzt und die Einstellung geloggt.</p></div>
             </section>
 
-            <!-- Stempelsystem -->
-            <section id="stempelsystem">
-                <h2><i class="fa-solid fa-stopwatch"></i> Stempelsystem</h2>
-                <p>Das Stempelsystem erfasst automatisch die Arbeitszeit deiner Mitarbeiter.</p>
+            <!-- Dashboard Moderation -->
+            <section id="dashboard-moderation">
+                <h2><i class="fa-solid fa-shield-halved"></i> Tab: Moderation</h2>
+                <p>Steuere alle Moderationsfunktionen zentral: Auto-Mod, Welcome, Auto-Rollen, Logging und Befehls-Berechtigungen.</p>
+                <h3>Moderations-Rollen</h3>
+                <div class="field-card"><div class="field-name">Rollen die moderieren dürfen</div><div class="field-desc">Nur Administratoren und Nutzer mit diesen Rollen können Moderations-Befehle nutzen.</div></div>
+                <h3>Auto-Moderation</h3>
+                <div class="field-card"><div class="field-name">Auto-Mod aktivieren</div><div class="field-desc">Automatische Prüfung neuer Nachrichten auf Spam, Links, Schimpfwörter, übermäßige Großschreibung und zu viele Erwähnungen.</div></div>
+                <div class="field-card"><div class="field-name">Bypass (Rollen & Kanäle)</div><div class="field-desc">Diese Rollen/Kanäle werden vom Auto-Mod ignoriert.</div></div>
+                <div class="field-card"><div class="field-name">Aktion bei Verstoß</div><div class="field-desc">Wähle: Keine (nur löschen & loggen), Timeout (5 Min), Kick, Ban.</div></div>
+                <h4>Filter</h4>
+                <div class="table-container"><table>
+                    <tr><th>Filter</th><th>Beschreibung</th><th>Wichtige Optionen</th></tr>
+                    <tr><td>Anti-Spam</td><td>Erkennt viele Nachrichten in kurzer Zeit</td><td>Max Nachrichten, Zeitfenster (Sekunden)</td></tr>
+                    <tr><td>Anti-Links</td><td>Blockiert Links außer erlaubte Domains</td><td>Whitelist (eine Domain pro Zeile)</td></tr>
+                    <tr><td>Bad Words</td><td>Filtert verbotene Wörter (case-insensitive)</td><td>Wortliste (ein Wort pro Zeile)</td></tr>
+                    <tr><td>Anti-Caps</td><td>Blockiert zu hohe Großbuchstaben-Anteile</td><td>Min Länge, Max % Caps</td></tr>
+                    <tr><td>Anti-Mentions</td><td>Limitiert @Erwähnungen pro Nachricht</td><td>Max Mentions</td></tr>
+                </table></div>
+                <h3>Welcome System</h3>
+                <div class="field-card"><div class="field-name">Welcome aktivieren & Kanal</div><div class="field-desc">Sendet eine Willkommensnachricht in den ausgewählten Kanal.</div></div>
+                <div class="field-card"><div class="field-name">Nachricht & Variablen</div><div class="field-desc">Unterstützte Variablen: <code>{user}</code>, <code>{user.mention}</code>, <code>{user.tag}</code>, <code>{server}</code>, <code>{membercount}</code>, <code>{user.id}</code></div></div>
+                <div class="field-card"><div class="field-name">Embed-Designer</div><div class="field-desc">Farbe, Titel, Thumbnail (Avatar), Bild, Footer, Auto-Delete (Sekunden)</div></div>
+                <h3>Auto-Roles</h3>
+                <div class="field-card"><div class="field-name">Rollen bei Join</div><div class="field-desc">Vergebe automatisch eine oder mehrere Rollen an neue Mitglieder.</div></div>
+                <h3>Logging</h3>
+                <div class="field-card"><div class="field-name">Log-Kanäle</div><div class="field-desc">Konfiguriere separate Kanäle: Auto-Mod, Join/Leave, Nachrichten (Edit/Delete), Member-Änderungen, Server-Änderungen, Moderations-Aktionen.</div></div>
+            </section>
 
+            <!-- Systeme -->
+            <section id="stempelsystem"><h2><i class="fa-solid fa-stopwatch"></i> Stempelsystem</h2><p>Das Stempelsystem erfasst automatisch die Arbeitszeit deiner Mitarbeiter.</p>
                 <h3>So funktioniert's</h3>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Stempel-Panel erstellen</div>
-                        <div class="step-desc">Nutze <code>/stempel panel</code> um das Stempel-Panel in einem Kanal zu erstellen.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Dienst beginnen</div>
-                        <div class="step-desc">Mitarbeiter klicken auf "Dienstbeginn" - die Im-Dienst-Rolle wird vergeben, die Zeit läuft.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Dienst beenden</div>
-                        <div class="step-desc">Mitarbeiter klicken auf "Dienstende" - die Rolle wird entfernt, die Zeit wird gespeichert.</div>
-                    </div>
-                </div>
-
+                <div class="steps"><div class="step"><div class="step-title">Stempel-Panel erstellen</div><div class="step-desc">Nutze <code>/stempel panel</code> um das Stempel-Panel in einem Kanal zu erstellen.</div></div>
+                    <div class="step"><div class="step-title">Dienst beginnen</div><div class="step-desc">Mitarbeiter klicken auf "Dienstbeginn" - die Im-Dienst-Rolle wird vergeben, die Zeit läuft.</div></div>
+                    <div class="step"><div class="step-title">Dienst beenden</div><div class="step-desc">Mitarbeiter klicken auf "Dienstende" - die Rolle wird entfernt, die Zeit wird gespeichert.</div></div></div>
                 <h3>Features</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
                     <li><strong>Automatische Zeiterfassung</strong> - Jede Session wird mit Start- und Endzeit gespeichert</li>
@@ -1441,13 +533,9 @@
                 </ul>
             </section>
 
-            <!-- Ticketsystem -->
-            <section id="ticketsystem">
-                <h2><i class="fa-solid fa-envelope"></i> Ticketsystem</h2>
+            <section id="ticketsystem"><h2><i class="fa-solid fa-envelope"></i> Ticketsystem</h2>
                 <p>Das Ticketsystem ermöglicht strukturierte Kommunikation mit Bürgern und innerhalb der Fraktion.</p>
-
                 <h3>Ticket-Typen</h3>
-
                 <h4>Bürger-Tickets</h4>
                 <p>Für externe Anfragen von Bürgern:</p>
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
@@ -1455,7 +543,6 @@
                     <li><strong>🛡️ Dienstbeschwerde</strong> - Beschwerden über Mitarbeiter</li>
                     <li><strong>📋 Sonstiges</strong> - Allgemeine Anfragen</li>
                 </ul>
-
                 <h4>Mitarbeiter-Tickets</h4>
                 <p>Für interne Anfragen (nur mit Mitarbeiter-Rolle sichtbar):</p>
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
@@ -1463,50 +550,18 @@
                     <li><strong>📚 Ausbildung</strong> - Schulungsanfragen</li>
                     <li><strong>📋 Sonstiges</strong> - Interne Anfragen</li>
                 </ul>
-
                 <h3>Panels erstellen</h3>
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/setup-tickets-buerger</span>
-                    </div>
-                    <div class="command-desc">Erstellt das Bürger-Panel mit Buttons für Bewerbung, Beschwerde und Sonstiges.</div>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/setup-tickets-mitarbeiter</span>
-                    </div>
-                    <div class="command-desc">Erstellt das interne Mitarbeiter-Panel (nur für Nutzer mit Mitarbeiter-Rolle sichtbar).</div>
-                </div>
-
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/setup-tickets-buerger</span></div><div class="command-desc">Erstellt das Bürger-Panel mit Buttons für Bewerbung, Beschwerde und Sonstiges.</div></div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/setup-tickets-mitarbeiter</span></div><div class="command-desc">Erstellt das interne Mitarbeiter-Panel (nur für Nutzer mit Mitarbeiter-Rolle sichtbar).</div></div>
                 <h3>Ticket-Aktionen</h3>
                 <p>In jedem Ticket stehen verschiedene Buttons zur Verfügung:</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Button</th>
-                            <th>Funktion</th>
-                        </tr>
-                        <tr>
-                            <td>🔵 Management</td>
-                            <td>Leitung zum Ticket hinzufügen</td>
-                        </tr>
-                        <tr>
-                            <td>🔒 Schließen</td>
-                            <td>Ticket schließen und archivieren</td>
-                        </tr>
-                        <tr>
-                            <td>✅ Annehmen (Bewerbung)</td>
-                            <td>Bewerbung akzeptieren</td>
-                        </tr>
-                        <tr>
-                            <td>❌ Ablehnen (Bewerbung)</td>
-                            <td>Bewerbung ablehnen</td>
-                        </tr>
-                    </table>
-                </div>
-
+                <div class="table-container"><table>
+                    <tr><th>Button</th><th>Funktion</th></tr>
+                    <tr><td>🔵 Management</td><td>Leitung zum Ticket hinzufügen</td></tr>
+                    <tr><td>🔒 Schließen</td><td>Ticket schließen und archivieren</td></tr>
+                    <tr><td>✅ Annehmen (Bewerbung)</td><td>Bewerbung akzeptieren</td></tr>
+                    <tr><td>❌ Ablehnen (Bewerbung)</td><td>Bewerbung ablehnen</td></tr>
+                </table></div>
                 <h3>Kategoriespezifische Handler-Rollen</h3>
                 <p>Für jede Ticket-Kategorie kann eine eigene Handler-Rolle definiert werden:</p>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
@@ -1522,18 +577,11 @@
             <section id="dienstnummern">
                 <h2><i class="fa-solid fa-hashtag"></i> Dienstnummern</h2>
                 <p>Die Dienstnummern-Übersicht zeigt live alle freien und vergebenen Nummern.</p>
-
                 <h3>So funktioniert's</h3>
                 <p>Das System liest die Dienstnummern aus den Nicknames der Mitarbeiter:</p>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-user"></i> Nickname-Format</div>
-                    <p>Der Nickname muss das Format <code>[XX] Name</code> haben, z.B. <code>[01] Max Mustermann</code></p>
-                </div>
-
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-user"></i> Nickname-Format</div><p>Der Nickname muss das Format <code>[XX] Name</code> haben, z.B. <code>[01] Max Mustermann</code></p></div>
                 <h3>Übersicht erstellen</h3>
                 <p>Das Embed wird automatisch erstellt wenn du im Dashboard den Kanal auswählst und speicherst. Es aktualisiert sich automatisch bei Änderungen.</p>
-
                 <h3>Anzeige</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
                     <li>🟢 <strong>Vergeben</strong> - Nummer ist einem Mitarbeiter zugewiesen</li>
@@ -1546,58 +594,25 @@
             <section id="personalverwaltung">
                 <h2><i class="fa-solid fa-users"></i> Personalverwaltung</h2>
                 <p>Digitale Personalakten für alle Mitarbeiter mit Statistiken, Historie und mehr.</p>
-
                 <h3>Zugriff</h3>
                 <p>Die Personalverwaltung erreichst du über:</p>
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
                     <li><a href="http://personal.5base.de" style="color: var(--accent);">personal.5base.de</a> (Webseite)</li>
                     <li><code>/personal</code> (Discord-Command)</li>
                 </ul>
-
                 <h3>Personalakte</h3>
                 <p>Jede Akte enthält:</p>
-
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Information</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td>Dienstnummer</td>
-                            <td>Die zugewiesene Dienstnummer</td>
-                        </tr>
-                        <tr>
-                            <td>Name (IC)</td>
-                            <td>Der Roleplay-Name</td>
-                        </tr>
-                        <tr>
-                            <td>Rang</td>
-                            <td>Aktueller Rang (synchronisiert mit Discord-Rollen)</td>
-                        </tr>
-                        <tr>
-                            <td>Einstellungsdatum</td>
-                            <td>Wann der Mitarbeiter eingestellt wurde</td>
-                        </tr>
-                        <tr>
-                            <td>Discord</td>
-                            <td>Verknüpfter Discord-Account</td>
-                        </tr>
-                        <tr>
-                            <td>Discord ID</td>
-                            <td>Die Discord-User-ID (kopierbar)</td>
-                        </tr>
-                        <tr>
-                            <td>Verwarnungen</td>
-                            <td>Anzahl aktiver Verwarnungen</td>
-                        </tr>
-                        <tr>
-                            <td>Notizen</td>
-                            <td>Freitext für Anmerkungen</td>
-                        </tr>
-                    </table>
-                </div>
-
+                <div class="table-container"><table>
+                    <tr><th>Information</th><th>Beschreibung</th></tr>
+                    <tr><td>Dienstnummer</td><td>Die zugewiesene Dienstnummer</td></tr>
+                    <tr><td>Name (IC)</td><td>Der Roleplay-Name</td></tr>
+                    <tr><td>Rang</td><td>Aktueller Rang (synchronisiert mit Discord-Rollen)</td></tr>
+                    <tr><td>Einstellungsdatum</td><td>Wann der Mitarbeiter eingestellt wurde</td></tr>
+                    <tr><td>Discord</td><td>Verknüpfter Discord-Account</td></tr>
+                    <tr><td>Discord ID</td><td>Die Discord-User-ID (kopierbar)</td></tr>
+                    <tr><td>Verwarnungen</td><td>Anzahl aktiver Verwarnungen</td></tr>
+                    <tr><td>Notizen</td><td>Freitext für Anmerkungen</td></tr>
+                </table></div>
                 <h3>Tabs in der Akte</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
                     <li><strong>📋 Informationen</strong> - Allgemeine Daten und Notizen</li>
@@ -1606,7 +621,6 @@
                     <li><strong>📊 Statistiken</strong> - Arbeitszeiten aus dem Stempelsystem</li>
                     <li><strong>🏖️ Urlaub</strong> - Urlaubshistorie</li>
                 </ul>
-
                 <h3>Automatische Rang-Synchronisierung</h3>
                 <p>Wenn sich die Discord-Rollen eines Mitarbeiters ändern, wird der Rang in der Akte automatisch aktualisiert und in der Historie dokumentiert.</p>
             </section>
@@ -1615,46 +629,16 @@
             <section id="urlaubssystem">
                 <h2><i class="fa-solid fa-umbrella-beach"></i> Urlaubssystem</h2>
                 <p>Mitarbeiter können Urlaub über Discord eintragen - ohne Genehmigung nötig.</p>
-
                 <h3>So funktioniert's</h3>
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Urlaub eintragen</div>
-                        <div class="step-desc">Mitarbeiter nutzt <code>/urlaub eintragen</code> mit Start-, End-Datum und Grund.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Automatisch aktiv</div>
-                        <div class="step-desc">Wenn das Startdatum erreicht ist, wird die Urlaubs-Rolle automatisch vergeben.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Automatisch beendet</div>
-                        <div class="step-desc">Nach dem End-Datum wird die Rolle entfernt und der Mitarbeiter per DM benachrichtigt.</div>
-                    </div>
+                    <div class="step"><div class="step-title">Urlaub eintragen</div><div class="step-desc">Mitarbeiter nutzt <code>/urlaub eintragen</code> mit Start-, End-Datum und Grund.</div></div>
+                    <div class="step"><div class="step-title">Automatisch aktiv</div><div class="step-desc">Wenn das Startdatum erreicht ist, wird die Urlaubs-Rolle automatisch vergeben.</div></div>
+                    <div class="step"><div class="step-title">Automatisch beendet</div><div class="step-desc">Nach dem End-Datum wird die Rolle entfernt und der Mitarbeiter per DM benachrichtigt.</div></div>
                 </div>
-
                 <h3>Befehle</h3>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/urlaub eintragen</span> <span class="param">von:DD.MM.YYYY</span> <span class="param">bis:DD.MM.YYYY</span> <span class="param">grund:Text</span>
-                    </div>
-                    <div class="command-desc">Trägt einen neuen Urlaub ein. Datum im Format TT.MM.JJJJ (z.B. 15.01.2025)</div>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/urlaub beenden</span>
-                    </div>
-                    <div class="command-desc">Beendet den eigenen Urlaub vorzeitig.</div>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/urlaub liste</span>
-                    </div>
-                    <div class="command-desc">Zeigt alle aktuellen Urlaube an.</div>
-                </div>
-
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/urlaub eintragen</span> <span class="param">von:DD.MM.YYYY</span> <span class="param">bis:DD.MM.YYYY</span> <span class="param">grund:Text</span></div><div class="command-desc">Trägt einen neuen Urlaub ein. Datum im Format TT.MM.JJJJ (z.B. 15.01.2025)</div></div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/urlaub beenden</span></div><div class="command-desc">Beendet den eigenen Urlaub vorzeitig.</div></div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/urlaub liste</span></div><div class="command-desc">Zeigt alle aktuellen Urlaube an.</div></div>
                 <h3>Features</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
                     <li>✅ Keine Genehmigung nötig - direkt aktiv</li>
@@ -1665,74 +649,28 @@
                 </ul>
             </section>
 
-            <!-- Verwarnungen -->
+            <!-- Verwarnungen (Personal) -->
             <section id="verwarnungen">
                 <h2><i class="fa-solid fa-triangle-exclamation"></i> Verwarnungssystem</h2>
-                <p>Dokumentiere Abmahnungen und Verwarnungen professionell.</p>
-
+                <p>Dokumentiere Abmahnungen und Verwarnungen professionell über die Personalverwaltung (separat vom Moderationssystem).</p>
                 <h3>Befehle</h3>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/verwarnung erteilen</span> <span class="param">@user</span> <span class="param">stufe:...</span> <span class="param">grund:Text</span>
-                    </div>
-                    <div class="command-desc">Erteilt eine Verwarnung. Die Stufen werden per Autocomplete vorgeschlagen.</div>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/verwarnung liste</span> <span class="param">@user</span>
-                    </div>
-                    <div class="command-desc">Zeigt alle Verwarnungen eines Mitarbeiters (aktive und abgelaufene).</div>
-                </div>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/verwarnung loeschen</span> <span class="param">id:123456</span>
-                    </div>
-                    <div class="command-desc">Löscht eine Verwarnung anhand der ID.</div>
-                </div>
-
-                <h3>Features</h3>
-                <ul style="color: var(--text-secondary); margin-left: 20px;">
-                    <li>✅ Konfiguierbare Stufen (1. Abmahnung, 2. Abmahnung, etc.)</li>
-                    <li>✅ Automatischer Ablauf nach X Tagen</li>
-                    <li>✅ Optionale Rolle bei Verwarnung</li>
-                    <li>✅ Rolle wird bei Ablauf automatisch entfernt</li>
-                    <li>✅ DM an den verwarnten Mitarbeiter</li>
-                    <li>✅ Log im konfigurierten Kanal</li>
-                    <li>✅ Verknüpft mit Personalakte</li>
-                </ul>
-
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-user-shield"></i> Berechtigung</div>
-                    <p>Nur Nutzer mit der Management- oder Personal-Rolle können Verwarnungen erteilen.</p>
-                </div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/verwarnung erteilen</span> <span class="param">@user</span> <span class="param">stufe:...</span> <span class="param">grund:Text</span></div><div class="command-desc">Erteilt eine Verwarnung. Die Stufen werden per Autocomplete vorgeschlagen.</div></div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/verwarnung liste</span> <span class="param">@user</span></div><div class="command-desc">Zeigt alle Verwarnungen eines Mitarbeiters (aktive und abgelaufene).</div></div>
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/verwarnung loeschen</span> <span class="param">id:123456</span></div><div class="command-desc">Löscht eine Verwarnung anhand der ID.</div></div>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-user-shield"></i> Berechtigung</div><p>Nur Nutzer mit der Management- oder Personal-Rolle können Verwarnungen erteilen.</p></div>
             </section>
 
             <!-- Teamlistsystem -->
             <section id="teamlistsystem">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Teamliste</h2>
                 <p>Die Teamliste zeigt alle Mitarbeiter nach Rängen sortiert in einem Live-Embed an.</p>
-
                 <h3>So funktioniert's</h3>
                 <p>Die Liste liest automatisch alle Mitglieder mit den konfigurierten Rang-Rollen aus und sortiert sie hierarchisch.</p>
-
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Ränge konfigurieren</div>
-                        <div class="step-desc">Im Dashboard unter "Teamliste" legst du die Ränge mit Emoji, Name und Discord-Rolle fest.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Kanal auswählen</div>
-                        <div class="step-desc">Wähle den Kanal in dem die Liste angezeigt werden soll und speichere.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Automatische Updates</div>
-                        <div class="step-desc">Die Liste aktualisiert sich automatisch im konfigurierten Intervall (Standard: 10 Minuten).</div>
-                    </div>
+                    <div class="step"><div class="step-title">Ränge konfigurieren</div><div class="step-desc">Im Dashboard unter "Teamliste" legst du die Ränge mit Emoji, Name und Discord-Rolle fest.</div></div>
+                    <div class="step"><div class="step-title">Kanal auswählen</div><div class="step-desc">Wähle den Kanal in dem die Liste angezeigt werden soll und speichere.</div></div>
+                    <div class="step"><div class="step-title">Automatische Updates</div><div class="step-desc">Die Liste aktualisiert sich automatisch im konfigurierten Intervall (Standard: 10 Minuten).</div></div>
                 </div>
-
                 <h3>Anzeige-Format</h3>
                 <p>Für jeden Rang wird angezeigt:</p>
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
@@ -1741,21 +679,9 @@
                     <li><strong>Dienstnummer</strong> wird aus dem Nickname extrahiert ([XX] Name)</li>
                     <li><strong>Sortierung</strong> nach Dienstnummer aufsteigend</li>
                 </ul>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-user"></i> Nickname-Format</div>
-                    <p>Wenn der Nickname das Format <code>[XX] Name</code> hat, wird die DN vor dem Namen angezeigt. Sonst nur der Name.</p>
-                </div>
-
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-user"></i> Nickname-Format</div><p>Wenn der Nickname das Format <code>[XX] Name</code> hat, wird die DN vor dem Namen angezeigt. Sonst nur der Name.</p></div>
                 <h3>Befehle</h3>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/teamlist update</span>
-                    </div>
-                    <div class="command-desc">Aktualisiert die Teamliste manuell sofort.</div>
-                </div>
-
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/teamlist update</span></div><div class="command-desc">Aktualisiert die Teamliste manuell sofort.</div></div>
                 <h3>Features</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px;">
                     <li>✅ Automatische Updates im konfigurierten Intervall</li>
@@ -1770,36 +696,15 @@
             <section id="einstellungssystem">
                 <h2><i class="fa-solid fa-user-plus"></i> Einstellungssystem</h2>
                 <p>Stelle neue Mitarbeiter mit einem einzigen Befehl ein - inklusive automatischer DN-Vergabe und Rollenzuweisung.</p>
-
                 <h3>So funktioniert's</h3>
                 <div class="steps">
-                    <div class="step">
-                        <div class="step-title">Befehl ausführen</div>
-                        <div class="step-desc">Nutze <code>/einstellung</code> mit Discord-User, IC-Name und optional einer Dienstnummer.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Automatische DN-Vergabe</div>
-                        <div class="step-desc">Wenn Auto-DN aktiviert ist und keine DN angegeben wird, wird automatisch die nächste freie DN gesucht.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Rollen & Nickname</div>
-                        <div class="step-desc">Alle konfigurierten Rollen werden vergeben, der Nickname wird gesetzt: [XX] IC-Name</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-title">Logging</div>
-                        <div class="step-desc">Die Einstellung wird im Log-Kanal dokumentiert mit allen Details.</div>
-                    </div>
+                    <div class="step"><div class="step-title">Befehl ausführen</div><div class="step-desc">Nutze <code>/einstellung</code> mit Discord-User, IC-Name und optional einer Dienstnummer.</div></div>
+                    <div class="step"><div class="step-title">Automatische DN-Vergabe</div><div class="step-desc">Wenn Auto-DN aktiviert ist und keine DN angegeben wird, wird automatisch die nächste freie DN gesucht.</div></div>
+                    <div class="step"><div class="step-title">Rollen & Nickname</div><div class="step-desc">Alle konfigurierten Rollen werden vergeben, der Nickname wird gesetzt: [XX] IC-Name</div></div>
+                    <div class="step"><div class="step-title">Logging</div><div class="step-desc">Die Einstellung wird im Log-Kanal dokumentiert mit allen Details.</div></div>
                 </div>
-
                 <h3>Befehle</h3>
-
-                <div class="command-card">
-                    <div class="command-syntax">
-                        <span class="cmd">/einstellung</span> <span class="param">user:@User</span> <span class="param">ic_name:Max_Mustermann</span> <span class="optional-param">dienstnummer:01</span>
-                    </div>
-                    <div class="command-desc">Stellt einen neuen Mitarbeiter ein. Dienstnummer ist optional wenn Auto-DN aktiviert ist.</div>
-                </div>
-
+                <div class="command-card"><div class="command-syntax"><span class="cmd">/einstellung</span> <span class="param">user:@User</span> <span class="param">ic_name:Max_Mustermann</span> <span class="optional-param">dienstnummer:01</span></div><div class="command-desc">Stellt einen neuen Mitarbeiter ein. Dienstnummer ist optional wenn Auto-DN aktiviert ist.</div></div>
                 <h3>Was passiert automatisch?</h3>
                 <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 20px;">
                     <li>✅ <strong>Mitarbeiter-Rolle</strong> wird vergeben</li>
@@ -1810,292 +715,147 @@
                     <li>✅ <strong>Log-Message</strong> wird erstellt mit allen Details</li>
                     <li>✅ <strong>Bestätigung</strong> an den Ausführenden</li>
                 </ul>
-
                 <h3>Auto-DN Vergabe</h3>
                 <p>Das System durchsucht automatisch alle Mitglieder mit der Mitarbeiter-Rolle und findet die nächste freie Dienstnummer im konfigurierten Bereich.</p>
+                <div class="info-box warning"><div class="info-box-title"><i class="fa-solid fa-clock"></i> Performance</div><p>Bei großen Servern kann die DN-Suche einige Sekunden dauern. Das System hat einen Timeout-Schutz und nutzt zwischengespeicherte Daten als Fallback.</p></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-shield-halved"></i> Berechtigung</div><p>Nur Nutzer mit der im Dashboard konfigurierten "Berechtigte Rolle" können diesen Befehl nutzen.</p></div>
+            </section>
 
-                <div class="info-box warning">
-                    <div class="info-box-title"><i class="fa-solid fa-clock"></i> Performance</div>
-                    <p>Bei großen Servern kann die DN-Suche einige Sekunden dauern. Das System hat einen Timeout-Schutz und nutzt zwischengespeicherte Daten als Fallback.</p>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-solid fa-shield-halved"></i> Berechtigung</div>
-                    <p>Nur Nutzer mit der im Dashboard konfigurierten "Berechtigte Rolle" können diesen Befehl nutzen.</p>
-                </div>
+            <!-- Moderationssystem -->
+            <section id="moderationsystem">
+                <h2><i class="fa-solid fa-shield-halved"></i> Moderationssystem</h2>
+                <p>Das Moderationssystem bietet Auto-Moderation, Willkommensnachrichten, automatische Rollenvergabe, umfangreiches Logging und Moderations-Befehle.</p>
+                <h3>Features</h3>
+                <ul style="color: var(--text-secondary); margin-left: 20px;">
+                    <li>✅ <strong>Auto-Moderation</strong> (Spam, Links, Bad Words, Caps, Mentions)</li>
+                    <li>✅ <strong>Welcome</strong> (mit Variablen und Embed-Designer)</li>
+                    <li>✅ <strong>Auto-Roles</strong> (Rollen automatisch bei Join vergeben)</li>
+                    <li>✅ <strong>Logging</strong> (6 getrennte Log-Kanäle)</li>
+                    <li>✅ <strong>Moderations-Befehle</strong> (Ban, Kick, Timeout, Clear, Unban, Untimeout)</li>
+                    <li>✅ <strong>Dashboard-Steuerung</strong> (alles per UI konfigurierbar)</li>
+                </ul>
+                <h3>Logging-Kategorien</h3>
+                <div class="table-container"><table>
+                    <tr><th>Kategorie</th><th>Beispiele</th></tr>
+                    <tr><td>Auto-Mod</td><td>Gelöschte Nachrichten, Filter-Treffer</td></tr>
+                    <tr><td>Join/Leave</td><td>Neue/gehende Mitglieder</td></tr>
+                    <tr><td>Messages</td><td>Nachrichten gelöscht/editiert</td></tr>
+                    <tr><td>Member</td><td>Rollen-/Nickname-Änderungen</td></tr>
+                    <tr><td>Server</td><td>Kanäle/Rollen erstellt/gelöscht</td></tr>
+                    <tr><td>Moderation</td><td>Ban, Kick, Timeout, Clear</td></tr>
+                </table></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-circle-info"></i> Hinweis</div><p>Moderations-Verwarnungen (<code>/warn</code>) sind entfernt. Verwarnungen laufen ausschließlich über die Personalverwaltung.</p></div>
             </section>
 
             <!-- Befehle Übersicht -->
             <section id="befehle-uebersicht">
                 <h2><i class="fa-solid fa-terminal"></i> Alle Befehle</h2>
                 <p>Übersicht aller verfügbaren Discord-Befehle.</p>
-
                 <h3>Allgemeine Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/ping</code></td>
-                            <td>Zeigt die Bot-Latenz an</td>
-                        </tr>
-                        <tr>
-                            <td><code>/help</code></td>
-                            <td>Zeigt die Hilfe-Übersicht</td>
-                        </tr>
-                        <tr>
-                            <td><code>/dashboard</code></td>
-                            <td>Link zum Web-Dashboard</td>
-                        </tr>
-                        <tr>
-                            <td><code>/personal</code></td>
-                            <td>Link zur Personalverwaltung</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Befehl</th><th>Beschreibung</th></tr>
+                    <tr><td><code>/ping</code></td><td>Zeigt die Bot-Latenz an</td></tr>
+                    <tr><td><code>/help</code></td><td>Zeigt die Hilfe-Übersicht</td></tr>
+                    <tr><td><code>/dashboard</code></td><td>Link zum Web-Dashboard</td></tr>
+                    <tr><td><code>/personal</code></td><td>Link zur Personalverwaltung</td></tr>
+                </table></div>
             </section>
 
             <!-- Befehle Stempel -->
             <section id="befehle-stempel">
                 <h3>Stempel-Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/stempel panel</code></td>
-                            <td>Erstellt das Stempel-Panel im Kanal</td>
-                        </tr>
-                        <tr>
-                            <td><code>/stempel stats</code></td>
-                            <td>Zeigt deine persönlichen Statistiken</td>
-                        </tr>
-                        <tr>
-                            <td><code>/stempel list</code></td>
-                            <td>Zeigt alle Mitarbeiter die gerade im Dienst sind</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Befehl</th><th>Beschreibung</th></tr>
+                    <tr><td><code>/stempel panel</code></td><td>Erstellt das Stempel-Panel im Kanal</td></tr>
+                    <tr><td><code>/stempel stats</code></td><td>Zeigt deine persönlichen Statistiken</td></tr>
+                    <tr><td><code>/stempel list</code></td><td>Zeigt alle Mitarbeiter die gerade im Dienst sind</td></tr>
+                </table></div>
             </section>
 
             <!-- Befehle Personal -->
             <section id="befehle-personal">
                 <h3>Personal-Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/urlaub eintragen</code></td>
-                            <td>Urlaub eintragen</td>
-                        </tr>
-                        <tr>
-                            <td><code>/urlaub beenden</code></td>
-                            <td>Urlaub vorzeitig beenden</td>
-                        </tr>
-                        <tr>
-                            <td><code>/urlaub liste</code></td>
-                            <td>Alle aktuellen Urlaube anzeigen</td>
-                        </tr>
-                        <tr>
-                            <td><code>/verwarnung erteilen</code></td>
-                            <td>Verwarnung an Mitarbeiter erteilen</td>
-                        </tr>
-                        <tr>
-                            <td><code>/verwarnung liste</code></td>
-                            <td>Verwarnungen eines Mitarbeiters anzeigen</td>
-                        </tr>
-                        <tr>
-                            <td><code>/verwarnung loeschen</code></td>
-                            <td>Verwarnung löschen</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="table-container"><table>
+                    <tr><th>Befehl</th><th>Beschreibung</th></tr>
+                    <tr><td><code>/urlaub eintragen</code></td><td>Urlaub eintragen</td></tr>
+                    <tr><td><code>/urlaub beenden</code></td><td>Urlaub vorzeitig beenden</td></tr>
+                    <tr><td><code>/urlaub liste</code></td><td>Alle aktuellen Urlaube anzeigen</td></tr>
+                    <tr><td><code>/verwarnung erteilen</code></td><td>Verwarnung an Mitarbeiter erteilen</td></tr>
+                    <tr><td><code>/verwarnung liste</code></td><td>Verwarnungen eines Mitarbeiters anzeigen</td></tr>
+                    <tr><td><code>/verwarnung loeschen</code></td><td>Verwarnung löschen</td></tr>
+                </table></div>
+            </section>
 
-                <h3>Ticket-Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/setup-tickets-buerger</code></td>
-                            <td>Erstellt das Bürger-Ticketpanel</td>
-                        </tr>
-                        <tr>
-                            <td><code>/setup-tickets-mitarbeiter</code></td>
-                            <td>Erstellt das Mitarbeiter-Ticketpanel</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <h3>Teamliste-Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/teamlist update</code></td>
-                            <td>Aktualisiert die Teamliste manuell</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <h3>Einstellungs-Befehle</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Befehl</th>
-                            <th>Beschreibung</th>
-                        </tr>
-                        <tr>
-                            <td><code>/einstellung</code></td>
-                            <td>Stellt einen neuen Mitarbeiter ein (mit Auto-DN und Rollenvergabe)</td>
-                        </tr>
-                    </table>
-                </div>
+            <!-- Befehle Moderation -->
+            <section id="befehle-moderation">
+                <h3><i class="fa-solid fa-gavel"></i> Moderation-Befehle</h3>
+                <div class="table-container"><table>
+                    <tr><th>Befehl</th><th>Beschreibung</th></tr>
+                    <tr><td><code>/ban</code></td><td>Bannt ein Mitglied (optional: Grund, Tage Nachrichten löschen)</td></tr>
+                    <tr><td><code>/unban</code></td><td>Hebt einen Bann per User-ID auf</td></tr>
+                    <tr><td><code>/kick</code></td><td>Kick eines Mitglieds vom Server</td></tr>
+                    <tr><td><code>/timeout</code></td><td>Timeout für eine Dauer (z.B. 10m, 2h, 1d)</td></tr>
+                    <tr><td><code>/untimeout</code></td><td>Entfernt einen aktiven Timeout</td></tr>
+                    <tr><td><code>/clear</code></td><td>Löscht 1-100 Nachrichten (optional: nur von User)</td></tr>
+                </table></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Berechtigungen</div><p>Nur Administratoren oder Nutzer mit den im Dashboard definierten Moderations-Rollen können diese Befehle nutzen. Rollen-Hierarchie wird beachtet.</p></div>
             </section>
 
             <!-- FAQ -->
             <section id="faq">
                 <h2><i class="fa-solid fa-circle-question"></i> Häufige Fragen (FAQ)</h2>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Der Bot vergibt keine Rollen - was tun?
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Stelle sicher, dass die Bot-Rolle ÜBER den Rollen liegt, die er verwalten soll. In Discord: Servereinstellungen → Rollen → Die Bot-Rolle nach oben ziehen.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Ich sehe meinen Server nicht im Dashboard
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Du siehst nur Server auf denen du Administrator bist UND der Bot bereits eingeladen wurde. Stelle sicher, dass beides zutrifft.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Dienstnummern werden nicht erkannt
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Der Nickname muss das Format <code>[XX] Name</code> haben, also z.B. <code>[01] Max Mustermann</code>. Die eckigen Klammern sind wichtig!</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Wie lösche ich alle Daten meines Servers?
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Kontaktiere uns im Support-Discord. Wir können die Daten für deinen Server komplett zurücksetzen.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Kann ich den Bot auf mehreren Servern nutzen?
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Ja! Der Bot kann auf beliebig vielen Servern genutzt werden. Jeder Server hat seine eigenen unabhängigen Einstellungen.</p>
-                    </div>
-                </div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Der Bot vergibt keine Rollen - was tun?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><p>Stelle sicher, dass die Bot-Rolle ÜBER den Rollen liegt, die er verwalten soll. In Discord: Servereinstellungen → Rollen → Die Bot-Rolle nach oben ziehen.</p></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Ich sehe meinen Server nicht im Dashboard<i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><p>Du siehst nur Server auf denen du Administrator bist UND der Bot bereits eingeladen wurde. Stelle sicher, dass beides zutrifft.</p></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Dienstnummern werden nicht erkannt<i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><p>Der Nickname muss das Format <code>[XX] Name</code> haben, also z.B. <code>[01] Max Mustermann</code>. Die eckigen Klammern sind wichtig!</p></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Wie lösche ich alle Daten meines Servers?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><p>Kontaktiere uns im Support-Discord. Wir können die Daten für deinen Server komplett zurücksetzen.</p></div></div>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Kann ich den Bot auf mehreren Servern nutzen?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer"><p>Ja! Der Bot kann auf beliebig vielen Servern genutzt werden. Jeder Server hat seine eigenen unabhängigen Einstellungen.</p></div></div>
             </section>
 
             <!-- Fehlerbehebung -->
             <section id="fehlerbehebung">
                 <h2><i class="fa-solid fa-wrench"></i> Fehlerbehebung</h2>
-
                 <h3>Häufige Probleme</h3>
-
-                <div class="field-card">
-                    <div class="field-name" style="color: var(--danger);">❌ "Bot reagiert nicht auf Befehle"</div>
-                    <div class="field-desc">
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Prüfe ob der Bot online ist (grüner Punkt)</li>
-                            <li>Stelle sicher, dass du Slash-Commands verwendest (/befehl)</li>
-                            <li>Warte 1-2 Minuten - Commands werden manchmal verzögert registriert</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name" style="color: var(--danger);">❌ "Einstellungen werden nicht gespeichert"</div>
-                    <div class="field-desc">
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Klicke auf den "Speichern" Button unten im Dashboard</li>
-                            <li>Warte auf die Bestätigungsmeldung</li>
-                            <li>Lade die Seite neu und prüfe ob die Einstellungen übernommen wurden</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="field-card">
-                    <div class="field-name" style="color: var(--danger);">❌ "Ticket-Panel funktioniert nicht"</div>
-                    <div class="field-desc">
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Stelle sicher, dass das Ticketsystem aktiviert ist</li>
-                            <li>Prüfe ob alle Kategorien im Dashboard ausgewählt sind</li>
-                            <li>Erstelle das Panel neu mit /setup-tickets-buerger</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-box-title"><i class="fa-brands fa-discord"></i> Weitere Hilfe</div>
-                    <p>Bei weiteren Problemen komm in unseren <a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Support Discord</a> - wir helfen dir gerne!</p>
-                </div>
+                <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Bot reagiert nicht auf Befehle"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Prüfe ob der Bot online ist (grüner Punkt)</li><li>Stelle sicher, dass du Slash-Commands verwendest (/befehl)</li><li>Warte 1-2 Minuten - Commands werden manchmal verzögert registriert</li></ul></div></div>
+                <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Einstellungen werden nicht gespeichert"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Klicke auf den "Speichern" Button unten im Dashboard</li><li>Warte auf die Bestätigungsmeldung</li><li>Lade die Seite neu und prüfe ob die Einstellungen übernommen wurden</li></ul></div></div>
+                <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Ticket-Panel funktioniert nicht"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Stelle sicher, dass das Ticketsystem aktiviert ist</li><li>Prüfe ob alle Kategorien im Dashboard ausgewählt sind</li><li>Erstelle das Panel neu mit /setup-tickets-buerger</li></ul></div></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-brands fa-discord"></i> Weitere Hilfe</div><p>Bei weiteren Problemen komm in unseren <a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Support Discord</a> - wir helfen dir gerne!</p></div>
             </section>
 
+            <!-- Changelog -->
+            <section id="changelog">
+                <h2><i class="fa-solid fa-clock-rotate-left"></i> Changelog</h2>
+                <div class="field-card">
+                    <div class="field-name">20.01.2026</div>
+                    <ul style="color: var(--text-secondary); margin-left: 20px; margin-top: 8px;">
+                        <li>Neu: Moderationssystem mit Auto-Mod, Welcome, Auto-Rollen und Logging</li>
+                        <li>Neu: Dashboard Tab "Moderation" inkl. aller Einstellungen</li>
+                        <li>Neu: Moderations-Befehle: /ban, /unban, /kick, /timeout, /untimeout, /clear</li>
+                        <li>Entfernt: Moderations-Verwarnungen (/warn, /warnings) – Verwarnungen laufen über die Personalverwaltung</li>
+                        <li>Fix: Modul-Toggle für Moderation speichert korrekt</li>
+                        <li>Update: Wiki mit Moderations-Dokumentation ergänzt</li>
+                    </ul>
+                </div>
+            </section>
         </main>
     </div>
 
     <!-- Back to top -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fa-solid fa-arrow-up"></i>
-    </a>
+    <a href="#" class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
 
     <script>
         // Mobile Sidebar Toggle
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         // FAQ Toggle
-        function toggleFaq(element) {
-            element.parentElement.classList.toggle('active');
-        }
-
+        function toggleFaq(element) { element.parentElement.classList.toggle('active'); }
         // Active Link highlighting
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.sidebar-link');
-
         function highlightNav() {
             const scrollPos = window.scrollY + 100;
-
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
                 const sectionId = section.getAttribute('id');
-
                 if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                     navLinks.forEach(link => {
                         link.classList.remove('active');
@@ -2106,23 +866,10 @@
                 }
             });
         }
-
         // Back to top button
         const backToTop = document.getElementById('backToTop');
-
-        function toggleBackToTop() {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        window.addEventListener('scroll', () => {
-            highlightNav();
-            toggleBackToTop();
-        });
-
+        function toggleBackToTop() { if (window.scrollY > 300) { backToTop.classList.add('visible'); } else { backToTop.classList.remove('visible'); } }
+        window.addEventListener('scroll', () => { highlightNav(); toggleBackToTop(); });
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -2130,18 +877,15 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile sidebar
                     document.getElementById('sidebar').classList.remove('active');
                 }
             });
         });
-
         // Search functionality
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
             const allSections = document.querySelectorAll('section');
-
             allSections.forEach(section => {
                 const text = section.textContent.toLowerCase();
                 if (text.includes(searchTerm) || searchTerm === '') {
