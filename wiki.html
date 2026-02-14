@@ -551,8 +551,8 @@
                     <li><strong>📋 Sonstiges</strong> - Interne Anfragen</li>
                 </ul>
                 <h3>Panels erstellen</h3>
-                <div class="command-card"><div class="command-syntax"><span class="cmd">/setup-tickets-buerger</span></div><div class="command-desc">Erstellt das Bürger-Panel mit Buttons für Bewerbung, Beschwerde und Sonstiges.</div></div>
-                <div class="command-card"><div class="command-syntax"><span class="cmd">/setup-tickets-mitarbeiter</span></div><div class="command-desc">Erstellt das interne Mitarbeiter-Panel (nur für Nutzer mit Mitarbeiter-Rolle sichtbar).</div></div>
+                <p>Panels werden im Dashboard erstellt und konfiguriert:</p>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-arrow-right"></i> Setup-Schritte</div><ol style="margin-left: 20px; margin-top: 10px;"><li>Gehe zu <strong>🎯 Panels verwalten</strong></li><li>Klicke <strong>+ Panel Erstellen</strong></li><li>Gib Name, Präfix und Beschreibung ein (z.B. "Bürgerpanels", "BUERGER")</li><li>Füge Kategorien hinzu (Bewerbung, Dienstbeschwerde, etc.)</li><li>Konfiguriere für jede Kategorie die Discord-Kanalkategorie und Rollen</li><li>Stelle die Status ein die aktiviert sein sollen</li><li>Klicke <strong>📤 Senden</strong> um das Panel in einen Discord-Kanal zu posten</li></ol></div>
                 <h3>Ticket-Aktionen</h3>
                 <p>In jedem Ticket stehen verschiedene Buttons zur Verfügung:</p>
                 <div class="table-container"><table>
@@ -817,7 +817,7 @@
                 <h3>Häufige Probleme</h3>
                 <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Bot reagiert nicht auf Befehle"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Prüfe ob der Bot online ist (grüner Punkt)</li><li>Stelle sicher, dass du Slash-Commands verwendest (/befehl)</li><li>Warte 1-2 Minuten - Commands werden manchmal verzögert registriert</li></ul></div></div>
                 <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Einstellungen werden nicht gespeichert"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Klicke auf den "Speichern" Button unten im Dashboard</li><li>Warte auf die Bestätigungsmeldung</li><li>Lade die Seite neu und prüfe ob die Einstellungen übernommen wurden</li></ul></div></div>
-                <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Ticket-Panel funktioniert nicht"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Stelle sicher, dass das Ticketsystem aktiviert ist</li><li>Prüfe ob alle Kategorien im Dashboard ausgewählt sind</li><li>Erstelle das Panel neu mit /setup-tickets-buerger</li></ul></div></div>
+                <div class="field-card"><div class="field-name" style="color: var(--danger);">❌ "Ticket-Panel funktioniert nicht"</div><div class="field-desc"><ul style="margin-left: 20px; margin-top: 10px;"><li>Stelle sicher, dass das Ticketsystem aktiviert ist</li><li>Prüfe ob alle Kategorien im Dashboard korrekt konfiguriert sind (Discord-Kategorien, Rollen)</li><li>Gehe zu <strong>🎯 Panels verwalten</strong> und bearbeite das Panel</li><li>Wende die Änderungen an und versende das Panel neu über <strong>📤 Senden</strong></li></ul></div></div>
                 <div class="info-box"><div class="info-box-title"><i class="fa-brands fa-discord"></i> Weitere Hilfe</div><p>Bei weiteren Problemen komm in unseren <a href="https://discord.gg/UQD9K363T3" style="color: var(--accent);">Support Discord</a> - wir helfen dir gerne!</p></div>
             </section>
 
@@ -838,6 +838,7 @@
                         <li>Fix: Rollenüberprüfung bei Ticket-Erstellung funktioniert zuverlässig</li>
                         <li>Fix: Multi-Select Menü für Kategoriewahl funktioniert korrekt</li>
                         <li>Update: Wiki mit vollständiger Panel-System Dokumentation erweitert</li>
+                        <li>📝 Neu: Detaillierter Changelog für Discord-Community</li>
                     </ul>
                 </div>
                 <div class="field-card">
@@ -872,12 +873,4 @@
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
                 const sectionId = section.getAttribute('id');
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + sectionId) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-        
+              
