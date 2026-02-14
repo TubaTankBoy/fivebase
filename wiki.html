@@ -369,42 +369,42 @@
             <!-- Dashboard Tickets -->
             <section id="dashboard-tickets">
                 <h2><i class="fa-solid fa-ticket"></i> Tab: Ticketsystem</h2>
-                <p>Das Ticketsystem ermöglicht Bewerbungen, Beschwerden und interne Anfragen.</p>
-                <h3>Rollen</h3>
-                <div class="field-card"><div class="field-name">Support-Rolle <span class="badge required">Erforderlich</span></div><div class="field-desc">Nutzer mit dieser Rolle können alle Tickets sehen und bearbeiten.</div><div class="field-example"><span>Beispiel:</span> "Personalamt" oder "Support Team"</div></div>
-                <div class="field-card"><div class="field-name">Admin-Rolle <span class="badge optional">Optional</span></div><div class="field-desc">Erweiterte Berechtigungen wie Tickets löschen oder Bewerbungen final annehmen.</div></div>
-                <div class="field-card"><div class="field-name">Mitarbeiter-Rolle <span class="badge required">Für Mitarbeiter-Panel</span></div><div class="field-desc">Nur Nutzer mit dieser Rolle sehen das interne Mitarbeiter-Ticketpanel.</div></div>
-                <h3>Kategoriespezifische Handler-Rollen</h3>
-                <p>Für jede Ticket-Kategorie kannst du eine eigene Handler-Rolle festlegen. Diese Rolle kann das Ticket sehen und wird bei Erstellung gepingt. Falls keine Rolle angegeben wird, wird die allgemeine Support-Rolle verwendet.</p>
-                <div class="field-card"><div class="field-name">Handler-Rolle: Bewerbungen</div><div class="field-desc">Nur diese Rolle kann Bewerbungs-Tickets sehen und bearbeiten.</div><div class="field-example"><span>Beispiel:</span> @Personalamt, @Recruiter</div></div>
-                <div class="field-card"><div class="field-name">Handler-Rolle: Bürger Dienstbeschwerde</div><div class="field-desc">Zuständig für Beschwerden von Bürgern über Mitarbeiter.</div><div class="field-example"><span>Beispiel:</span> @IA (Internal Affairs)</div></div>
-                <div class="field-card"><div class="field-name">Handler-Rolle: Bürger Sonstiges</div><div class="field-desc">Zuständig für allgemeine Bürgeranfragen.</div></div>
-                <div class="field-card"><div class="field-name">Handler-Rolle: MA Beschwerde</div><div class="field-desc">Zuständig für interne Mitarbeiterbeschwerden.</div></div>
-                <div class="field-card"><div class="field-name">Handler-Rolle: Ausbildung</div><div class="field-desc">Zuständig für Ausbildungsanfragen.</div><div class="field-example"><span>Beispiel:</span> @Ausbilder, @Training</div></div>
-                <div class="field-card"><div class="field-name">Handler-Rolle: MA Sonstiges</div><div class="field-desc">Zuständig für sonstige interne Anfragen.</div></div>
-                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Fallback</div><p>Wenn keine kategoriespezifische Rolle eingestellt ist, wird automatisch die allgemeine Support-Rolle verwendet.</p></div>
-                <h3>Kategorien (Bürger-Tickets)</h3>
-                <p>Wähle für jede Ticket-Art eine Discord-Kategorie, in der die Ticket-Kanäle erstellt werden:</p>
-                <div class="field-card"><div class="field-name">Kategorie: Bewerbungen</div><div class="field-desc">Hier werden Bewerbungs-Tickets erstellt.</div></div>
-                <div class="field-card"><div class="field-name">Kategorie: Dienstbeschwerden</div><div class="field-desc">Für Beschwerden von Bürgern über Mitarbeiter.</div></div>
-                <div class="field-card"><div class="field-name">Kategorie: Sonstiges</div><div class="field-desc">Allgemeine Anfragen.</div></div>
-                <h3>Kategorien (Mitarbeiter-Tickets)</h3>
-                <div class="field-card"><div class="field-name">Kategorie: Interne Beschwerden</div><div class="field-desc">Für Beschwerden von Mitarbeitern untereinander.</div></div>
-                <div class="field-card"><div class="field-name">Kategorie: Ausbildungen</div><div class="field-desc">Anfragen für Ausbildungen oder Schulungen.</div></div>
-                <h3>Quiz-System (Bewerbungen)</h3>
-                <div class="field-card"><div class="field-name">Quiz aktivieren</div><div class="field-desc">Wenn aktiviert, müssen Bewerber nach dem Formular ein Quiz bestehen.</div></div>
-                <div class="field-card"><div class="field-name">Maximale Fehler</div><div class="field-desc">Wie viele falsche Antworten erlaubt sind. Bei Überschreitung wird die Bewerbung abgelehnt.</div><div class="field-example"><span>Empfehlung:</span> 1-2 Fehler</div></div>
-                <div class="field-card"><div class="field-name">Regelwerk-Link</div><div class="field-desc">Link zu eurem Regelwerk, das vor dem Quiz angezeigt wird.</div></div>
-                <h3>Bewerbungsformular</h3>
-                <p>Definiere die Fragen, die Bewerber ausfüllen müssen:</p>
-                <div class="table-container"><table>
-                    <tr><th>Feld</th><th>Beschreibung</th></tr>
-                    <tr><td>ID</td><td>Interner Name (z.B. "name", "age")</td></tr>
-                    <tr><td>Beschriftung</td><td>Die Frage die angezeigt wird (z.B. "Wie heißen Sie?")</td></tr>
-                </table></div>
-                <h3>Quiz-Fragen</h3>
-                <p>Erstelle Multiple-Choice Fragen für das Bewerbungs-Quiz:</p>
-                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Tipp</div><p>Markiere genau EINE Antwort pro Frage als "Richtig". Der Bewerber muss die richtige Antwort auswählen.</p></div>
+                <p>Das moderne Panel-basierte Ticketsystem ermöglicht flexible Ticket-Management mit kategorieabhängigen Workflows.</p>
+                
+                <h3>🎯 Panels verwalten</h3>
+                <p>Erstelle und verwalte mehrere Ticket-Panels mit je eigenen Einstellungen und Kategorien:</p>
+                <div class="field-card"><div class="field-name">Panel erstellen <span class="badge required">neu</span></div><div class="field-desc">Erstelle ein neues Ticket-Panel (z.B. "Support", "Bewerbungen", "Beschwerden").</div></div>
+                <div class="field-card"><div class="field-name">Panel-Name</div><div class="field-desc">Zeige Name für das Panel (z.B. "Support Team").</div></div>
+                <div class="field-card"><div class="field-name">Panel-Präfix</div><div class="field-desc">Präfix für Ticketnummern (z.B. "SUPPORT" → SUPPORT-001).</div></div>
+                <div class="field-card"><div class="field-name">Beschreibung</div><div class="field-desc">Kurze Beschreibung was dieses Panel macht (wird in Discord angezeigt).</div></div>
+                
+                <h3>📋 Ticket-Kategorien pro Panel</h3>
+                <p>Jedes Panel kann mehrere Kategorien haben mit eigenen Einstellungen:</p>
+                <div class="field-card"><div class="field-name">Kategorie-Name</div><div class="field-desc">Name der Kategorie (z.B. "Allgemein", "Billing").</div></div>
+                <div class="field-card"><div class="field-name">Discord Kategorie <span class="badge required">Erforderlich</span></div><div class="field-desc">Discord-Kategorie wo Ticket-Kanäle erstellt werden.</div></div>
+                <div class="field-card"><div class="field-name">Bearbeiter-Rollen</div><div class="field-desc">Rollen die Tickets dieser Kategorie sehen und bearbeiten können.</div><div class="field-example"><span>Hinweis:</span> Strg+Klick für Mehrfachauswahl</div></div>
+                <div class="field-card"><div class="field-name">Öffner-Rollen</div><div class="field-desc">Apenas diese Rollen dürfen Tickets in dieser Kategorie öffnen (leer = alle).</div></div>
+                
+                <h3>⚙️ Status-Einstellungen pro Panel <span class="badge required">neu</span></h3>
+                <p>Jedes Panel hat seine eigenen aktivierten Statuse (global gestaltbar, pro Panel aktivierbar):</p>
+                <div class="field-card"><div class="field-name">🟢 Neu</div><div class="field-desc">Neues Ticket (wird automatisch beim Erstellen gesetzt).</div></div>
+                <div class="field-card"><div class="field-name">🟡 In Bearbeitung</div><div class="field-desc">Ticket wird gerade bearbeitet.</div></div>
+                <div class="field-card"><div class="field-name">🔵 Management</div><div class="field-desc">Benötigt Management-Genehmigung.</div></div>
+                <div class="field-card"><div class="field-name">⚪ Fertig</div><div class="field-desc">Ticket ist abgeschlossen.</div></div>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Automatischer Status</div><p>🔴 <strong>Geschlossen</strong> wird automatisch gesetzt, wenn auf den "Schließen"-Button geklickt wird.</p></div>
+                
+                <h3>👑 Management-Rolle <span class="badge required">neu</span></h3>
+                <p>Wähle eine Rolle die benachrichtigt wird, wenn in einem Ticket auf "Management Hinzufügen" geklickt wird.</p>
+                
+                <h3>📤 Panel versenden</h3>
+                <p>Sende ein Ticket-Panel als Message in einen Discord-Kanal. Benutzer können dann das Panel mit Select-Menu öffnen.</p>
+                <div class="info-box"><div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> Verwendung</div><p>Klicke auf "📤 Senden" bei einem Panel, wähle einen Kanal und das Embed mit Select-Menu wird dort angezeigt.</p></div>
+                
+                <h3>⚙️ Allgemeine Einstellungen</h3>
+                <div class="field-card"><div class="field-name">Maximale gleichzeitige Tickets</div><div class="field-desc">Wie viele Tickets gleichzeitig ein User öffnen darf (0 = unbegrenzt).</div></div>
+                <div class="field-card"><div class="field-name">Team markieren</div><div class="field-desc">Ob Rollen gepingt werden, wenn ein neues Ticket geöffnet wird.</div></div>
+                <div class="field-card"><div class="field-name">Löschen nach (Stunden) <span class="badge required">neu</span></div><div class="field-desc">Nach wie vielen Stunden geschlossene Tickets automatisch gelöscht werden (Standard: 24h).</div></div>
+                <div class="field-card"><div class="field-name">Archiv-Nachricht <span class="badge required">neu</span></div><div class="field-desc">Benutzerdefinierte Nachricht die beim Schließen eines Tickets angezeigt wird.</div></div>
             </section>
 
             <!-- Dashboard Dienstnummern -->
