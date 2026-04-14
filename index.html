@@ -3,810 +3,1038 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FiveBase | Die Fraktions-Lösung</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>FiveBase — Die Fraktions-Lösung für GTA RP</title>
+<meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personal, Abmahnungen und mehr.">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500;600&family=Satoshi:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
-  --bg:      #04061a;
-  --bg2:     #060818;
-  --primary: #4f6ef7;
-  --pb:      #6b83ff;
-  --border:  rgba(255,255,255,0.07);
-  --text:    #e8ecf8;
-  --muted:   #5a6688;
-  --muted2:  #8892b0;
-  --green:   #10b981;
-  --card:    rgba(8,12,35,0.85);
+  --bg:        #05070f;
+  --bg2:       #080b1a;
+  --card:      rgba(13,18,38,0.75);
+  --card2:     rgba(18,24,48,0.55);
+  --border:    rgba(255,255,255,0.06);
+  --border2:   rgba(255,255,255,0.11);
+  --text:      #eef1fb;
+  --muted:     #7681a0;
+  --muted2:    #9aa3c2;
+  --dim:       #4b5475;
+  --primary:   #5b7cff;
+  --primary2:  #7c8fff;
+  --accent:    #a4f0d0;
+  --warn:      #ffb547;
+  --danger:    #ff6868;
+  --purple:    #a78bfa;
+  --green:     #22d99a;
 }
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
   background:var(--bg);
   color:var(--text);
-  font-family:'Inter', sans-serif;
+  font-family:'Satoshi', system-ui, sans-serif;
+  font-feature-settings:'ss01','ss02','cv11';
   overflow-x:hidden;
+  line-height:1.5;
 }
 
-/* ── STARS ── */
+/* ─── BACKGROUND ───────────────────────────────────── */
+.bg-layer { position:fixed; inset:0; z-index:0; pointer-events:none; }
 #stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.glow1 {
+  position:fixed; top:-20%; left:-10%;
+  width:700px; height:700px; border-radius:50%;
+  background:radial-gradient(circle, rgba(91,124,255,0.22) 0%, transparent 60%);
+  filter:blur(80px); z-index:0; pointer-events:none;
+}
+.glow2 {
+  position:fixed; bottom:-20%; right:-10%;
+  width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 60%);
+  filter:blur(80px); z-index:0; pointer-events:none;
+}
+.grid-bg {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    linear-gradient(rgba(91,124,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,124,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
 
-/* ── NAV ── */
+/* ─── TYPOGRAPHY HELPERS ─────────────────────────── */
+.serif { font-family:'Instrument Serif', serif; font-weight:400; font-style:italic; letter-spacing:-.02em; }
+.mono  { font-family:'JetBrains Mono', monospace; }
+
+/* ─── NAV ───────────────────────────────────────── */
 .nav {
-  position:fixed; top:0; left:0; width:100%; z-index:9999;
-  height:64px; padding:0 48px;
-  display:flex; justify-content:space-between; align-items:center;
-  background:rgba(4,6,26,.75); backdrop-filter:blur(20px);
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:68px; padding:0 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(5,7,15,0.7);
+  backdrop-filter:blur(24px) saturate(1.2);
+  -webkit-backdrop-filter:blur(24px) saturate(1.2);
   border-bottom:1px solid var(--border);
 }
-.nav-logo {
-  display:flex; align-items:center; gap:10px;
-  font-size:1.2rem; font-weight:800; color:#fff; text-decoration:none;
-}
-.logo-icon {
-  width:32px; height:32px; border-radius:8px;
-  background:linear-gradient(135deg, var(--primary), #8b5cf6);
+.nav-logo { display:flex; align-items:center; gap:12px; font-size:1.1rem; font-weight:800; color:#fff; text-decoration:none; letter-spacing:-.02em; }
+.nav-logo .dot {
+  width:34px; height:34px; border-radius:10px;
+  background:linear-gradient(135deg, var(--primary), var(--purple));
   display:flex; align-items:center; justify-content:center;
-  font-size:.85rem; color:#fff; flex-shrink:0;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 12px 30px -8px rgba(91,124,255,0.5);
+  position:relative; overflow:hidden;
 }
-.logo-text span { color:var(--primary); }
-.nav-links { display:flex; gap:2px; }
+.nav-logo .dot::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,0.3), transparent 50%);
+}
+.nav-logo .dot i { position:relative; font-size:.85rem; color:#fff; }
+.nav-logo .brand span { color:var(--primary2); }
+
+.nav-links { display:flex; gap:6px; }
 .nav-links a {
-  color:var(--muted2); font-size:.85rem; font-weight:500;
-  text-decoration:none; padding:6px 14px; border-radius:8px; transition:.2s;
+  color:var(--muted2); font-size:.88rem; font-weight:500;
+  text-decoration:none; padding:8px 14px; border-radius:8px;
+  transition:all .2s; position:relative;
 }
-.nav-links a:hover { color:#fff; background:rgba(255,255,255,.05); }
+.nav-links a:hover { color:#fff; background:rgba(255,255,255,0.05); }
+
 .nav-right { display:flex; gap:10px; align-items:center; }
 
 .btn {
   display:inline-flex; align-items:center; gap:8px;
-  padding:8px 20px; border-radius:9px;
-  font-weight:600; font-size:.85rem; text-decoration:none;
-  transition:all .2s; border:none; font-family:'Inter',sans-serif; cursor:pointer;
+  padding:10px 20px; border-radius:10px;
+  font-family:'Satoshi', sans-serif; font-weight:600; font-size:.88rem;
+  text-decoration:none; cursor:pointer; border:none;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  white-space:nowrap;
 }
-.btn-primary { background:var(--primary); color:#fff; box-shadow:0 0 20px rgba(79,110,247,.3); }
-.btn-primary:hover { background:var(--pb); transform:translateY(-1px); box-shadow:0 0 35px rgba(79,110,247,.5); }
-.btn-outline { border:1px solid var(--border); color:var(--text); background:transparent; }
-.btn-outline:hover { border-color:var(--primary); color:var(--primary); }
-.btn-ghost { background:rgba(255,255,255,.06); color:#fff; border:1px solid var(--border); }
-.btn-ghost:hover { background:rgba(255,255,255,.11); }
-.btn-discord { background:rgba(88,101,242,.12); color:#7c8ce8; border:1px solid rgba(88,101,242,.22); font-size:.82rem; padding:7px 14px; }
-.btn-discord:hover { background:rgba(88,101,242,.22); }
+.btn-primary {
+  background:linear-gradient(180deg, var(--primary2), var(--primary));
+  color:#fff;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 0 0 1px rgba(91,124,255,0.4),
+    0 10px 30px -10px rgba(91,124,255,0.6),
+    0 4px 12px rgba(91,124,255,0.25);
+}
+.btn-primary:hover {
+  transform:translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.2) inset,
+    0 0 0 1px rgba(91,124,255,0.5),
+    0 16px 40px -10px rgba(91,124,255,0.75),
+    0 6px 16px rgba(91,124,255,0.35);
+}
+.btn-ghost {
+  background:rgba(255,255,255,0.04);
+  color:var(--text);
+  border:1px solid var(--border2);
+  backdrop-filter:blur(8px);
+}
+.btn-ghost:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); }
+.btn-outline { border:1px solid var(--border2); color:var(--text); background:transparent; }
+.btn-outline:hover { border-color:var(--primary); color:var(--primary2); }
 
-/* ── CONTENT WRAPPER ── */
+/* ─── CONTENT ─────────────────────────────────── */
 .content { position:relative; z-index:1; }
 
-/* ── HERO ── */
+/* ─── HERO ────────────────────────────────────── */
 .hero {
   min-height:100vh;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  text-align:center; padding:100px 24px 80px;
-  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:140px 24px 100px;
+  position:relative;
 }
-.hero-glow {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-60%);
-  width:500px; height:500px; border-radius:50%;
-  background:radial-gradient(circle at 40% 40%, rgba(79,110,247,.22) 0%, rgba(30,40,100,.15) 45%, transparent 70%);
-  pointer-events:none;
-}
-.hero-ring {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-55%);
-  width:700px; height:700px; border-radius:50%;
-  border:1px solid rgba(79,110,247,.06);
-  pointer-events:none;
-}
-.hero-ring2 {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-55%);
-  width:900px; height:900px; border-radius:50%;
-  border:1px solid rgba(79,110,247,.04);
-  pointer-events:none;
-}
-.hero h1 {
-  font-size:clamp(5rem,13vw,10rem);
-  font-weight:900; line-height:.92;
-  letter-spacing:-.04em;
-  background:linear-gradient(180deg,#fff 25%, rgba(100,120,200,.55) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:8px; position:relative; z-index:2;
-}
-.hero-sub-title {
-  font-size:clamp(1.2rem,3vw,2rem);
-  font-weight:300; color:var(--muted2);
-  letter-spacing:.04em; margin-bottom:26px;
-  position:relative; z-index:2;
-}
-.hero p {
-  color:var(--muted2); font-size:1rem; max-width:520px;
-  line-height:1.75; margin-bottom:36px;
-  position:relative; z-index:2;
-}
-.hero-ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; }
-.hero-scroll {
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  display:flex; align-items:center; gap:10px; color:var(--muted);
-  font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
-  z-index:2; text-decoration:none;
-}
-.hero-scroll i { animation:bounce .2s ease-in-out infinite alternate; font-size:.9rem; }
-@keyframes bounce { to { transform:translateY(4px); } }
-
-/* corner widget */
-.hero-widget {
-  position:absolute; bottom:80px; left:60px;
-  background:rgba(8,12,35,.9); border:1px solid var(--border);
-  border-radius:14px; padding:18px 20px; width:200px;
-  backdrop-filter:blur(16px); z-index:3;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-.hw-label { font-size:.67rem; font-weight:600; color:var(--muted2); letter-spacing:.06em; margin-bottom:6px; }
-.hw-title { font-size:.95rem; font-weight:700; color:#fff; margin-bottom:12px; }
-.hw-btn { display:flex; align-items:center; justify-content:center; gap:7px; width:100%; background:var(--primary); color:#fff; border:none; padding:9px; border-radius:8px; font-size:.78rem; font-weight:600; cursor:pointer; transition:.2s; text-decoration:none; }
-.hw-btn:hover { background:var(--pb); }
-
-/* ── SECTION LABEL ── */
-.sec-label {
+.hero-badge {
   display:inline-flex; align-items:center; gap:8px;
-  background:rgba(79,110,247,.08); color:var(--muted2);
-  border:1px solid rgba(79,110,247,.15);
-  padding:5px 14px; border-radius:50px; font-size:.75rem; font-weight:600;
-  margin-bottom:20px;
+  background:linear-gradient(180deg, rgba(91,124,255,0.15), rgba(91,124,255,0.05));
+  border:1px solid rgba(91,124,255,0.2);
+  padding:6px 16px; border-radius:50px;
+  font-size:.78rem; font-weight:500; color:var(--muted2);
+  margin-bottom:32px;
 }
-.sec-label i { color:var(--primary); }
+.hero-badge .pulse {
+  width:7px; height:7px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 12px var(--green); animation:pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity:1; transform:scale(1); }
+  50% { opacity:.6; transform:scale(0.85); }
+}
+.hero-badge span { color:var(--primary2); font-weight:600; }
 
-/* ── BENEFITS SECTION ── */
-.benefits {
-  padding:120px 48px; position:relative;
+.hero h1 {
+  font-size:clamp(3.5rem, 10vw, 8.5rem);
+  font-weight:900; line-height:.88; letter-spacing:-.055em;
+  margin-bottom:14px; position:relative; z-index:2;
 }
-.benefits-top {
-  display:grid; grid-template-columns:1fr 1fr; gap:48px;
-  align-items:start; margin-bottom:60px;
+.hero h1 .line1 {
+  display:block;
+  background:linear-gradient(180deg, #fff 30%, rgba(154,163,194,0.4) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
 }
-.benefits-top-left h2 {
-  font-size:clamp(2.2rem,4vw,3.2rem); font-weight:800;
-  line-height:1.1; letter-spacing:-.02em;
+.hero h1 .line2 {
+  display:block;
+  font-weight:400; font-style:italic;
+  font-family:'Instrument Serif', serif;
+  font-size:.72em; letter-spacing:-.02em;
+  background:linear-gradient(135deg, var(--primary2) 10%, var(--purple) 60%, var(--accent) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-top:.1em;
 }
-.benefits-top-right {
-  padding-top:8px;
-}
-.benefits-top-right p { color:var(--muted2); font-size:.95rem; line-height:1.75; margin-bottom:20px; }
 
-.benefits-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+.hero p.sub {
+  color:var(--muted2); font-size:1.1rem; max-width:620px;
+  line-height:1.7; margin:26px auto 36px;
+  font-weight:400;
+}
+.hero-ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+.hero-stats {
+  display:flex; justify-content:center; gap:50px;
+  margin-top:72px; flex-wrap:wrap;
+}
+.hero-stat { text-align:center; }
+.hero-stat .n {
+  font-family:'Instrument Serif', serif; font-style:italic;
+  font-size:2.4rem; color:#fff; font-weight:400;
+  background:linear-gradient(180deg, #fff 40%, rgba(154,163,194,0.5));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-stat .l {
+  font-size:.75rem; color:var(--muted); letter-spacing:.08em;
+  text-transform:uppercase; margin-top:4px;
+}
+.hero-stat .sep {
+  width:1px; height:44px; background:linear-gradient(180deg, transparent, var(--border2), transparent);
 }
 
-.ben-card {
-  background:rgba(8,12,35,.7); border:1px solid var(--border);
-  border-radius:16px; padding:0; overflow:hidden;
-  transition:border-color .3s;
+/* ─── SECTION BASICS ─────────────────────────── */
+section { position:relative; padding:120px 40px; }
+.section-lead {
+  text-align:center; max-width:720px; margin:0 auto 80px;
+}
+.section-label {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.72rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--primary2); margin-bottom:18px;
+}
+.section-label::before, .section-label::after {
+  content:''; width:24px; height:1px; background:var(--primary);
+  opacity:.5;
+}
+.section-title {
+  font-size:clamp(2.2rem, 5vw, 3.8rem); font-weight:800;
+  letter-spacing:-.035em; line-height:1.05; margin-bottom:20px;
+}
+.section-title .italic {
+  font-family:'Instrument Serif', serif; font-style:italic;
+  font-weight:400; color:var(--primary2);
+  font-size:1.04em;
+}
+.section-sub { color:var(--muted2); font-size:1.02rem; line-height:1.7; }
+
+/* ─── FEATURES ─────────────────────────────────── */
+.features-wrap { max-width:1240px; margin:0 auto; }
+
+.features-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+.feature {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px 26px;
   position:relative;
+  overflow:hidden;
+  backdrop-filter:blur(8px);
+  transition:all .35s cubic-bezier(.4,0,.2,1);
 }
-.ben-card:hover { border-color:rgba(79,110,247,.3); }
+.feature::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--border2), transparent);
+}
+.feature:hover {
+  border-color:rgba(91,124,255,0.3);
+  transform:translateY(-3px);
+  background:rgba(18,24,48,0.75);
+}
+.feature:hover .f-icon { transform:scale(1.08) rotate(-4deg); }
 
-/* circuit bg inside benefit card */
-.ben-card::before {
-  content:''; position:absolute; inset:0;
-  background:
-    linear-gradient(rgba(79,110,247,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,110,247,.03) 1px, transparent 1px);
-  background-size:28px 28px;
-  z-index:0;
-}
-.ben-visual {
-  height:180px; display:flex; align-items:center; justify-content:center;
-  position:relative; z-index:1;
-}
-.ben-icon-wrap {
-  width:70px; height:70px; border-radius:18px;
-  background:linear-gradient(135deg, var(--primary), #8b5cf6);
+.f-icon {
+  width:48px; height:48px; border-radius:12px;
   display:flex; align-items:center; justify-content:center;
-  font-size:1.8rem; color:#fff;
-  box-shadow:0 0 40px rgba(79,110,247,.3);
+  font-size:1.15rem; color:#fff; margin-bottom:18px;
+  background:linear-gradient(135deg, var(--primary), var(--purple));
+  box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(91,124,255,0.45);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
 }
-.ben-icon-wrap.green { background:linear-gradient(135deg,#10b981,#059669); box-shadow:0 0 40px rgba(16,185,129,.3); }
-.ben-icon-wrap.orange { background:linear-gradient(135deg,#f59e0b,#d97706); box-shadow:0 0 40px rgba(245,158,11,.3); }
-.ben-icon-wrap.purple { background:linear-gradient(135deg,#8b5cf6,#7c3aed); box-shadow:0 0 40px rgba(139,92,246,.3); }
-.ben-icon-wrap.red    { background:linear-gradient(135deg,#ef4444,#dc2626); box-shadow:0 0 40px rgba(239,68,68,.3); }
+.f-icon.green  { background:linear-gradient(135deg, #10b981, #059669); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(16,185,129,0.45); }
+.f-icon.orange { background:linear-gradient(135deg, #f59e0b, #d97706); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(245,158,11,0.45); }
+.f-icon.purple { background:linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(167,139,250,0.45); }
+.f-icon.red    { background:linear-gradient(135deg, #ef4444, #dc2626); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(239,68,68,0.45); }
+.f-icon.cyan   { background:linear-gradient(135deg, #22d3ee, #06b6d4); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(34,211,238,0.45); }
+.f-icon.rose   { background:linear-gradient(135deg, #f43f5e, #e11d48); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(244,63,94,0.45); }
+.f-icon.sky    { background:linear-gradient(135deg, #38bdf8, #0ea5e9); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(56,189,248,0.45); }
+.f-icon.amber  { background:linear-gradient(135deg, #fbbf24, #d97706); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(251,191,36,0.45); }
 
-.ben-num {
-  position:absolute; top:16px; left:18px;
-  font-size:.72rem; font-weight:700; color:var(--muted);
-  letter-spacing:.06em; z-index:2;
+.feature h3 {
+  font-size:1.08rem; font-weight:700; letter-spacing:-.01em;
+  margin-bottom:8px; color:#fff;
 }
-.ben-tag {
-  position:absolute; top:14px; right:14px;
-  display:inline-flex; align-items:center; gap:5px;
-  background:rgba(79,110,247,.1); color:var(--primary);
-  border:1px solid rgba(79,110,247,.2);
-  padding:3px 10px; border-radius:50px; font-size:.68rem; font-weight:600; z-index:2;
+.feature .tag {
+  position:absolute; top:18px; right:18px;
+  font-size:.62rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); font-family:'JetBrains Mono', monospace;
 }
-.ben-tag.green { background:rgba(16,185,129,.1); color:#10b981; border-color:rgba(16,185,129,.2); }
-.ben-tag.orange { background:rgba(245,158,11,.1); color:#f59e0b; border-color:rgba(245,158,11,.2); }
-.ben-tag.purple { background:rgba(139,92,246,.1); color:#a78bfa; border-color:rgba(139,92,246,.2); }
-.ben-tag.red { background:rgba(239,68,68,.1); color:#f87171; border-color:rgba(239,68,68,.2); }
-
-.ben-body { padding:20px 24px 28px; position:relative; z-index:1; border-top:1px solid var(--border); }
-.ben-body h3 { font-size:1.1rem; font-weight:700; margin-bottom:8px; line-height:1.3; }
-.ben-body p { color:var(--muted2); font-size:.85rem; line-height:1.65; margin-bottom:14px; }
-.ben-items { display:flex; flex-direction:column; gap:5px; }
-.ben-items li {
+.feature p {
+  color:var(--muted2); font-size:.86rem; line-height:1.65;
+  margin-bottom:14px;
+}
+.feature ul { list-style:none; }
+.feature li {
+  color:var(--muted); font-size:.78rem; line-height:1.7;
   display:flex; align-items:flex-start; gap:8px;
-  font-size:.8rem; color:var(--muted2); list-style:none; line-height:1.5;
 }
-.ben-items li::before { content:'·'; color:var(--primary); font-weight:700; flex-shrink:0; font-size:1rem; margin-top:-1px; }
-
-/* big span card */
-.ben-card.span2 { grid-column:span 2; }
-.ben-card.span2 .ben-visual { height:160px; }
-
-/* ── MOCKUP SECTION ── */
-.mockup-section {
-  padding:100px 48px;
-  text-align:center;
-  position:relative;
-}
-.mockup-section h2 { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.02em; margin-bottom:14px; }
-.mockup-section > p { color:var(--muted2); margin-bottom:52px; font-size:1rem; }
-
-/* dashboard shell */
-.mockup-screen {
-  max-width:980px; margin:0 auto;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:16px; overflow:hidden;
-  box-shadow:0 40px 120px rgba(0,0,0,.75), 0 0 80px rgba(79,110,247,.07), 0 0 0 1px rgba(255,255,255,.03);
-  background:#1e2130;
-  text-align:left;
+.feature li::before {
+  content:''; width:4px; height:4px; border-radius:50%;
+  background:var(--primary2); margin-top:9px; flex-shrink:0;
 }
 
-/* top bar */
-.db-topbar {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 20px;
-  background:#1a1d2e;
-  border-bottom:1px solid rgba(255,255,255,.06);
+/* ─── DIAGONAL DIVIDER ─────────────────────── */
+.divider {
+  height:1px; max-width:1240px; margin:0 auto;
+  background:linear-gradient(90deg, transparent, var(--border2), transparent);
 }
-.db-topbar-left { display:flex; align-items:center; gap:10px; }
-.db-bot-icon {
-  width:30px; height:30px; border-radius:7px;
-  background:linear-gradient(135deg,var(--primary),#7c3aed);
-  display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff;
+
+/* ─── MOCKUP ─────────────────────────────────── */
+.mockup-wrap {
+  max-width:1100px; margin:80px auto 0;
+  perspective:2000px;
 }
-.db-bot-name { font-size:.88rem; font-weight:700; color:#fff; }
-.db-topbar-right { display:flex; align-items:center; gap:12px; }
-.db-user { display:flex; align-items:center; gap:8px; font-size:.82rem; color:var(--muted2); }
-.db-avatar { width:24px; height:24px; border-radius:50%; }
-.db-logout { background:#ef4444; color:#fff; border:none; border-radius:7px; padding:5px 14px; font-size:.78rem; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; }
-
-/* layout */
-.db-body { display:grid; grid-template-columns:220px 1fr; min-height:480px; }
-
-/* sidebar */
-.db-sidebar { background:#181b28; border-right:1px solid rgba(255,255,255,.05); padding:16px 0; }
-.db-server-info { display:flex; align-items:center; gap:10px; padding:4px 16px 16px; border-bottom:1px solid rgba(255,255,255,.05); margin-bottom:12px; }
-.db-server-icon { width:38px; height:38px; border-radius:9px; background:linear-gradient(135deg,var(--primary),#7c3aed); display:flex; align-items:center; justify-content:center; font-size:.95rem; color:#fff; flex-shrink:0; }
-.db-server-name { font-size:.72rem; font-weight:700; color:#fff; line-height:1.3; }
-.db-server-id { font-size:.62rem; color:var(--muted); margin-top:2px; }
-.db-menu-group-label { font-size:.62rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding:4px 16px 6px; }
-.db-menu-item { display:flex; align-items:center; gap:9px; padding:8px 16px; font-size:.78rem; color:var(--muted2); cursor:default; transition:.15s; }
-.db-menu-item i { width:14px; text-align:center; font-size:.78rem; flex-shrink:0; }
-.db-menu-item.active { background:rgba(79,110,247,.12); color:#fff; border-left:2px solid var(--primary); padding-left:14px; }
-.db-menu-item:not(.active):hover { background:rgba(255,255,255,.03); color:#fff; }
-
-/* main */
-.db-main { padding:22px 24px; background:#1e2130; overflow:hidden; }
-.db-page-title { font-size:1.3rem; font-weight:800; color:#fff; margin-bottom:4px; letter-spacing:-.01em; }
-.db-page-sub { font-size:.8rem; color:var(--muted2); margin-bottom:20px; }
-
-.db-card { background:#252838; border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:18px 20px; margin-bottom:16px; }
-.db-card-title { font-size:.9rem; font-weight:700; color:#fff; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
-.db-card-desc { font-size:.78rem; color:var(--muted2); margin-bottom:16px; }
-
-/* modules grid */
-.db-modules-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-.db-module-item {
+.mockup {
+  background:linear-gradient(180deg, #1a1f33, #12172a);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 60px 120px -40px rgba(0,0,0,0.9),
+    0 0 100px rgba(91,124,255,0.1);
+  transform:rotateX(2deg);
+  transform-origin:top center;
+}
+.mockup-bar {
   display:flex; align-items:center; gap:10px;
-  background:#1e2130; border:1px solid rgba(255,255,255,.05);
+  padding:14px 18px;
+  background:rgba(10,14,28,0.7);
+  border-bottom:1px solid var(--border);
+}
+.mb-dot { width:11px; height:11px; border-radius:50%; }
+.mb-dot.r { background:#ff5f56; }
+.mb-dot.y { background:#ffbd2e; }
+.mb-dot.g { background:#27c93f; }
+.mb-url {
+  margin-left:16px; background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  padding:5px 14px; border-radius:7px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:.72rem; color:var(--muted2);
+  flex:1; max-width:360px;
+}
+.mb-url .d { color:var(--primary2); }
+
+.mockup-body { display:grid; grid-template-columns:240px 1fr; min-height:540px; }
+.mb-sidebar { background:rgba(8,12,24,0.6); padding:18px 0; border-right:1px solid var(--border); }
+.mb-server {
+  display:flex; align-items:center; gap:11px;
+  padding:4px 18px 18px;
+  border-bottom:1px solid var(--border); margin-bottom:14px;
+}
+.mb-si {
+  width:38px; height:38px; border-radius:10px;
+  background:linear-gradient(135deg, var(--primary), var(--purple));
+  display:flex; align-items:center; justify-content:center; font-size:.95rem; color:#fff;
+}
+.mb-sn { font-size:.78rem; font-weight:700; color:#fff; line-height:1.3; }
+.mb-sid { font-size:.62rem; color:var(--dim); margin-top:1px; font-family:'JetBrains Mono', monospace; }
+
+.mb-label {
+  font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--dim); padding:12px 18px 6px;
+}
+.mb-item {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 18px; font-size:.78rem; color:var(--muted2);
+  border-left:2px solid transparent;
+  cursor:default;
+}
+.mb-item i { width:14px; text-align:center; font-size:.8rem; flex-shrink:0; color:var(--dim); }
+.mb-item:hover { background:rgba(255,255,255,0.03); color:#fff; }
+.mb-item.active {
+  background:linear-gradient(90deg, rgba(91,124,255,0.12), transparent);
+  color:#fff; border-left-color:var(--primary);
+}
+.mb-item.active i { color:var(--primary2); }
+
+.mb-main { padding:26px 30px; background:#12172a; }
+.mb-h1 {
+  font-size:1.4rem; font-weight:800; color:#fff;
+  letter-spacing:-.02em; margin-bottom:4px;
+}
+.mb-sub { font-size:.8rem; color:var(--muted); margin-bottom:22px; }
+
+.mb-card {
+  background:rgba(20,27,52,0.6);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px 22px; margin-bottom:14px;
+}
+.mb-card-title {
+  font-size:.88rem; font-weight:700; color:#fff;
+  display:flex; align-items:center; gap:9px; margin-bottom:6px;
+}
+.mb-card-title i { color:var(--primary2); }
+.mb-card-desc { font-size:.76rem; color:var(--muted); margin-bottom:16px; }
+
+.mb-modules { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.mb-mod {
+  display:flex; align-items:center; gap:10px;
+  background:rgba(10,14,28,0.55);
+  border:1px solid var(--border);
   border-radius:9px; padding:10px 12px;
 }
-.db-mod-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; flex-shrink:0; }
-.db-mod-info { flex:1; min-width:0; }
-.db-mod-name { font-size:.76rem; font-weight:700; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.db-mod-desc { font-size:.67rem; color:var(--muted2); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.db-toggle {
-  width:34px; height:19px; border-radius:10px; background:rgba(255,255,255,.1);
-  flex-shrink:0; position:relative; transition:.2s;
+.mb-mod-ic {
+  width:30px; height:30px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.78rem; color:#fff; flex-shrink:0;
 }
-.db-toggle.on { background:#22c55e; }
-.db-toggle::after {
+.mb-mod-info { flex:1; min-width:0; }
+.mb-mod-name { font-size:.76rem; font-weight:700; color:#fff; }
+.mb-mod-desc { font-size:.64rem; color:var(--muted); margin-top:1px; }
+.mb-toggle {
+  width:30px; height:17px; border-radius:9px;
+  background:rgba(255,255,255,0.1); position:relative;
+  flex-shrink:0; transition:.2s;
+}
+.mb-toggle.on { background:var(--green); }
+.mb-toggle::after {
   content:''; position:absolute; top:3px; left:3px;
-  width:13px; height:13px; border-radius:50%; background:#fff;
+  width:11px; height:11px; border-radius:50%; background:#fff;
   transition:.2s;
 }
-.db-toggle.on::after { left:18px; }
+.mb-toggle.on::after { left:16px; }
 
-/* quickstart */
-.db-quickstart { display:flex; gap:0; }
-.db-qs-bar { width:3px; border-radius:2px; background:var(--primary); flex-shrink:0; margin-right:14px; }
-.db-qs-content { flex:1; }
-.db-qs-step-title { font-size:.82rem; font-weight:700; color:#fff; margin-bottom:8px; }
-.db-qs-step { font-size:.78rem; color:var(--muted2); padding:3px 0; }
+/* ─── MODULES COMPARISON TABLE ─────────── */
+.cmd-section {
+  padding:120px 40px;
+  position:relative;
+}
+.cmd-wrap { max-width:1100px; margin:0 auto; }
 
-/* ── COMMUNITY CARDS ── */
-.community { padding:80px 48px 100px; }
-.community h2 { font-size:clamp(1.8rem,3vw,2.6rem); font-weight:800; text-align:center; margin-bottom:48px; letter-spacing:-.02em; }
-.comm-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:640px; margin:0 auto; }
-.comm-card {
-  background:rgba(8,12,35,.7); border:1px solid var(--border);
-  border-radius:16px; padding:32px 28px 28px;
+.cmd-grid {
+  display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap:12px; margin-top:50px;
+}
+.cmd {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px 20px;
+  transition:all .25s;
+}
+.cmd:hover { border-color:rgba(91,124,255,0.3); background:rgba(20,27,52,0.75); }
+.cmd-name {
+  font-family:'JetBrains Mono', monospace;
+  font-size:.82rem; color:var(--primary2); font-weight:600;
+  margin-bottom:6px;
+}
+.cmd-desc { font-size:.76rem; color:var(--muted); line-height:1.55; }
+
+/* ─── CTA ────────────────────────────────── */
+.cta-section { padding:140px 40px; }
+.cta-box {
+  max-width:900px; margin:0 auto;
+  background:linear-gradient(135deg, rgba(91,124,255,0.08), rgba(167,139,250,0.05));
+  border:1px solid rgba(91,124,255,0.2);
+  border-radius:24px; padding:68px 48px;
   text-align:center; position:relative; overflow:hidden;
-  transition:border-color .3s, transform .3s;
 }
-.comm-card:hover { border-color:rgba(79,110,247,.3); transform:translateY(-4px); }
-.comm-card::before {
-  content:''; position:absolute; inset:0;
-  background:
-    linear-gradient(rgba(79,110,247,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,110,247,.03) 1px, transparent 1px);
-  background-size:28px 28px;
+.cta-box::before {
+  content:''; position:absolute; top:-50%; left:-20%;
+  width:140%; height:200%;
+  background:radial-gradient(circle at 50% 40%, rgba(91,124,255,0.15), transparent 60%);
+  pointer-events:none;
 }
-.comm-icon-wrap {
-  width:64px; height:64px; border-radius:50%;
-  border:1px solid rgba(255,255,255,.1);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.4rem; margin:0 auto 20px;
-  background:rgba(255,255,255,.04);
+.cta-box h2 {
+  font-size:clamp(2rem, 4vw, 3rem); font-weight:800;
+  letter-spacing:-.035em; line-height:1.1; margin-bottom:16px;
+  position:relative;
+}
+.cta-box h2 .italic {
+  font-family:'Instrument Serif', serif; font-style:italic;
+  font-weight:400; color:var(--primary2);
+}
+.cta-box p {
+  color:var(--muted2); font-size:1.02rem;
+  max-width:520px; margin:0 auto 32px;
+  position:relative;
+}
+.cta-box .ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; }
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  padding:60px 40px 36px;
+  border-top:1px solid var(--border);
+  background:rgba(5,7,15,0.6);
   position:relative; z-index:1;
 }
-.comm-dots {
-  position:absolute; top:50%; left:0; right:0;
-  height:1px; background:linear-gradient(90deg, transparent, rgba(79,110,247,.2), transparent);
+.footer-wrap { max-width:1240px; margin:0 auto; }
+.footer-top {
+  display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:48px;
+  padding-bottom:40px; border-bottom:1px solid var(--border);
 }
-.comm-card h3 { font-size:.95rem; font-weight:700; margin-bottom:8px; position:relative; z-index:1; }
-.comm-card p { color:var(--muted2); font-size:.82rem; line-height:1.6; margin-bottom:20px; position:relative; z-index:1; }
-.comm-input {
-  display:flex; gap:6px; position:relative; z-index:1;
+.footer-brand-info { max-width:320px; }
+.footer-brand-info p {
+  color:var(--muted); font-size:.85rem; line-height:1.65; margin-top:14px;
 }
-.comm-input input {
-  flex:1; background:rgba(255,255,255,.04); border:1px solid var(--border);
-  border-radius:7px; padding:8px 12px; color:#fff; font-size:.8rem; font-family:'Inter',sans-serif;
-  outline:none;
+.footer-col h4 {
+  font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:16px;
 }
-.comm-input input::placeholder { color:var(--muted); }
-.comm-input button {
-  width:34px; height:34px; border-radius:7px; border:none;
-  background:var(--primary); color:#fff; cursor:pointer;
-  display:flex; align-items:center; justify-content:center; font-size:.8rem;
-  transition:.2s; flex-shrink:0;
+.footer-col a {
+  display:block; color:var(--text); text-decoration:none;
+  font-size:.88rem; margin-bottom:10px; transition:.2s;
 }
-.comm-input button:hover { background:var(--pb); }
-
-/* ── FOOTER ── */
-footer {
-  border-top:1px solid var(--border);
-  padding:40px 48px 28px;
-  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+.footer-col a:hover { color:var(--primary2); transform:translateX(2px); }
+.footer-bottom {
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top:28px; flex-wrap:wrap; gap:16px;
 }
-.footer-logo { font-size:1.15rem; font-weight:800; display:flex; align-items:center; gap:8px; }
-.footer-logo span { color:var(--primary); }
+.footer-copy { color:var(--dim); font-size:.78rem; }
 .footer-links { display:flex; gap:24px; }
-.footer-links a { color:var(--muted); font-size:.84rem; text-decoration:none; transition:.2s; }
-.footer-links a:hover { color:var(--primary); }
-.footer-copy { color:var(--muted); font-size:.78rem; }
+.footer-links a { color:var(--muted); font-size:.82rem; text-decoration:none; transition:.2s; }
+.footer-links a:hover { color:var(--primary2); }
 
-/* ── MODAL ── */
-.modal { display:none; position:fixed; z-index:99999; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(8px); }
+/* ─── MODAL ─────────────────────────────── */
+.modal { display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.85); backdrop-filter:blur(12px); }
+.modal.open { display:flex; align-items:flex-start; justify-content:center; padding:8% 20px; }
 .modal-box {
-  background:#080c1e; border:1px solid var(--border); border-radius:16px;
-  padding:40px; width:90%; max-width:560px; max-height:80vh; overflow-y:auto;
-  margin:6% auto; position:relative;
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:18px; padding:44px; max-width:580px; width:100%;
+  position:relative; max-height:80vh; overflow-y:auto;
 }
-.mcls { position:absolute; top:16px; right:22px; font-size:24px; color:var(--muted); cursor:pointer; }
-.mcls:hover { color:#fff; }
-.itext { color:var(--muted2); margin-top:14px; font-size:.86rem; line-height:1.7; }
-.itext h3 { color:#fff; margin:14px 0 6px; }
-.itext p { margin-bottom:8px; }
-.itext hr { border:0; border-top:1px solid var(--border); margin:14px 0; }
+.modal-box h2 {
+  font-size:1.6rem; font-weight:800; margin-bottom:14px;
+  background:linear-gradient(180deg, #fff, var(--muted2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.modal-box h3 { color:#fff; margin:18px 0 6px; font-size:.95rem; font-weight:700; }
+.modal-box p { color:var(--muted2); font-size:.86rem; line-height:1.7; margin-bottom:10px; }
+.modal-box a { color:var(--primary2); }
+.modal-close {
+  position:absolute; top:16px; right:20px;
+  width:32px; height:32px; border-radius:8px;
+  background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  color:var(--muted2); font-size:1.1rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:.2s;
+}
+.modal-close:hover { background:rgba(255,255,255,0.08); color:#fff; }
 
-/* ── DIVIDER ── */
-.section-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(79,110,247,.15),transparent); margin:0 48px; }
+/* ─── REVEAL ANIMATIONS ─────────────────── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
+.reveal.in { opacity:1; transform:translateY(0); }
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .benefits-top,
-  .benefits-grid,
-  .ms-body,
-  .comm-grid { grid-template-columns:1fr; }
-  .ben-card.span2 { grid-column:span 1; }
-  .ms-sidebar { display:none; }
-  .ms-stats { grid-template-columns:1fr 1fr; }
+/* ─── RESPONSIVE ─────────────────────── */
+@media (max-width: 960px) {
+  .nav { padding:0 20px; }
   .nav-links { display:none; }
-  .hero-widget { display:none; }
-  .benefits,
-  .mockup-section,
-  .community { padding:80px 24px; }
-  .nav { padding:0 24px; }
-  footer { padding:30px 24px; }
-  .section-divider { margin:0 24px; }
+  .hero { padding:120px 20px 80px; }
+  .hero-stats { gap:26px; }
+  .hero-stat .sep { display:none; }
+  section { padding:80px 20px; }
+  .features-grid { grid-template-columns:1fr; }
+  .cmd-grid { grid-template-columns:1fr 1fr; }
+  .mockup-body { grid-template-columns:1fr; min-height:auto; }
+  .mb-sidebar { display:none; }
+  .mockup { transform:none; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:30px; }
+  .footer-brand-info { grid-column:1/-1; max-width:none; }
+  .cta-box { padding:48px 28px; }
 }
 </style>
 </head>
 <body>
 
-<!-- STARS -->
+<!-- BACKGROUND -->
 <canvas id="stars"></canvas>
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="grid-bg"></div>
 
 <!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="#">
-    <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
-    <div class="logo-text">Five<span>Base</span></div>
+    <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="brand">Five<span>Base</span></div>
   </a>
   <div class="nav-links">
-    <a href="#features">Funktionen</a>
+    <a href="#features">Features</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#commands">Commands</a>
     <a href="wiki.html">Wiki</a>
     <a href="https://discord.gg/jTNhxFJFYf" target="_blank">Support</a>
   </div>
   <div class="nav-right">
-    <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-discord"><i class="fa-brands fa-discord"></i> Discord</a>
-    <a href="https://dashboard.5base.de" class="btn btn-outline">Login – Dashboard</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">Bot hinzufügen <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="https://dashboard.5base.de" class="btn btn-outline">Dashboard</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
+      Bot hinzufügen <i class="fa-solid fa-arrow-right"></i>
+    </a>
   </div>
 </nav>
 
 <div class="content">
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-ring"></div>
-    <div class="hero-ring2"></div>
-    <h1>FiveBase</h1>
-    <p class="hero-sub-title">Die Fraktions-Lösung</p>
-    <p>Der Discord Bot für staatliche Fraktionen auf GTA RP Servern.<br>Zeiterfassung, Tickets, Dienstnummern und mehr – kostenlos.</p>
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      <span>v2.1</span> · 10 Module · 100% kostenlos
+    </div>
+    <h1>
+      <span class="line1">Der Bot für</span>
+      <span class="line2">deine Fraktion.</span>
+    </h1>
+    <p class="sub">
+      Zeiterfassung, Tickets, Dienstnummern, Personal, Abmahnungen, Termine —
+      alles in einem Discord Bot. Speziell für staatliche Fraktionen auf GTA RP Servern.
+    </p>
     <div class="hero-ctas">
-      <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary"><i class="fa-brands fa-discord"></i> Bot hinzufügen <i class="fa-solid fa-arrow-right"></i></a>
-      <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-ghost"><i class="fa-solid fa-users"></i> Support Server</a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
+        <i class="fa-brands fa-discord"></i> Bot hinzufügen
+      </a>
+      <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-ghost">
+        <i class="fa-solid fa-users"></i> Support-Server
+      </a>
     </div>
-    <div class="hero-widget">
-      <div class="hw-label">Jetzt starten</div>
-      <div class="hw-title">Für Fraktionen</div>
-      <a href="https://dashboard.5base.de" target="_blank" class="hw-btn">Dashboard öffnen <i class="fa-solid fa-arrow-right"></i></a>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="n">10</div>
+        <div class="l">Module</div>
+      </div>
+      <div class="sep"></div>
+      <div class="hero-stat">
+        <div class="n">100%</div>
+        <div class="l">Kostenlos</div>
+      </div>
+      <div class="sep"></div>
+      <div class="hero-stat">
+        <div class="n">0€</div>
+        <div class="l">Für immer</div>
+      </div>
+      <div class="sep"></div>
+      <div class="hero-stat">
+        <div class="n">∞</div>
+        <div class="l">Server</div>
+      </div>
     </div>
-    <a href="#features" class="hero-scroll">Scroll to explore <i class="fa-solid fa-arrow-down"></i></a>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider"></div>
 
-  <!-- ── BENEFITS ── -->
-  <section class="benefits" id="features">
-    <div class="benefits-top">
-      <div class="benefits-top-left">
-        <div class="sec-label"><i class="fa-solid fa-bolt"></i> Unsere Funktionen</div>
-        <h2>Warum FiveBase<br>wählen</h2>
-      </div>
-      <div class="benefits-top-right">
-        <p>Alle Tools die deine Fraktion braucht – in einem Discord Bot. Kostenlos, sofort einsatzbereit und speziell für staatliche Fraktionen auf GTA RP Servern entwickelt.</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">Bot hinzufügen <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-lead reveal">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Alles was deine Fraktion<br><span class="italic">wirklich braucht.</span></h2>
+      <p class="section-sub">Zehn Module, die ineinander greifen. Kein Feature-Bloat, keine bezahlten Premium-Versionen — nur Tools die für GTA-RP-Fraktionen entwickelt wurden.</p>
     </div>
 
-    <div class="benefits-grid">
+    <div class="features-wrap">
+      <div class="features-grid">
 
-      <!-- 0.1 Stempelsystem -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.1</div>
-        <div class="ben-tag"><i class="fa-solid fa-stopwatch"></i> Zeiterfassung</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap"><i class="fa-solid fa-stopwatch"></i></div>
-        </div>
-        <div class="ben-body">
+        <div class="feature reveal">
+          <div class="tag">01</div>
+          <div class="f-icon"><i class="fa-solid fa-stopwatch"></i></div>
           <h3>Stempelsystem</h3>
-          <p>Automatisches Zeittracking per /dienstbeginn & /dienstende. Wochentoplisten und AFK-Checks inklusive.</p>
-          <ul class="ben-items">
-            <li>Toplist & Wöchentliche Auswertungen</li>
-            <li>AFK Checks & automatische Erkennung</li>
-            <li>Präzise Minutenerfassung</li>
+          <p>Automatische Zeiterfassung mit AFK-Check, Wochenberichten und Live-Topliste.</p>
+          <ul>
+            <li>Dienstbeginn / Dienstende per Button</li>
+            <li>Wöchentliche Auswertung je Rang</li>
+            <li>AFK-Erkennung mit Auto-Abmeldung</li>
           </ul>
         </div>
-      </div>
 
-      <!-- 0.2 Ticket-System -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.2</div>
-        <div class="ben-tag purple"><i class="fa-solid fa-ticket"></i> Support</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap purple"><i class="fa-solid fa-ticket"></i></div>
-        </div>
-        <div class="ben-body">
-          <h3>Ticket-System</h3>
-          <p>Vollständiges Ticketsystem für Bürger & Mitarbeiter. Logs, Transkripte und individuelle Panels.</p>
-          <ul class="ben-items">
-            <li>Support-Tickets für Bürger & Mitarbeiter</li>
-            <li>Ticket Logs & Chat-Transkripte</li>
-            <li>Verschiedene Panels & Kategorien</li>
+        <div class="feature reveal">
+          <div class="tag">02</div>
+          <div class="f-icon purple"><i class="fa-solid fa-ticket"></i></div>
+          <h3>Ticketsystem</h3>
+          <p>Panel-basiertes Ticketsystem mit Kategorien, Claim-Funktion und Statistiken.</p>
+          <ul>
+            <li>Mehrere Panels mit Drag-&-Drop Kategorien</li>
+            <li>Live-Statistik-Embed alle 5 Min</li>
+            <li>Bewertungssystem nach Ticket-Close</li>
           </ul>
         </div>
-      </div>
 
-      <!-- 0.3 Dienstnummern -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.3</div>
-        <div class="ben-tag green"><i class="fa-solid fa-list-ol"></i> Nummern</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap green"><i class="fa-solid fa-list-ol"></i></div>
-        </div>
-        <div class="ben-body">
+        <div class="feature reveal">
+          <div class="tag">03</div>
+          <div class="f-icon green"><i class="fa-solid fa-list-ol"></i></div>
           <h3>Dienstnummern</h3>
-          <p>Nie wieder doppelte Nummern. Live-Übersicht und vollautomatische Vergabe beim Dienstantritt.</p>
-          <ul class="ben-items">
-            <li>Freie Nummern direkt im Überblick</li>
-            <li>Automatische Nummernvergabe</li>
-            <li>Konfigurierbare Nummernbereiche</li>
+          <p>Nie wieder doppelte DNs. Live-Übersicht aus Nicknames, automatische Vergabe.</p>
+          <ul>
+            <li>Erkennt DN aus <span class="mono">[XX] Name</span></li>
+            <li>Frei/Vergeben/Blacklist Übersicht</li>
+            <li>Konfigurierbarer Nummernbereich</li>
           </ul>
         </div>
-      </div>
 
-      <!-- 0.4 Personal -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.4</div>
-        <div class="ben-tag orange"><i class="fa-solid fa-users"></i> Personal</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap orange"><i class="fa-solid fa-address-card"></i></div>
-        </div>
-        <div class="ben-body">
+        <div class="feature reveal">
+          <div class="tag">04</div>
+          <div class="f-icon orange"><i class="fa-solid fa-folder-open"></i></div>
           <h3>Personal-System</h3>
-          <p>Personalakten, Urlaubssystem und eine live aktualisierte Teamliste. Ränge manuell einstellbar.</p>
-          <ul class="ben-items">
-            <li>Eigene Personalseite je Mitarbeiter</li>
-            <li>Urlaubssystem & Verwaltung</li>
-            <li>Teamliste – Live-Status aktiver Mitarbeiter</li>
+          <p>Digitale Personalakten, Urlaubsverwaltung und Rang-Synchronisation.</p>
+          <ul>
+            <li>Akten mit Historie & Statistiken</li>
+            <li>Urlaubsanträge über Discord</li>
+            <li>Automatische Rang-Updates</li>
           </ul>
         </div>
-      </div>
 
-      <!-- 0.5 Einstellungs-System -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.5</div>
-        <div class="ben-tag"><i class="fa-solid fa-bolt"></i> Onboarding</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap"><i class="fa-solid fa-user-plus"></i></div>
+        <div class="feature reveal">
+          <div class="tag">05</div>
+          <div class="f-icon cyan"><i class="fa-solid fa-users-rectangle"></i></div>
+          <h3>Teamliste</h3>
+          <p>Live-Übersicht aller Mitarbeiter nach Rängen sortiert. Aktualisiert sich selbst.</p>
+          <ul>
+            <li>Multi-Message Support für große Teams</li>
+            <li>Hierarchische Sortierung</li>
+            <li>DN-Anzeige aus Nickname</li>
+          </ul>
         </div>
-        <div class="ben-body">
+
+        <div class="feature reveal">
+          <div class="tag">06</div>
+          <div class="f-icon sky"><i class="fa-solid fa-user-plus"></i></div>
           <h3>Einstellungs-System</h3>
-          <p>Neue Mitarbeiter in Sekunden eingestellt. Alles automatisch – Nummer, Rang und Willkommensnachricht.</p>
-          <ul class="ben-items">
-            <li>Bewerbungen & Fragebögen (konfigurierbar)</li>
-            <li>Freie Dienstnummer wird auto. vergeben</li>
-            <li>Einstellungsnachricht im Uprank-Channel</li>
+          <p>Bewerbungen mit Fragebogen und Quiz. Automatische Einstellung mit DN-Vergabe.</p>
+          <ul>
+            <li>Konfigurierbare Bewerbungsfelder</li>
+            <li>Optionales Quiz mit Ban-Funktion</li>
+            <li>Einstellung per <span class="mono">/einstellung</span></li>
           </ul>
         </div>
-      </div>
 
-      <!-- 0.6 Moderation -->
-      <div class="ben-card">
-        <div class="ben-num">· 0.6</div>
-        <div class="ben-tag red"><i class="fa-solid fa-shield-halved"></i> Sicherheit</div>
-        <div class="ben-visual">
-          <div class="ben-icon-wrap red"><i class="fa-solid fa-shield-halved"></i></div>
-        </div>
-        <div class="ben-body">
+        <div class="feature reveal">
+          <div class="tag">07</div>
+          <div class="f-icon red"><i class="fa-solid fa-shield-halved"></i></div>
           <h3>Moderation</h3>
-          <p>Automod, Logging und alle wichtigen Commands. Dein Server bleibt sauber – ohne manuellen Aufwand.</p>
-          <ul class="ben-items">
-            <li>Automod, Antispam, Anti-Links</li>
-            <li>Bad Words Filter & Anti-Mentions</li>
-            <li>/clear, /ban, /kick & Logging</li>
+          <p>Auto-Mod, Welcome, Auto-Rollen und 6 separate Logging-Kanäle.</p>
+          <ul>
+            <li>Anti-Spam / Links / Caps / Mentions</li>
+            <li>Welcome-Embed Designer</li>
+            <li><span class="mono">/ban /kick /timeout /clear</span></li>
           </ul>
         </div>
-      </div>
 
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ── DASHBOARD MOCKUP ── -->
-  <section class="mockup-section">
-    <h2>Jetzt starten mit <span style="color:var(--primary)">FiveBase</span></h2>
-    <p>Bot hinzufügen, Fraktion einrichten und sofort loslegen.</p>
-
-    <div class="mockup-screen">
-      <!-- Top bar -->
-      <div class="db-topbar">
-        <div class="db-topbar-left">
-          <div class="db-bot-icon"><i class="fa-solid fa-robot"></i></div>
-          <div>
-            <div class="db-bot-name">FiveBase Dashboard</div>
-          </div>
-        </div>
-        <div class="db-topbar-right">
-          <div class="db-user"><img src="https://cdn.discordapp.com/embed/avatars/0.png" class="db-avatar" alt=""> Lias82</div>
-          <button class="db-logout">Abmelden</button>
-        </div>
-      </div>
-
-      <div class="db-body">
-        <!-- Sidebar -->
-        <div class="db-sidebar">
-          <div class="db-server-info">
-            <div class="db-server-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <div>
-              <div class="db-server-name">5Base.de – Fraktionsbot v0.9.2</div>
-              <div class="db-server-id">1457779754647163145</div>
-            </div>
-          </div>
-
-          <div class="db-menu-group-label">MODULE</div>
-          <div class="db-menu-item active"><i class="fa-solid fa-table-columns"></i> Dashboard</div>
-          <div class="db-menu-item"><i class="fa-solid fa-gear"></i> Allgemein</div>
-          <div class="db-menu-item"><i class="fa-solid fa-ticket"></i> Tickets</div>
-          <div class="db-menu-item"><i class="fa-solid fa-file-lines"></i> Bewerbung</div>
-          <div class="db-menu-item"><i class="fa-solid fa-clock"></i> Stempeln</div>
-          <div class="db-menu-item"><i class="fa-solid fa-hashtag"></i> Dienstnummern</div>
-          <div class="db-menu-item"><i class="fa-solid fa-users"></i> Personal</div>
-          <div class="db-menu-item"><i class="fa-solid fa-list"></i> Teamliste</div>
-          <div class="db-menu-item"><i class="fa-solid fa-user-plus"></i> Einstellung</div>
-          <div class="db-menu-item"><i class="fa-solid fa-shield-halved"></i> Moderation</div>
-
-          <div class="db-menu-group-label" style="margin-top:10px">WEITERE</div>
-          <div class="db-menu-item"><i class="fa-solid fa-book"></i> Wiki & Dokumentation</div>
-          <div class="db-menu-item"><i class="fa-solid fa-arrow-right-arrow-left"></i> Server wechseln</div>
+        <div class="feature reveal">
+          <div class="tag">08</div>
+          <div class="f-icon rose"><i class="fa-solid fa-user-minus"></i></div>
+          <h3>Kündigungs-System</h3>
+          <p>Automatisiertes Offboarding. Ein Command entfernt Rollen, setzt Nickname zurück.</p>
+          <ul>
+            <li><span class="mono">/kuendigung @user</span></li>
+            <li>Entfernt alle Fraktions-Rollen</li>
+            <li>Dokumentiert in Personalakte</li>
+          </ul>
         </div>
 
-        <!-- Main content -->
-        <div class="db-main">
-          <div class="db-page-title">Dashboard</div>
-          <div class="db-page-sub">Willkommen im FiveBase Dashboard! Aktiviere und konfiguriere deine Module.</div>
-
-          <!-- Module aktivieren -->
-          <div class="db-card">
-            <div class="db-card-title"><i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i> Module aktivieren</div>
-            <div class="db-card-desc">Wähle aus, welche Features du für deinen Server nutzen möchtest.</div>
-            <div class="db-modules-grid">
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#4f6ef7,#7c3aed)"><i class="fa-solid fa-clock"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Stempelsystem</div><div class="db-mod-desc">Zeiterfassung für Mitarbeiter</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#4f6ef7,#2563eb)"><i class="fa-solid fa-ticket"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Ticket-System</div><div class="db-mod-desc">Support-Tickets für Bürger & Mitarbeiter</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#4f6ef7,#6366f1)"><i class="fa-solid fa-hashtag"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Dienstnummern</div><div class="db-mod-desc">Automatische Nummernvergabe</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#4f6ef7,#7c3aed)"><i class="fa-solid fa-users"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Personal-System</div><div class="db-mod-desc">Verwaltung von Personalakten</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#4f6ef7,#2563eb)"><i class="fa-solid fa-list"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Teamliste</div><div class="db-mod-desc">Live-Status aktiver Mitarbeiter</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#10b981,#059669)"><i class="fa-solid fa-user-plus"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Einstellungs-System</div><div class="db-mod-desc">Bewerbungen & Fragebögen</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-              <div class="db-module-item">
-                <div class="db-mod-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="db-mod-info"><div class="db-mod-name">Moderation</div><div class="db-mod-desc">Auto-Mod, Logging & Mod-Commands</div></div>
-                <div class="db-toggle on"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Schnellstart -->
-          <div class="db-card">
-            <div class="db-card-title"><i class="fa-solid fa-circle-info" style="color:var(--primary)"></i> Schnellstart</div>
-            <div class="db-quickstart">
-              <div class="db-qs-bar"></div>
-              <div class="db-qs-content">
-                <div class="db-qs-step-title">🚀 Erste Schritte:</div>
-                <div class="db-qs-step">1. Aktiviere die gewünschten Module oben</div>
-                <div class="db-qs-step">2. Klicke in der Sidebar auf ein Modul, um es zu konfigurieren</div>
-                <div class="db-qs-step">3. Speichere deine Einstellungen mit dem Button unten</div>
-                <div class="db-qs-step">4. Benutze die Commands im Discord (z.B. /dienstbeginn)</div>
-              </div>
-            </div>
-          </div>
-
+        <div class="feature reveal">
+          <div class="tag">09</div>
+          <div class="f-icon amber"><i class="fa-solid fa-gavel"></i></div>
+          <h3>Abmahnungs-System</h3>
+          <p>Eskalations-basierte Abmahnungen mit Leveln, Ablaufdatum und Uprank-Sperre.</p>
+          <ul>
+            <li>Mehrere Abmahnungs-Stufen</li>
+            <li>Automatische Uprank-Sperre</li>
+            <li>Levels laufen automatisch ab</li>
+          </ul>
         </div>
+
+        <div class="feature reveal">
+          <div class="tag">10</div>
+          <div class="f-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3>Termin-System</h3>
+          <p>Besprechungen, Ausbildungen und Events planen. Mit RSVP und automatischen Erinnerungen.</p>
+          <ul>
+            <li>Termine mit Uhrzeit & Beschreibung</li>
+            <li>RSVP: Zusagen / Absagen / Vielleicht</li>
+            <li>Automatische Reminder-DMs</li>
+          </ul>
+        </div>
+
+        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(91,124,255,0.12), rgba(167,139,250,0.06)); border-color:rgba(91,124,255,0.25);">
+          <div class="tag">PRO</div>
+          <div class="f-icon" style="background:linear-gradient(135deg, var(--primary), var(--purple)); box-shadow:0 0 0 1px rgba(255,255,255,0.15) inset, 0 12px 32px -6px rgba(91,124,255,0.6);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3>Start-Guide Wizard</h3>
+          <p>Komplette Server-Einrichtung in 2 Minuten. Wähle eine Vorlage — fertig.</p>
+          <ul>
+            <li>7 offizielle Templates (LSPD, LSMD, ...)</li>
+            <li>Rollen, Channels & Panels automatisch</li>
+            <li>Sofort einsatzbereit</li>
+          </ul>
+        </div>
+
+        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(34,217,154,0.08), rgba(34,217,154,0.02)); border-color:rgba(34,217,154,0.2);">
+          <div class="tag">NEU</div>
+          <div class="f-icon green"><i class="fa-solid fa-rotate"></i></div>
+          <h3>Auto-Backup</h3>
+          <p>Stündliche Datenbank-Backups. Daten-Integrität wird automatisch geprüft.</p>
+          <ul>
+            <li>Stündliche Backups (24h aufbewahrt)</li>
+            <li>Notfall-Wiederherstellung</li>
+            <li>Integritäts-Checks in Echtzeit</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider"></div>
 
-  <!-- ── COMMUNITY ── -->
-  <section class="community">
-    <h2>Community & Updates</h2>
-    <div class="comm-grid">
+  <!-- DASHBOARD MOCKUP -->
+  <section id="dashboard">
+    <div class="section-lead reveal">
+      <div class="section-label">Dashboard</div>
+      <h2 class="section-title">Alles steuerbar aus<br>dem <span class="italic">Browser.</span></h2>
+      <p class="section-sub">Login mit Discord. Server wählen. Module aktivieren. Kein Code, keine JSONs — reine UI mit Auto-Save.</p>
+    </div>
 
-      <div class="comm-card">
-        <div class="comm-icon-wrap" style="color:#7c8ce8"><i class="fa-brands fa-discord"></i></div>
-        <div class="comm-dots"></div>
-        <h3>Discord Community</h3>
-        <p>Direkte Hilfe, Changelogs und Community-Austausch.</p>
-        <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">Discord beitreten <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-      <div class="comm-card">
-        <div class="comm-icon-wrap" style="color:#9ca3af"><i class="fa-solid fa-book"></i></div>
-        <div class="comm-dots"></div>
-        <h3>Wiki & Dokumentation</h3>
-        <p>Alle Befehle, Einstellungen und Anleitungen übersichtlich erklärt.</p>
-        <a href="wiki.html" class="btn btn-ghost" style="width:100%;justify-content:center">Wiki öffnen <i class="fa-solid fa-arrow-right"></i></a>
+    <div class="mockup-wrap reveal">
+      <div class="mockup">
+        <div class="mockup-bar">
+          <div class="mb-dot r"></div>
+          <div class="mb-dot y"></div>
+          <div class="mb-dot g"></div>
+          <div class="mb-url"><i class="fa-solid fa-lock" style="color:var(--green); font-size:.65rem; margin-right:6px;"></i>dashboard.<span class="d">5base.de</span>/dashboard/1457779754647163145</div>
+        </div>
+
+        <div class="mockup-body">
+          <div class="mb-sidebar">
+            <div class="mb-server">
+              <div class="mb-si"><i class="fa-solid fa-shield-halved"></i></div>
+              <div>
+                <div class="mb-sn">5Base Fraktion</div>
+                <div class="mb-sid">145777...3145</div>
+              </div>
+            </div>
+            <div class="mb-label">Konfiguration</div>
+            <div class="mb-item active"><i class="fa-solid fa-gauge"></i> Dashboard</div>
+            <div class="mb-item"><i class="fa-solid fa-clock"></i> Stempeln</div>
+            <div class="mb-item"><i class="fa-solid fa-ticket"></i> Tickets</div>
+            <div class="mb-item"><i class="fa-solid fa-hashtag"></i> Dienstnummern</div>
+            <div class="mb-item"><i class="fa-solid fa-users"></i> Personal</div>
+            <div class="mb-item"><i class="fa-solid fa-list"></i> Teamliste</div>
+            <div class="mb-item"><i class="fa-solid fa-user-plus"></i> Einstellung</div>
+            <div class="mb-item"><i class="fa-solid fa-shield-halved"></i> Moderation</div>
+            <div class="mb-item"><i class="fa-solid fa-gavel"></i> Abmahnungen</div>
+            <div class="mb-item"><i class="fa-solid fa-calendar"></i> Termine</div>
+          </div>
+
+          <div class="mb-main">
+            <div class="mb-h1">Dashboard</div>
+            <div class="mb-sub">Willkommen. Aktiviere und konfiguriere deine Module.</div>
+
+            <div class="mb-card">
+              <div class="mb-card-title"><i class="fa-solid fa-cube"></i> Module aktivieren</div>
+              <div class="mb-card-desc">10 Module, unabhängig voneinander schaltbar.</div>
+              <div class="mb-modules">
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#7c3aed);"><i class="fa-solid fa-clock"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Stempelsystem</div><div class="mb-mod-desc">Zeiterfassung</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);"><i class="fa-solid fa-ticket"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Ticket-System</div><div class="mb-mod-desc">Support-Tickets</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#10b981,#059669);"><i class="fa-solid fa-hashtag"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Dienstnummern</div><div class="mb-mod-desc">Auto-Vergabe</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fa-solid fa-users"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Personal</div><div class="mb-mod-desc">Akten & Urlaub</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#22d3ee,#06b6d4);"><i class="fa-solid fa-list"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Teamliste</div><div class="mb-mod-desc">Live-Status</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#ef4444,#dc2626);"><i class="fa-solid fa-shield-halved"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Moderation</div><div class="mb-mod-desc">Auto-Mod</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#fbbf24,#d97706);"><i class="fa-solid fa-gavel"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Abmahnungen</div><div class="mb-mod-desc">Mit Levels</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#a78bfa);"><i class="fa-solid fa-calendar"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Termine</div><div class="mb-mod-desc">RSVP & Reminder</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <div class="divider"></div>
+
+  <!-- COMMANDS -->
+  <section id="commands" class="cmd-section">
+    <div class="cmd-wrap">
+      <div class="section-lead reveal">
+        <div class="section-label">Commands</div>
+        <h2 class="section-title">Discord-Commands<br><span class="italic">für alles.</span></h2>
+        <p class="section-sub">Über 30 Slash-Commands für Stempeln, Personal, Urlaub, Moderation, Termine und mehr.</p>
+      </div>
+
+      <div class="cmd-grid reveal">
+        <div class="cmd"><div class="cmd-name">/einstellung</div><div class="cmd-desc">Neuer Mitarbeiter + Auto-DN</div></div>
+        <div class="cmd"><div class="cmd-name">/kuendigung</div><div class="cmd-desc">Offboarding in einem Klick</div></div>
+        <div class="cmd"><div class="cmd-name">/abmahnung erteilen</div><div class="cmd-desc">Mit Level-Eskalation</div></div>
+        <div class="cmd"><div class="cmd-name">/termin erstellen</div><div class="cmd-desc">Mit RSVP & Reminder</div></div>
+
+        <div class="cmd"><div class="cmd-name">/urlaub eintragen</div><div class="cmd-desc">Ohne Genehmigung</div></div>
+        <div class="cmd"><div class="cmd-name">/verwarnung erteilen</div><div class="cmd-desc">Für Personalakte</div></div>
+        <div class="cmd"><div class="cmd-name">/personal</div><div class="cmd-desc">Personalakte öffnen</div></div>
+        <div class="cmd"><div class="cmd-name">/teamlist update</div><div class="cmd-desc">Liste neu bauen</div></div>
+
+        <div class="cmd"><div class="cmd-name">/stempel stats</div><div class="cmd-desc">Deine Arbeitszeit</div></div>
+        <div class="cmd"><div class="cmd-name">/ban @user</div><div class="cmd-desc">Mit Grund & Tagen</div></div>
+        <div class="cmd"><div class="cmd-name">/timeout 10m</div><div class="cmd-desc">Flexible Dauer</div></div>
+        <div class="cmd"><div class="cmd-name">/clear 50</div><div class="cmd-desc">Nachrichten löschen</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box reveal">
+      <h2>Bereit, deine Fraktion<br><span class="italic">zu automatisieren?</span></h2>
+      <p>Lade FiveBase jetzt auf deinen Server. Einladung in 10 Sekunden, Setup in 2 Minuten dank Start-Guide-Wizard.</p>
+      <div class="ctas">
+        <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
+          <i class="fa-brands fa-discord"></i> Bot hinzufügen
+        </a>
+        <a href="wiki.html" class="btn btn-ghost">
+          <i class="fa-solid fa-book"></i> Wiki lesen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">
-      <div class="logo-icon" style="width:28px;height:28px;font-size:.75rem"><i class="fa-solid fa-shield-halved"></i></div>
-      Five<span>Base</span>
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div class="footer-brand-info">
+          <a class="nav-logo" href="#">
+            <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="brand">Five<span>Base</span></div>
+          </a>
+          <p>Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Entwickelt aus Community-Feedback.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produkt</h4>
+          <a href="#features">Features</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#commands">Commands</a>
+          <a href="wiki.html">Wiki</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://discord.gg/jTNhxFJFYf" target="_blank">Discord</a>
+          <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank">Bot einladen</a>
+          <a href="https://dashboard.5base.de">Dashboard Login</a>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <a href="#" id="openImp">Impressum</a>
+          <a href="#">Datenschutz</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 FiveBase · Lias Lemke · Made for GTA RP</div>
+        <div class="footer-links">
+          <a href="https://discord.gg/jTNhxFJFYf" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+          <a href="wiki.html"><i class="fa-solid fa-book"></i> Wiki</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="https://discord.gg/jTNhxFJFYf" target="_blank">Discord</a>
-      <a href="wiki.html">Wiki</a>
-      <a href="#" id="openImp">Impressum</a>
-    </div>
-    <span class="footer-copy">© 2026 FiveBase Bot. All rights reserved.</span>
   </footer>
 
-</div><!-- /content -->
+</div>
 
 <!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-box">
-    <span class="mcls" id="closeImp">&times;</span>
+    <button class="modal-close" id="modalClose">×</button>
     <h2>Impressum</h2>
-    <div class="itext">
-      <p><strong>Angaben gemäß § 5 DDG</strong></p>
-      <p>5base.de</p>
-      <p><strong>Lias Lemke c/o Online-Impressum #7237</strong><br>
-      Adresse: Europaring 90, 53757 Sankt Augustin</p>
-      <p><strong>E-Mail:</strong> support@5base.de<br>
-      <strong>Zweiter Kontaktweg:</strong> <a href="https://discord.gg/VbnSmhMjpu" target="_blank">Discord</a></p>
-      <hr>
-      <h3>Zuständige Regulierungs- und Aufsichtsbehörde:</h3>
-      <p>Medienanstalt Thüringen · Sitz: Deutschland</p>
-      <p>Kein Umsatzsteuerausweis aufgrund Anwendung der Kleinunternehmerregelung gemäß § 19 UStG.</p>
-      <p>© 2026 FiveBase Bot. All rights reserved.</p>
-    </div>
+    <p><strong>Angaben gemäß § 5 DDG</strong></p>
+    <p>5base.de</p>
+    <h3>Betreiber</h3>
+    <p>Lias Lemke c/o Online-Impressum #7237<br>Europaring 90, 53757 Sankt Augustin</p>
+    <h3>Kontakt</h3>
+    <p>E-Mail: support@5base.de<br>Zweiter Kontaktweg: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">Discord</a></p>
+    <h3>Aufsichtsbehörde</h3>
+    <p>Medienanstalt Thüringen · Sitz: Deutschland</p>
+    <p style="color:var(--dim); font-size:.78rem; margin-top:18px;">Kein Umsatzsteuerausweis aufgrund Anwendung der Kleinunternehmerregelung gemäß § 19 UStG.</p>
   </div>
 </div>
 
 <script>
-// ── STARS ──────────────────────────────────────────────────
+// ── STARS ────────────────────────────────
 (function(){
   const c = document.getElementById('stars');
   const x = c.getContext('2d');
   let W,H,stars=[];
   function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; }
   resize(); window.addEventListener('resize',resize);
-  for(let i=0;i<220;i++) stars.push({
+  for(let i=0;i<180;i++) stars.push({
     x:Math.random(), y:Math.random(),
-    r:Math.random()*1.3+.2,
+    r:Math.random()*1.2+.2,
     a:Math.random(),
-    da:(Math.random()-.5)*.003,
-    dx:(Math.random()-.5)*.00006,
-    dy:(Math.random()-.5)*.00006,
+    da:(Math.random()-.5)*.004,
   });
   function draw(){
     x.clearRect(0,0,W,H);
     stars.forEach(s=>{
-      s.a+=s.da; if(s.a<0)s.da=Math.abs(s.da); if(s.a>1)s.da=-Math.abs(s.da);
-      s.x+=s.dx; s.y+=s.dy;
-      if(s.x<0)s.x=1; if(s.x>1)s.x=0;
-      if(s.y<0)s.y=1; if(s.y>1)s.y=0;
+      s.a+=s.da;
+      if(s.a<0)s.da=Math.abs(s.da);
+      if(s.a>1)s.da=-Math.abs(s.da);
       x.beginPath();
       x.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      x.fillStyle=`rgba(160,180,255,${s.a*.65})`;
+      x.fillStyle=`rgba(180,195,255,${s.a*.6})`;
       x.fill();
     });
     requestAnimationFrame(draw);
@@ -814,28 +1042,34 @@ footer {
   draw();
 })();
 
-// ── SCROLL REVEAL ──────────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.style.opacity='1';
-      e.target.style.transform='translateY(0)';
+// ── REVEAL ───────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      io.unobserve(e.target);
     }
   });
-}, { threshold:.12 });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-document.querySelectorAll('.ben-card, .comm-card, .mockup-screen').forEach(el => {
-  el.style.opacity='0';
-  el.style.transform='translateY(32px)';
-  el.style.transition='opacity .6s ease, transform .6s ease';
-  observer.observe(el);
-});
-
-// ── MODAL ──────────────────────────────────────────────────
+// ── MODAL ────────────────────────────────
 const modal = document.getElementById('modal');
-document.getElementById('openImp').onclick = e => { e.preventDefault(); modal.style.display='block'; document.body.style.overflow='hidden'; };
-document.getElementById('closeImp').onclick = () => { modal.style.display='none'; document.body.style.overflow=''; };
-window.addEventListener('click', e => { if(e.target===modal){ modal.style.display='none'; document.body.style.overflow=''; }});
+document.getElementById('openImp').addEventListener('click', e => {
+  e.preventDefault();
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+document.getElementById('modalClose').addEventListener('click', () => {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+});
+modal.addEventListener('click', e => {
+  if (e.target === modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
 </script>
 </body>
 </html>
