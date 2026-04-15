@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FiveBase — Die Fraktions-Lösung für GTA RP</title>
 <meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personal, Abmahnungen und mehr.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500;600&family=Satoshi:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -523,20 +525,36 @@ footer {
 
 /* ─── MODAL ─────────────────────────────── */
 .modal { display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.85); backdrop-filter:blur(12px); }
-.modal.open { display:flex; align-items:flex-start; justify-content:center; padding:8% 20px; }
+.modal.open { display:flex; align-items:flex-start; justify-content:center; padding:6% 20px; }
 .modal-box {
   background:var(--bg2); border:1px solid var(--border2);
   border-radius:18px; padding:44px; max-width:580px; width:100%;
-  position:relative; max-height:80vh; overflow-y:auto;
+  position:relative; max-height:84vh; overflow-y:auto;
 }
+.modal-box.wide { max-width:860px; padding:48px 52px; }
 .modal-box h2 {
   font-size:1.6rem; font-weight:800; margin-bottom:14px;
   background:linear-gradient(180deg, #fff, var(--muted2));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
 }
-.modal-box h3 { color:#fff; margin:18px 0 6px; font-size:.95rem; font-weight:700; }
-.modal-box p { color:var(--muted2); font-size:.86rem; line-height:1.7; margin-bottom:10px; }
-.modal-box a { color:var(--primary2); }
+.modal-box h3 { color:#fff; margin:24px 0 8px; font-size:1.05rem; font-weight:700; letter-spacing:-.01em; }
+.modal-box h4 { color:var(--text); margin:18px 0 6px; font-size:.92rem; font-weight:600; }
+.modal-box p { color:var(--muted2); font-size:.88rem; line-height:1.7; margin-bottom:10px; }
+.modal-box ul { color:var(--muted2); font-size:.86rem; line-height:1.65; padding-left:22px; margin:8px 0 14px; }
+.modal-box ul li { margin-bottom:5px; }
+.modal-box ul li strong { color:var(--text); }
+.modal-box a { color:var(--primary2); text-decoration:none; }
+.modal-box a:hover { text-decoration:underline; }
+.modal-box hr { border:0; border-top:1px solid var(--border); margin:22px 0; }
+.modal-box .small { font-size:.78rem; color:var(--dim); }
+.modal-box .ds-section {
+  background:rgba(91,124,255,0.04);
+  border:1px solid rgba(91,124,255,0.12);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:14px 0;
+}
+.modal-box .ds-section h4 { margin-top:0; color:var(--primary2); }
 .modal-close {
   position:absolute; top:16px; right:20px;
   width:32px; height:32px; border-radius:8px;
@@ -546,6 +564,69 @@ footer {
   transition:.2s;
 }
 .modal-close:hover { background:rgba(255,255,255,0.08); color:#fff; }
+
+/* ─── COOKIE BANNER ─────────────────────── */
+.cookie-banner {
+  position:fixed; bottom:20px; left:20px; right:20px;
+  max-width:560px; margin:0 auto;
+  background:linear-gradient(180deg, rgba(13,18,38,0.98), rgba(8,12,28,0.98));
+  border:1px solid var(--border2);
+  border-radius:14px;
+  padding:22px 24px;
+  z-index:9000;
+  box-shadow: 0 0 0 1px rgba(91,124,255,0.15) inset, 0 24px 60px -16px rgba(0,0,0,0.7), 0 0 60px rgba(91,124,255,0.08);
+  backdrop-filter:blur(20px);
+  transform:translateY(140%);
+  opacity:0;
+  transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .35s;
+  pointer-events:none;
+}
+.cookie-banner.show { transform:translateY(0); opacity:1; pointer-events:auto; }
+.cookie-banner h3 {
+  font-size:.98rem; font-weight:700; color:#fff;
+  margin-bottom:6px;
+  display:flex; align-items:center; gap:8px;
+}
+.cookie-banner h3 i { color:var(--primary2); font-size:.9rem; }
+.cookie-banner p {
+  font-size:.83rem; color:var(--muted2); line-height:1.6;
+  margin-bottom:14px;
+}
+.cookie-banner p a { color:var(--primary2); text-decoration:underline; text-underline-offset:2px; }
+.cookie-banner-actions {
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.cookie-banner button {
+  flex:1; min-width:130px;
+  padding:9px 14px;
+  border:none; border-radius:8px;
+  font-family:'Satoshi', sans-serif; font-weight:600; font-size:.82rem;
+  cursor:pointer;
+  transition: all .2s;
+}
+.cb-accept {
+  background:linear-gradient(180deg, var(--primary2), var(--primary));
+  color:#fff;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset, 0 6px 18px -4px rgba(91,124,255,0.4);
+}
+.cb-accept:hover { transform:translateY(-1px); box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset, 0 10px 26px -4px rgba(91,124,255,0.55); }
+.cb-essential {
+  background:rgba(255,255,255,0.05);
+  color:var(--text);
+  border:1px solid var(--border2);
+}
+.cb-essential:hover { background:rgba(255,255,255,0.1); }
+.cb-settings {
+  background:transparent;
+  color:var(--muted2);
+  border:1px solid var(--border);
+}
+.cb-settings:hover { color:#fff; border-color:var(--border2); }
+
+@media (max-width:560px) {
+  .cookie-banner { left:12px; right:12px; bottom:12px; padding:18px 20px; }
+  .cookie-banner button { min-width:0; font-size:.78rem; padding:9px 10px; }
+}
 
 /* ─── REVEAL ANIMATIONS ─────────────────── */
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
@@ -605,7 +686,7 @@ footer {
   <section class="hero">
     <div class="hero-badge">
       <span class="pulse"></span>
-      <span>v1.1</span> · 10 Module · 100% kostenlos
+      <span>v2.1</span> · 10 Module · 100% kostenlos
     </div>
     <h1>
       <span class="line1">Der Bot für</span>
@@ -637,7 +718,7 @@ footer {
       <div class="sep"></div>
       <div class="hero-stat">
         <div class="n">0€</div>
-        <div class="l">Aktuelle Features</div>
+        <div class="l">Für immer</div>
       </div>
       <div class="sep"></div>
       <div class="hero-stat">
@@ -980,11 +1061,12 @@ footer {
         <div class="footer-col">
           <h4>Rechtliches</h4>
           <a href="#" id="openImp">Impressum</a>
-          <a href="#">Datenschutz</a>
+          <a href="#" id="openDs">Datenschutz</a>
+          <a href="#" id="openCookieSettings">Cookie-Einstellungen</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">© 2026 FiveBase · Made for GTA RP</div>
+        <div class="footer-copy">© 2026 FiveBase · Lias Lemke · Made for GTA RP</div>
         <div class="footer-links">
           <a href="https://discord.gg/jTNhxFJFYf" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
           <a href="wiki.html"><i class="fa-solid fa-book"></i> Wiki</a>
@@ -995,7 +1077,7 @@ footer {
 
 </div>
 
-<!-- MODAL -->
+<!-- IMPRESSUM MODAL -->
 <div id="modal" class="modal">
   <div class="modal-box">
     <button class="modal-close" id="modalClose">×</button>
@@ -1009,6 +1091,152 @@ footer {
     <h3>Aufsichtsbehörde</h3>
     <p>Medienanstalt Thüringen · Sitz: Deutschland</p>
     <p style="color:var(--dim); font-size:.78rem; margin-top:18px;">Kein Umsatzsteuerausweis aufgrund Anwendung der Kleinunternehmerregelung gemäß § 19 UStG.</p>
+  </div>
+</div>
+
+<!-- DATENSCHUTZ MODAL -->
+<div id="dsModal" class="modal">
+  <div class="modal-box wide">
+    <button class="modal-close" id="dsModalClose">×</button>
+    <h2>Datenschutzerklärung</h2>
+    <p class="small">Stand: April 2026</p>
+
+    <p>Diese Datenschutzerklärung erklärt, welche personenbezogenen Daten beim Besuch der Website <strong>5base.de</strong>, beim Nutzen des Web-Dashboards (<strong>dashboard.5base.de</strong>) und beim Einsatz des Discord-Bots <strong>FiveBase</strong> verarbeitet werden, sowie deine Rechte als betroffene Person nach der Datenschutz-Grundverordnung (DSGVO).</p>
+
+    <hr>
+
+    <h3>1. Verantwortlicher</h3>
+    <p>Verantwortlich für die Datenverarbeitung im Sinne von Art. 4 Nr. 7 DSGVO ist:</p>
+    <p>
+      <strong>Lias Lemke</strong><br>
+      c/o Online-Impressum #7237<br>
+      Europaring 90, 53757 Sankt Augustin<br>
+      E-Mail: <a href="mailto:support@5base.de">support@5base.de</a><br>
+      Discord: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">discord.gg/VbnSmhMjpu</a>
+    </p>
+
+    <h3>2. Datenschutzbeauftragter</h3>
+    <p>Aufgrund der Größe des Projekts ist die Bestellung eines Datenschutzbeauftragten gesetzlich nicht erforderlich. Bei Fragen zum Datenschutz wende dich bitte direkt an den oben genannten Verantwortlichen.</p>
+
+    <h3>3. Erhebung und Verarbeitung von Daten</h3>
+
+    <div class="ds-section">
+      <h4>3.1 Beim Besuch der Website (5base.de)</h4>
+      <p>Beim Aufruf der Seiten <code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">5base.de</code> und <code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">5base.de/wiki.html</code> werden vom Webserver des Hostingproviders technisch notwendige Server-Logs erfasst:</p>
+      <ul>
+        <li>IP-Adresse (gekürzt bzw. anonymisiert)</li>
+        <li>Datum und Uhrzeit des Zugriffs</li>
+        <li>Aufgerufene URL und HTTP-Statuscode</li>
+        <li>Browser-Typ, Sprache und Betriebssystem</li>
+        <li>Referrer-URL (falls vorhanden)</li>
+      </ul>
+      <p><strong>Zweck:</strong> Bereitstellung der Website, Stabilität, Fehleranalyse, Sicherheit (z.B. Erkennung von DDoS-Angriffen).<br>
+      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb).<br>
+      <strong>Speicherdauer:</strong> Server-Logs werden nach maximal 7 Tagen automatisch gelöscht, soweit nicht aus Sicherheitsgründen länger erforderlich.</p>
+    </div>
+
+    <div class="ds-section">
+      <h4>3.2 Eingebundene Drittanbieter (Schriften & Icons)</h4>
+      <p>Die Website lädt Schriften (Google Fonts) und Icons (Font Awesome via Cloudflare) von externen Servern. Dabei wird beim ersten Aufruf deine IP-Adresse an Google bzw. Cloudflare übermittelt.</p>
+      <ul>
+        <li><strong>Google Fonts</strong> — Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</li>
+        <li><strong>Font Awesome (Cloudflare CDN)</strong> — Anbieter: Cloudflare Inc., 101 Townsend Street, San Francisco, CA 94107, USA</li>
+      </ul>
+      <p><strong>Zweck:</strong> Einheitliche und schnelle Darstellung der Schriften und Icons.<br>
+      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung über den Cookie-/Consent-Banner).<br>
+      <strong>Speicherdauer:</strong> Wird allein durch den Drittanbieter bestimmt. Auf die Verarbeitung dort haben wir keinen Einfluss.</p>
+    </div>
+
+    <div class="ds-section">
+      <h4>3.3 Login & Dashboard (dashboard.5base.de)</h4>
+      <p>Wenn du dich am Dashboard anmeldest, wird der OAuth2-Mechanismus von Discord genutzt. Dabei werden folgende Daten von Discord übermittelt und verarbeitet:</p>
+      <ul>
+        <li>Discord-User-ID</li>
+        <li>Discord-Username (inkl. Tag bzw. Discriminator)</li>
+        <li>Discord-Avatar-URL</li>
+        <li>Liste deiner Discord-Server (nur die ID, der Name und die Berechtigungen — zur Anzeige der verwaltbaren Server)</li>
+      </ul>
+      <p>Diese Daten werden in einer <strong>Server-Session</strong> auf unserem Hostsystem gespeichert. Ein <strong>technisch notwendiges Session-Cookie</strong> (<code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">connect.sid</code>) wird in deinem Browser gesetzt, damit du eingeloggt bleibst.</p>
+      <p><strong>Zweck:</strong> Authentifizierung, Bereitstellung der Dashboard-Funktionen, Zuordnung von Konfigurationsänderungen zu deinem Discord-Account.<br>
+      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung — Bereitstellung des Dashboards).<br>
+      <strong>Speicherdauer:</strong> Session-Cookies werden bei Logout oder spätestens nach 30 Tagen Inaktivität gelöscht.</p>
+    </div>
+
+    <div class="ds-section">
+      <h4>3.4 Bot-Daten (Discord-Server-Konfigurationen)</h4>
+      <p>Wenn du den FiveBase-Bot auf deinem Discord-Server einsetzt, werden Konfigurations- und Funktionsdaten gespeichert, die für den Betrieb der Bot-Funktionen erforderlich sind:</p>
+      <ul>
+        <li>Discord-Server-ID und Server-Name</li>
+        <li>Konfigurierte Rollen-, Channel- und Kategorie-IDs</li>
+        <li>Modul-Einstellungen (Stempelsystem, Tickets, Moderation usw.)</li>
+        <li>Stempel-Daten (Dienstzeiten der Mitarbeiter)</li>
+        <li>Personalakten, Urlaubseinträge, Verwarnungen, Abmahnungen</li>
+        <li>Ticket-Inhalte und Bewerbungs-Antworten</li>
+        <li>Discord-User-IDs der von Bot-Aktionen betroffenen Personen</li>
+      </ul>
+      <p><strong>Zweck:</strong> Bereitstellung der vom Server-Administrator konfigurierten Bot-Funktionen.<br>
+      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung gegenüber dem Server-Administrator), bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse des jeweiligen Server-Betreibers an Personalverwaltung).<br>
+      <strong>Verantwortlich für die Daten innerhalb eines Servers:</strong> Der jeweilige Server-Administrator. Wir stellen lediglich die technische Infrastruktur bereit.<br>
+      <strong>Speicherdauer:</strong> Solange der Bot auf dem Server eingesetzt wird, bzw. bis zur Löschanfrage durch den Server-Administrator.</p>
+    </div>
+
+    <h3>4. Empfänger der Daten</h3>
+    <p>Eine Weitergabe deiner personenbezogenen Daten an Dritte findet ausschließlich in folgendem Umfang statt:</p>
+    <ul>
+      <li><strong>Discord (Discord Inc., 444 De Haro Street, San Francisco, CA 94107, USA)</strong> — für die OAuth2-Anmeldung und sämtliche Bot-Interaktionen. Discord verarbeitet hierbei Daten gemäß <a href="https://discord.com/privacy" target="_blank">discord.com/privacy</a>.</li>
+      <li><strong>Hostingprovider</strong> — die Website und der Bot werden auf gemieteten Servern betrieben. Der Hoster verarbeitet ausschließlich technische Verbindungsdaten im Rahmen eines Auftragsverarbeitungsvertrags.</li>
+      <li><strong>Google Ireland Limited</strong> — bei aktivierter Einwilligung für die Auslieferung von Google Fonts.</li>
+      <li><strong>Cloudflare Inc.</strong> — bei aktivierter Einwilligung für die Auslieferung von Font Awesome.</li>
+    </ul>
+
+    <h3>5. Übermittlung in Drittländer</h3>
+    <p>Bei der Nutzung von Discord, Cloudflare und ggf. weiteren US-Diensten kann eine Übermittlung deiner Daten in die USA erfolgen. Diese Anbieter sind nach dem <strong>EU-US Data Privacy Framework</strong> zertifiziert, sodass ein angemessenes Datenschutzniveau im Sinne der DSGVO gewährleistet ist.</p>
+
+    <h3>6. Cookies</h3>
+    <p>Auf <strong>5base.de</strong> setzen wir keine eigenen Tracking-Cookies. Auf <strong>dashboard.5base.de</strong> wird ausschließlich ein <strong>technisch notwendiges Session-Cookie</strong> (<code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">connect.sid</code>) gesetzt, das deine Login-Sitzung speichert. Dieses Cookie ist für die Funktion des Dashboards erforderlich und benötigt keine Einwilligung (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+    <p>Externe Schriften und Icons (Google Fonts, Font Awesome) werden erst nach deiner Einwilligung über den Consent-Banner geladen. Diese Einwilligung kannst du jederzeit über den Link <strong>"Cookie-Einstellungen"</strong> im Footer widerrufen.</p>
+
+    <h3>7. Deine Rechte als betroffene Person</h3>
+    <p>Nach der DSGVO stehen dir folgende Rechte zu:</p>
+    <ul>
+      <li><strong>Auskunftsrecht (Art. 15 DSGVO):</strong> Du kannst Auskunft über die zu deiner Person gespeicherten Daten verlangen.</li>
+      <li><strong>Berichtigungsrecht (Art. 16 DSGVO):</strong> Du kannst die Berichtigung unrichtiger Daten verlangen.</li>
+      <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Du kannst die Löschung deiner Daten verlangen ("Recht auf Vergessenwerden").</li>
+      <li><strong>Recht auf Einschränkung (Art. 18 DSGVO):</strong> Du kannst die Einschränkung der Verarbeitung verlangen.</li>
+      <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Du kannst die zu deiner Person gespeicherten Daten in einem strukturierten, gängigen Format erhalten.</li>
+      <li><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Du kannst der Verarbeitung deiner Daten aus berechtigtem Interesse widersprechen.</li>
+      <li><strong>Widerrufsrecht (Art. 7 Abs. 3 DSGVO):</strong> Erteilte Einwilligungen kannst du jederzeit mit Wirkung für die Zukunft widerrufen.</li>
+    </ul>
+    <p>Zur Ausübung dieser Rechte genügt eine formlose E-Mail an <a href="mailto:support@5base.de">support@5base.de</a>.</p>
+
+    <h3>8. Beschwerderecht bei der Aufsichtsbehörde</h3>
+    <p>Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn du der Auffassung bist, dass die Verarbeitung deiner Daten gegen die DSGVO verstößt. Zuständig ist insbesondere die Aufsichtsbehörde des Bundeslandes, in dem du deinen Wohnsitz hast. Eine Liste aller deutschen Aufsichtsbehörden findest du unter:</p>
+    <p><a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html" target="_blank">bfdi.bund.de — Aufsichtsbehörden der Länder</a></p>
+
+    <h3>9. Pflicht zur Bereitstellung der Daten</h3>
+    <p>Die Bereitstellung deiner Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Du bist nicht verpflichtet, deine Daten zur Verfügung zu stellen. Die Nichtbereitstellung hat folgende Konsequenzen:</p>
+    <ul>
+      <li>Ohne Discord-Login ist eine Nutzung des Dashboards nicht möglich.</li>
+      <li>Ohne die für die Bot-Funktionen erforderlichen Daten kann der jeweilige Bot-Service nicht erbracht werden.</li>
+    </ul>
+
+    <h3>10. Datensicherheit</h3>
+    <p>Wir treffen technische und organisatorische Maßnahmen, um deine Daten gegen unbefugten Zugriff, Verlust oder Manipulation zu schützen. Dazu gehören insbesondere die HTTPS-Verschlüsselung der Datenübertragung sowie regelmäßige automatische Backups der Bot-Datenbank.</p>
+
+    <h3>11. Änderungen dieser Datenschutzerklärung</h3>
+    <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Funktionserweiterungen des Bots zu aktualisieren. Die jeweils aktuelle Fassung kann jederzeit hier eingesehen werden.</p>
+
+    <p class="small" style="margin-top:24px;">© 2026 FiveBase · Lias Lemke</p>
+  </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookie-Hinweis" aria-live="polite">
+  <h3><i class="fa-solid fa-cookie-bite"></i> Cookies & externe Inhalte</h3>
+  <p>Wir nutzen ein technisch notwendiges Session-Cookie für das Dashboard-Login. Zusätzlich laden wir Schriften (Google Fonts) und Icons (Font Awesome) von externen Anbietern. Mehr in unserer <a href="#" id="cbDsLink">Datenschutzerklärung</a>.</p>
+  <div class="cookie-banner-actions">
+    <button class="cb-essential" id="cbEssential">Nur notwendige</button>
+    <button class="cb-accept" id="cbAccept">Alle akzeptieren</button>
   </div>
 </div>
 
@@ -1053,7 +1281,7 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ── MODAL ────────────────────────────────
+// ── MODAL (IMPRESSUM) ────────────────────
 const modal = document.getElementById('modal');
 document.getElementById('openImp').addEventListener('click', e => {
   e.preventDefault();
@@ -1070,6 +1298,80 @@ modal.addEventListener('click', e => {
     document.body.style.overflow = '';
   }
 });
+
+// ── DATENSCHUTZ MODAL ───────────────────
+const dsModal = document.getElementById('dsModal');
+function openDs(e) {
+  if (e) e.preventDefault();
+  dsModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDs() {
+  dsModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('openDs').addEventListener('click', openDs);
+document.getElementById('cbDsLink').addEventListener('click', openDs);
+document.getElementById('dsModalClose').addEventListener('click', closeDs);
+dsModal.addEventListener('click', e => { if (e.target === dsModal) closeDs(); });
+
+// ── COOKIE BANNER ───────────────────────
+// 'accepted' = User hat alle Cookies akzeptiert (inkl. externer Fonts/Icons)
+// 'essential' = nur notwendige Cookies, externe Drittanbieter blockieren wir nicht aktiv,
+//               sind aber bereits geladen — wir empfehlen daher trotzdem die Variante mit
+//               selbst-gehosteten Fonts. Hier wird nur die Wahl persistiert.
+// null = keine Wahl getroffen, Banner anzeigen
+const COOKIE_KEY = 'fb_cookie_consent';
+const cookieBanner = document.getElementById('cookieBanner');
+
+function getConsent() {
+  try { return localStorage.getItem(COOKIE_KEY); }
+  catch (e) { return null; }
+}
+function setConsent(v) {
+  try { localStorage.setItem(COOKIE_KEY, v); }
+  catch (e) {}
+}
+function showBanner() {
+  cookieBanner.classList.add('show');
+}
+function hideBanner() {
+  cookieBanner.classList.remove('show');
+}
+
+// Banner nur anzeigen wenn noch keine Wahl getroffen
+if (!getConsent()) {
+  // Kleine Verzögerung damit der Banner nicht sofort beim Pageload aufpoppt
+  setTimeout(showBanner, 800);
+}
+
+document.getElementById('cbAccept').addEventListener('click', () => {
+  setConsent('accepted');
+  hideBanner();
+});
+document.getElementById('cbEssential').addEventListener('click', () => {
+  setConsent('essential');
+  hideBanner();
+});
+
+// "Cookie-Einstellungen" im Footer öffnet den Banner erneut
+document.getElementById('openCookieSettings').addEventListener('click', e => {
+  e.preventDefault();
+  showBanner();
+});
+
+// ── HASH NAVIGATION ─────────────────────
+// Erlaubt Links wie index.html#openDs oder index.html#openImp aus dem Wiki
+function handleHash() {
+  const h = location.hash;
+  if (h === '#openDs') openDs();
+  else if (h === '#openImp') {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+window.addEventListener('load', handleHash);
+window.addEventListener('hashchange', handleHash);
 </script>
 </body>
 </html>
