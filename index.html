@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FiveBase — Die Fraktions-Lösung für GTA RP</title>
-<meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personal, Abmahnungen und mehr.">
+<meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personalverwaltung, Urlaubssystem, FiveM Tablet, Termine und mehr.">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500;600&family=Satoshi:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -686,15 +686,15 @@ footer {
   <section class="hero">
     <div class="hero-badge">
       <span class="pulse"></span>
-      <span>v2.1</span> · 10 Module · 100% kostenlos
+      <span>v1.2</span> · 12+ Module · FiveM ready
     </div>
     <h1>
       <span class="line1">Der Bot für</span>
       <span class="line2">deine Fraktion.</span>
     </h1>
     <p class="sub">
-      Zeiterfassung, Tickets, Dienstnummern, Personal, Abmahnungen, Termine —
-      alles in einem Discord Bot. Speziell für staatliche Fraktionen auf GTA RP Servern.
+      Zeiterfassung, Tickets, Dienstnummern, Personalakten, Urlaub, Termine und FiveM-Tablet —
+      alles in einem System. Speziell für staatliche Fraktionen auf GTA-RP-Servern.
     </p>
     <div class="hero-ctas">
       <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
@@ -707,7 +707,7 @@ footer {
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="n">10</div>
+        <div class="n">12+</div>
         <div class="l">Module</div>
       </div>
       <div class="sep"></div>
@@ -722,8 +722,8 @@ footer {
       </div>
       <div class="sep"></div>
       <div class="hero-stat">
-        <div class="n">∞</div>
-        <div class="l">Server</div>
+        <div class="n">Multi</div>
+        <div class="l">Fraktion</div>
       </div>
     </div>
   </section>
@@ -735,7 +735,7 @@ footer {
     <div class="section-lead reveal">
       <div class="section-label">Features</div>
       <h2 class="section-title">Alles was deine Fraktion<br><span class="italic">wirklich braucht.</span></h2>
-      <p class="section-sub">Zehn Module, die ineinander greifen. Kein Feature-Bloat, keine bezahlten Premium-Versionen — nur Tools die für GTA-RP-Fraktionen entwickelt wurden.</p>
+      <p class="section-sub">Aktuelle Module, Dashboard-Funktionen und FiveM-Anbindung greifen ineinander. Kein Feature-Bloat, keine bezahlten Premium-Versionen — nur Tools, die für GTA-RP-Fraktionen entwickelt wurden.</p>
     </div>
 
     <div class="features-wrap">
@@ -781,11 +781,23 @@ footer {
           <div class="tag">04</div>
           <div class="f-icon orange"><i class="fa-solid fa-folder-open"></i></div>
           <h3>Personal-System</h3>
-          <p>Digitale Personalakten, Urlaubsverwaltung und Rang-Synchronisation.</p>
+          <p>Digitale Personalakten mit Historie, Statistiken, Bildern und Rang-Synchronisation.</p>
           <ul>
             <li>Akten mit Historie & Statistiken</li>
-            <li>Urlaubsanträge über Discord</li>
+            <li>Bilder/Nachweise direkt in der Akte</li>
             <li>Automatische Rang-Updates</li>
+          </ul>
+        </div>
+
+        <div class="feature reveal">
+          <div class="tag">NEU</div>
+          <div class="f-icon sky"><i class="fa-solid fa-umbrella-beach"></i></div>
+          <h3>Urlaubssystem</h3>
+          <p>Eigenes Urlaubsmodul mit Discord-Embed, Rollen-Automation und Dashboard-Steuerung.</p>
+          <ul>
+            <li>Eigener Sidebar-Bereich im Dashboard</li>
+            <li>Embed-Farbe per Auswahlmenü</li>
+            <li>Urlaubs-Embed senden/aktualisieren</li>
           </ul>
         </div>
 
@@ -861,8 +873,20 @@ footer {
           </ul>
         </div>
 
+        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(91,124,255,0.10), rgba(34,217,154,0.04)); border-color:rgba(91,124,255,0.28);">
+          <div class="tag">v1.2</div>
+          <div class="f-icon cyan"><i class="fa-solid fa-tablet-screen-button"></i></div>
+          <h3>FiveM Personal-Tablet</h3>
+          <p>Personalverwaltung direkt ingame öffnen — mit Tablet-Prop, Multi-Fraktions-Support und sicherer API.</p>
+          <ul>
+            <li>Personalakten, Bilder, Urlaub & Termine ingame</li>
+            <li>Mehrere Discords/Fraktionen pro FiveM-Server</li>
+            <li>API-Key pro Fraktion, Zugriff über Job</li>
+          </ul>
+        </div>
+
         <div class="feature reveal" style="background:linear-gradient(135deg, rgba(91,124,255,0.12), rgba(167,139,250,0.06)); border-color:rgba(91,124,255,0.25);">
-          <div class="tag">PRO</div>
+          <div class="tag">Setup</div>
           <div class="f-icon" style="background:linear-gradient(135deg, var(--primary), var(--purple)); box-shadow:0 0 0 1px rgba(255,255,255,0.15) inset, 0 12px 32px -6px rgba(91,124,255,0.6);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
           <h3>Start-Guide Wizard</h3>
           <p>Komplette Server-Einrichtung in 2 Minuten. Wähle eine Vorlage — fertig.</p>
@@ -923,6 +947,8 @@ footer {
             <div class="mb-item"><i class="fa-solid fa-ticket"></i> Tickets</div>
             <div class="mb-item"><i class="fa-solid fa-hashtag"></i> Dienstnummern</div>
             <div class="mb-item"><i class="fa-solid fa-users"></i> Personal</div>
+            <div class="mb-item"><i class="fa-solid fa-umbrella-beach"></i> Urlaub</div>
+            <div class="mb-item"><i class="fa-solid fa-tablet-screen-button"></i> FiveM Tablet</div>
             <div class="mb-item"><i class="fa-solid fa-list"></i> Teamliste</div>
             <div class="mb-item"><i class="fa-solid fa-user-plus"></i> Einstellung</div>
             <div class="mb-item"><i class="fa-solid fa-shield-halved"></i> Moderation</div>
@@ -936,7 +962,7 @@ footer {
 
             <div class="mb-card">
               <div class="mb-card-title"><i class="fa-solid fa-cube"></i> Module aktivieren</div>
-              <div class="mb-card-desc">10 Module, unabhängig voneinander schaltbar.</div>
+              <div class="mb-card-desc">12+ Module und Schnittstellen, unabhängig voneinander schaltbar.</div>
               <div class="mb-modules">
                 <div class="mb-mod">
                   <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#7c3aed);"><i class="fa-solid fa-clock"></i></div>
@@ -955,7 +981,17 @@ footer {
                 </div>
                 <div class="mb-mod">
                   <div class="mb-mod-ic" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fa-solid fa-users"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Personal</div><div class="mb-mod-desc">Akten & Urlaub</div></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Personal</div><div class="mb-mod-desc">Akten & Bilder</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);"><i class="fa-solid fa-umbrella-beach"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">Urlaub</div><div class="mb-mod-desc">Anträge & Embed</div></div>
+                  <div class="mb-toggle on"></div>
+                </div>
+                <div class="mb-mod">
+                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#22d99a);"><i class="fa-solid fa-tablet-screen-button"></i></div>
+                  <div class="mb-mod-info"><div class="mb-mod-name">FiveM Tablet</div><div class="mb-mod-desc">Ingame API</div></div>
                   <div class="mb-toggle on"></div>
                 </div>
                 <div class="mb-mod">
@@ -994,7 +1030,7 @@ footer {
       <div class="section-lead reveal">
         <div class="section-label">Commands</div>
         <h2 class="section-title">Discord-Commands<br><span class="italic">für alles.</span></h2>
-        <p class="section-sub">Über 30 Slash-Commands für Stempeln, Personal, Urlaub, Moderation, Termine und mehr.</p>
+        <p class="section-sub">Über 30 Slash-Commands plus Dashboard-Tools für Stempeln, Personal, Urlaub, Moderation, Termine und FiveM-Anbindung.</p>
       </div>
 
       <div class="cmd-grid reveal">
@@ -1012,6 +1048,8 @@ footer {
         <div class="cmd"><div class="cmd-name">/ban @user</div><div class="cmd-desc">Mit Grund & Tagen</div></div>
         <div class="cmd"><div class="cmd-name">/timeout 10m</div><div class="cmd-desc">Flexible Dauer</div></div>
         <div class="cmd"><div class="cmd-name">/clear 50</div><div class="cmd-desc">Nachrichten löschen</div></div>
+        <div class="cmd"><div class="cmd-name">Dashboard → FiveM Tablet</div><div class="cmd-desc">API-Key & Fraktionen verwalten</div></div>
+        <div class="cmd"><div class="cmd-name">/personaltablet</div><div class="cmd-desc">Ingame Tablet öffnen</div></div>
       </div>
     </div>
   </section>
@@ -1022,7 +1060,7 @@ footer {
   <section class="cta-section">
     <div class="cta-box reveal">
       <h2>Bereit, deine Fraktion<br><span class="italic">zu automatisieren?</span></h2>
-      <p>Lade FiveBase jetzt auf deinen Server. Einladung in 10 Sekunden, Setup in 2 Minuten dank Start-Guide-Wizard.</p>
+      <p>Lade FiveBase jetzt auf deinen Server. Einladung in 10 Sekunden, Setup in 2 Minuten dank Start-Guide-Wizard — und optional mit FiveM-Tablet direkt ingame nutzbar.</p>
       <div class="ctas">
         <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
           <i class="fa-brands fa-discord"></i> Bot hinzufügen
@@ -1043,7 +1081,7 @@ footer {
             <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
             <div class="brand">Five<span>Base</span></div>
           </a>
-          <p>Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Entwickelt aus Community-Feedback.</p>
+          <p>Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Mit Dashboard, Personalverwaltung, Urlaubssystem und FiveM-Tablet.</p>
         </div>
         <div class="footer-col">
           <h4>Produkt</h4>
