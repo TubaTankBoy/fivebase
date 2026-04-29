@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FiveBase Wiki — Dokumentation</title>
-<meta name="description" content="Die komplette Dokumentation zu FiveBase. Installation, Module, Commands und Troubleshooting.">
+<meta name="description" content="Die komplette Dokumentation zu FiveBase. Installation, Module, FiveM Tablet, Commands und Troubleshooting.">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -615,6 +615,7 @@ tbody tr:hover { background:var(--bg-sidebar); }
       <a href="#kuendigung" class="sb-link" data-page="kuendigung"><i class="fa-solid fa-user-minus"></i> Kündigung</a>
       <a href="#abmahnung" class="sb-link" data-page="abmahnung"><i class="fa-solid fa-gavel"></i> Abmahnungen</a>
       <a href="#termine" class="sb-link" data-page="termine"><i class="fa-solid fa-calendar-check"></i> Termine</a>
+      <a href="#fivem-tablet" class="sb-link" data-page="fivem-tablet"><i class="fa-solid fa-tablet-screen-button"></i> FiveM Tablet</a>
     </div>
 
     <div class="sb-section">
@@ -649,9 +650,9 @@ tbody tr:hover { background:var(--bg-sidebar); }
       </div>
 
       <h2 id="was-ist">Was ist FiveBase?</h2>
-      <p>FiveBase ist ein Discord Bot, der speziell für staatliche Fraktionen auf GTA-RP-Servern entwickelt wurde. Statt zehn verschiedener Bots für Zeiterfassung, Tickets, Bewerbungen und Personalverwaltung kombinierst du alles in einem einzigen Bot, der optimal aufeinander abgestimmt ist.</p>
+      <p>FiveBase ist ein Discord Bot, der speziell für staatliche Fraktionen auf GTA-RP-Servern entwickelt wurde. Statt zehn verschiedener Bots für Zeiterfassung, Tickets, Bewerbungen, Personalverwaltung, Urlaub und FiveM-Anbindung kombinierst du alles in einem einzigen System, das optimal aufeinander abgestimmt ist.</p>
 
-      <h3>Die 10 Module im Überblick</h3>
+      <h3>Die wichtigsten Module im Überblick</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -661,13 +662,15 @@ tbody tr:hover { background:var(--bg-sidebar); }
             <tr><td><strong>Stempelsystem</strong></td><td>Automatische Zeiterfassung mit AFK-Check und Wochenberichten</td></tr>
             <tr><td><strong>Ticketsystem</strong></td><td>Panel-basierte Tickets mit Kategorien und Statistiken</td></tr>
             <tr><td><strong>Dienstnummern</strong></td><td>Live-Übersicht aller vergebenen DNs aus Nicknames</td></tr>
-            <tr><td><strong>Personal</strong></td><td>Digitale Personalakten mit Historie und Statistiken</td></tr>
+            <tr><td><strong>Personal</strong></td><td>Digitale Personalakten mit Historie, Statistiken und Bildern/Nachweisen</td></tr>
+            <tr><td><strong>Urlaub</strong></td><td>Eigenes Urlaubssystem mit Embed, Rollen-Automation und Dashboard-Bereich</td></tr>
             <tr><td><strong>Teamliste</strong></td><td>Live-Liste aller Mitarbeiter nach Rängen sortiert</td></tr>
             <tr><td><strong>Einstellung</strong></td><td>Bewerbungssystem mit Quiz und Auto-DN-Vergabe</td></tr>
             <tr><td><strong>Moderation</strong></td><td>Auto-Mod, Welcome, Auto-Rollen und Logging</td></tr>
             <tr><td><strong>Kündigung</strong></td><td>Automatisiertes Offboarding mit Rollen-Cleanup</td></tr>
             <tr><td><strong>Abmahnung</strong></td><td>Eskalations-basierte Abmahnungen mit Uprank-Sperre</td></tr>
             <tr><td><strong>Termine</strong></td><td>Besprechungen planen mit RSVP und Reminder-DMs</td></tr>
+            <tr><td><strong>FiveM Tablet</strong></td><td>Personalakten, Urlaub und Termine ingame über ein sicheres Tablet-Script anzeigen</td></tr>
           </tbody>
         </table>
       </div>
@@ -1006,7 +1009,7 @@ tbody tr:hover { background:var(--bg-sidebar); }
     <section class="page" id="page-personal">
       <div class="breadcrumb"><a href="#">Wiki</a><span class="sep">/</span><a href="#">Module</a><span class="sep">/</span><span>Personal</span></div>
       <h1>Personal-System</h1>
-      <p class="lead">Digitale Personalakten für alle Mitarbeiter mit Historie, Statistiken, Urlaubsverwaltung und automatischer Rang-Synchronisation.</p>
+      <p class="lead">Digitale Personalakten für alle Mitarbeiter mit Historie, Statistiken, Bildern/Nachweisen und automatischer Rang-Synchronisation.</p>
 
       <h2>Berechtigungen</h2>
       <div class="field">
@@ -1028,6 +1031,7 @@ tbody tr:hover { background:var(--bg-sidebar); }
         <li><strong>Verwarnungen</strong> — Aktive und abgelaufene Verwarnungen mit Historie</li>
         <li><strong>Historie</strong> — Beförderungen, Notizen, Rang-Änderungen</li>
         <li><strong>Statistiken</strong> — Arbeitszeiten aus dem Stempelsystem</li>
+        <li><strong>Bilder/Nachweise</strong> — Screenshots, Dokumente oder RP-Belege direkt in der Akte</li>
         <li><strong>Urlaub</strong> — Urlaubshistorie</li>
       </ul>
 
@@ -1049,14 +1053,21 @@ tbody tr:hover { background:var(--bg-sidebar); }
     <section class="page" id="page-urlaub">
       <div class="breadcrumb"><a href="#">Wiki</a><span class="sep">/</span><a href="#">Module</a><span class="sep">/</span><span>Urlaub</span></div>
       <h1>Urlaubssystem</h1>
-      <p class="lead">Mitarbeiter können ihren Urlaub selbst per Command eintragen. Keine Genehmigung nötig, die Urlaubs-Rolle wird automatisch vergeben.</p>
+      <p class="lead">Das Urlaubssystem besitzt einen eigenen Dashboard-Bereich. Urlaube können über Discord eingetragen/verwaltet werden, die Urlaubs-Rolle wird automatisch gesetzt und das Urlaubs-Embed kann direkt aus dem Dashboard gesendet oder aktualisiert werden.</p>
 
       <h2>Ablauf</h2>
       <ol class="steps">
-        <li class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Urlaub eintragen</div><p class="step-desc">Mitarbeiter nutzt <code>/urlaub eintragen</code> mit Start, Ende und Grund.</p></div></li>
-        <li class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Automatischer Start</div><p class="step-desc">Am Startdatum wird die Urlaubs-Rolle automatisch vergeben.</p></div></li>
-        <li class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Automatisches Ende</div><p class="step-desc">Am Enddatum wird die Rolle entfernt und der Mitarbeiter bekommt eine DM.</p></div></li>
+        <li class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Urlaubs-Embed senden</div><p class="step-desc">Im Dashboard unter <strong>Urlaub</strong> Kanal, Embed-Farbe und Texte einstellen und das Embed senden/aktualisieren.</p></div></li>
+        <li class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Urlaub eintragen</div><p class="step-desc">Mitarbeiter nutzen den Discord-Button oder <code>/urlaub eintragen</code> mit Start, Ende und Grund.</p></div></li>
+        <li class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Automatische Rollen</div><p class="step-desc">Am Startdatum wird die Urlaubs-Rolle vergeben. Am Enddatum wird sie wieder entfernt.</p></div></li>
       </ol>
+
+      <h2>Dashboard</h2>
+      <ul>
+        <li>Eigener Sidebar-Bereich <strong>Urlaub</strong></li>
+        <li>Embed-Farbe per Auswahlmenü</li>
+        <li>Button zum Senden oder Aktualisieren des Urlaubs-Embeds</li>
+      </ul>
 
       <h2>Commands</h2>
       <div class="cmd-box"><code>/urlaub eintragen von:DD.MM.YYYY bis:DD.MM.YYYY grund:Text</code><div class="desc">Trägt einen Urlaub ein.</div></div>
@@ -1281,6 +1292,60 @@ tbody tr:hover { background:var(--bg-sidebar); }
       <p>Die Antworten werden live im Termin-Embed angezeigt. Zugesagt Mitarbeiter bekommen automatisch eine Reminder-DM vor dem Termin.</p>
     </section>
 
+
+    <!-- FIVEM TABLET -->
+    <section class="page" id="page-fivem-tablet">
+      <div class="breadcrumb"><a href="#">Wiki</a><span class="sep">/</span><a href="#">Module</a><span class="sep">/</span><span>FiveM Tablet</span></div>
+      <h1>FiveM Personal-Tablet</h1>
+      <p class="lead">Mit dem FiveM Personal-Tablet kann die Personalverwaltung direkt ingame geöffnet werden. Das Script verbindet den FiveM-Server sicher mit dem FiveBase Dashboard.</p>
+
+      <div class="callout info">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div class="callout-body">
+          <div class="callout-title">Sichere API-Anbindung</div>
+          <p class="callout-text">Der API-Key liegt nur serverseitig in der FiveM-Resource. Spieler sehen den Key nicht im NUI/Client-Code.</p>
+        </div>
+      </div>
+
+      <h2>Funktionen</h2>
+      <ul>
+        <li>Personalakten ingame ansehen</li>
+        <li>Akten-Details, Notizen und Historie öffnen</li>
+        <li>Bilder/Nachweise aus Personalakten anzeigen</li>
+        <li>Urlaubsdaten und Termine anzeigen</li>
+        <li>Tablet-Animation mit Prop in der Hand</li>
+        <li>Mehrere Fraktionen/Discords pro FiveM-Server</li>
+      </ul>
+
+      <h2>Multi-Fraktions-System</h2>
+      <p>Ein FiveM-Server kann mehrere Fraktionen nutzen. Jede Fraktion hat eine eigene Discord-Guild-ID und einen eigenen API-Key.</p>
+      <pre><code>FiveBaseServer.Factions = {
+  police = {
+    Label = 'Polizei',
+    DiscordGuildId = 'DISCORD_ID_POLIZEI',
+    ApiKey = 'API_KEY_POLIZEI',
+    Jobs = { 'police', 'lspd', 'sheriff' }
+  },
+  ambulance = {
+    Label = 'Rettungsdienst',
+    DiscordGuildId = 'DISCORD_ID_AMBULANCE',
+    ApiKey = 'API_KEY_AMBULANCE',
+    Jobs = { 'ambulance', 'ems' }
+  }
+}</code></pre>
+
+      <h2>Zugriff</h2>
+      <p>Der Zugriff wird über den FiveM-Job gesteuert. Ein Spieler mit dem Job <code>police</code> sieht nur die Polizei-Fraktion. Ein Spieler mit <code>ambulance</code> sieht nur den Rettungsdienst.</p>
+
+      <h2>Einrichtung</h2>
+      <ol class="steps">
+        <li class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Dashboard öffnen</div><p class="step-desc">Im FiveBase Dashboard den Bereich <strong>FiveM Tablet</strong> öffnen.</p></div></li>
+        <li class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Tablet aktivieren</div><p class="step-desc">Tablet aktivieren und einen API-Key für die jeweilige Discord-Guild generieren.</p></div></li>
+        <li class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Resource konfigurieren</div><p class="step-desc">Guild-ID, API-Key und Jobs in der <code>server_config.lua</code> eintragen.</p></div></li>
+        <li class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Resource starten</div><p class="step-desc"><code>ensure fivebase_personal_tablet</code> in die <code>server.cfg</code> eintragen.</p></div></li>
+      </ol>
+    </section>
+
     <!-- COMMANDS -->
     <section class="page" id="page-commands">
       <div class="breadcrumb"><a href="#">Wiki</a><span class="sep">/</span><span>Commands</span></div>
@@ -1336,7 +1401,7 @@ tbody tr:hover { background:var(--bg-sidebar); }
 
       <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Dienstnummern werden nicht erkannt<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Der Nickname muss exakt das Format <code>[XX] Name</code> haben, z.B. <code>[01] Max Mustermann</code>. Die eckigen Klammern sind Pflicht.</p></div></div>
 
-      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Module schalten sich nach Restart aus<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Das war ein Bug in älteren Versionen und ist seit v2.1 behoben. Stelle sicher dass du die neueste Version hast. Falls das Problem trotzdem auftritt, melde dich im Support-Discord.</p></div></div>
+      <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Module schalten sich nach Restart aus<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Das war ein Bug in älteren Versionen und ist seit v1.2 behoben. Stelle sicher dass du die neueste Version hast. Falls das Problem trotzdem auftritt, melde dich im Support-Discord.</p></div></div>
 
       <div class="faq"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Kann ich den Bot auf mehreren Servern nutzen?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Ja! Beliebig viele Server. Jeder Server hat seine eigene unabhängige Konfiguration und Datenbank.</p></div></div>
 
@@ -1396,23 +1461,21 @@ tbody tr:hover { background:var(--bg-sidebar); }
       <h1>Changelog</h1>
       <p class="lead">Alle Updates und Änderungen am Bot.</p>
 
-      <h2 style="display:flex; align-items:center; gap:12px;">v2.1 <span style="font-size:.7rem; font-weight:500; color:var(--muted); font-family:'JetBrains Mono',monospace; padding:4px 10px; background:var(--primary-soft); border-radius:20px; color:var(--primary);">Latest</span></h2>
-      <p><em>14.04.2026 — Stabilitäts-Update</em></p>
-      <h3>🔧 Bugfixes</h3>
+      <h2 style="display:flex; align-items:center; gap:12px;">v1.2 <span style="font-size:.7rem; font-weight:500; color:var(--muted); font-family:'JetBrains Mono',monospace; padding:4px 10px; background:var(--primary-soft); border-radius:20px; color:var(--primary);">Latest</span></h2>
+      <p><em>29.04.2026 — FiveM Tablet & Personalverwaltung Update</em></p>
+      <h3>🚀 Neue Features</h3>
       <ul>
-        <li><strong>Module-Ausschaltung nach Restart behoben</strong> — fehlerhafter Fallback-Block in der API hat bei neuen Guilds Module vergessen</li>
-        <li><strong>Abmahnungs-Level speichern wieder</strong> — wurden beim Auto-Save nicht serialisiert</li>
-        <li><strong>Auto-Rollen funktionieren wieder</strong> — fehlender "Auto-Rollen aktivieren" Toggle hinzugefügt</li>
-        <li><strong>Ticket-Stats doppeln sich nicht mehr</strong> — Unterscheidung zwischen Netzwerkfehlern und gelöschten Nachrichten</li>
-        <li><strong>Rollen-Dropdown im Ticket-Panel</strong> — schließt sich nicht mehr beim Klicken innerhalb</li>
-        <li><strong>Bewerbungs-Toggle</strong> — setzte sich durch Kollision mit Rollen-Checkboxen zurück</li>
-        <li><strong>Drag & Drop</strong> — nur noch am ⋮⋮-Griff, nicht mehr an der ganzen Zeile</li>
+        <li><strong>FiveM Personal-Tablet</strong> — Personalakten, Urlaub und Termine können direkt ingame geöffnet werden.</li>
+        <li><strong>Multi-Fraktions-System</strong> — ein FiveM-Server kann mehrere Discords/Fraktionen nutzen, z.B. Polizei und Rettungsdienst.</li>
+        <li><strong>Bilder in Personalakten</strong> — Screenshots, Nachweise und Dokumente können direkt zu Akten hinzugefügt werden.</li>
+        <li><strong>Urlaubssystem überarbeitet</strong> — eigener Dashboard-Bereich, Embed-Farbe als Auswahlmenü und Button zum Senden/Aktualisieren des Embeds.</li>
       </ul>
-      <h3>🚀 Stabilität</h3>
+      <h3>🔧 Fixes & Verbesserungen</h3>
       <ul>
-        <li>Weniger Log-Spam bei Discord-Verbindungsproblemen</li>
-        <li>Hintergrund-Tasks prüfen jetzt ob der Client verbunden ist bevor sie laufen</li>
-        <li>Globaler Error-Handler gruppiert wiederkehrende Verbindungs-Fehler</li>
+        <li><strong>Dienstnummern</strong> — Konsolen-Spam behoben, Nummernbereich auf maximal 200 begrenzt und DN-01-Vergabeproblem gefixt.</li>
+        <li><strong>Terminsystem</strong> — Zeitzonenfehler behoben, Termine werden korrekt nach deutscher Zeit verarbeitet.</li>
+        <li><strong>Personalverwaltung</strong> — Performance verbessert und 504 Gateway Timeout beim Öffnen der Personalverwaltung behoben.</li>
+        <li><strong>FiveM Tablet</strong> — Tablet-Prop/Animation hinzugefügt und Cleanup verbessert, damit das Prop nicht hängen bleibt.</li>
       </ul>
 
       <h2>v2.0 · Ticketsystem Update</h2>
