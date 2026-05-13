@@ -4,668 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FiveBase — Die Fraktions-Lösung für GTA RP</title>
-<meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personalverwaltung, Urlaubssystem, FiveM Tablet, Termine und mehr.">
+<meta name="description" content="Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Zeiterfassung, Tickets, Dienstnummern, Personalverwaltung, Urlaubssystem, Uprank-System, FiveM Tablet, Termine und mehr.">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500;600&family=Satoshi:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-:root {
-  --bg:        #05070f;
-  --bg2:       #080b1a;
-  --card:      rgba(13,18,38,0.75);
-  --card2:     rgba(18,24,48,0.55);
-  --border:    rgba(255,255,255,0.06);
-  --border2:   rgba(255,255,255,0.11);
-  --text:      #eef1fb;
-  --muted:     #7681a0;
-  --muted2:    #9aa3c2;
-  --dim:       #4b5475;
-  --primary:   #5b7cff;
-  --primary2:  #7c8fff;
-  --accent:    #a4f0d0;
-  --warn:      #ffb547;
-  --danger:    #ff6868;
-  --purple:    #a78bfa;
-  --green:     #22d99a;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Satoshi', system-ui, sans-serif;
-  font-feature-settings:'ss01','ss02','cv11';
-  overflow-x:hidden;
-  line-height:1.5;
-}
-
-/* ─── BACKGROUND ───────────────────────────────────── */
-.bg-layer { position:fixed; inset:0; z-index:0; pointer-events:none; }
-#stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
-.glow1 {
-  position:fixed; top:-20%; left:-10%;
-  width:700px; height:700px; border-radius:50%;
-  background:radial-gradient(circle, rgba(91,124,255,0.22) 0%, transparent 60%);
-  filter:blur(80px); z-index:0; pointer-events:none;
-}
-.glow2 {
-  position:fixed; bottom:-20%; right:-10%;
-  width:600px; height:600px; border-radius:50%;
-  background:radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 60%);
-  filter:blur(80px); z-index:0; pointer-events:none;
-}
-.grid-bg {
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-  background:
-    linear-gradient(rgba(91,124,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(91,124,255,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-}
-
-/* ─── TYPOGRAPHY HELPERS ─────────────────────────── */
-.serif { font-family:'Instrument Serif', serif; font-weight:400; font-style:italic; letter-spacing:-.02em; }
-.mono  { font-family:'JetBrains Mono', monospace; }
-
-/* ─── NAV ───────────────────────────────────────── */
-.nav {
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  height:68px; padding:0 40px;
-  display:flex; align-items:center; justify-content:space-between;
-  background:rgba(5,7,15,0.7);
-  backdrop-filter:blur(24px) saturate(1.2);
-  -webkit-backdrop-filter:blur(24px) saturate(1.2);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo { display:flex; align-items:center; gap:12px; font-size:1.1rem; font-weight:800; color:#fff; text-decoration:none; letter-spacing:-.02em; }
-.nav-logo .dot {
-  width:34px; height:34px; border-radius:10px;
-  background:linear-gradient(135deg, var(--primary), var(--purple));
-  display:flex; align-items:center; justify-content:center;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 12px 30px -8px rgba(91,124,255,0.5);
-  position:relative; overflow:hidden;
-}
-.nav-logo .dot::before {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(255,255,255,0.3), transparent 50%);
-}
-.nav-logo .dot i { position:relative; font-size:.85rem; color:#fff; }
-.nav-logo .brand span { color:var(--primary2); }
-
-.nav-links { display:flex; gap:6px; }
-.nav-links a {
-  color:var(--muted2); font-size:.88rem; font-weight:500;
-  text-decoration:none; padding:8px 14px; border-radius:8px;
-  transition:all .2s; position:relative;
-}
-.nav-links a:hover { color:#fff; background:rgba(255,255,255,0.05); }
-
-.nav-right { display:flex; gap:10px; align-items:center; }
-
-.btn {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:10px 20px; border-radius:10px;
-  font-family:'Satoshi', sans-serif; font-weight:600; font-size:.88rem;
-  text-decoration:none; cursor:pointer; border:none;
-  transition:all .25s cubic-bezier(.4,0,.2,1);
-  white-space:nowrap;
-}
-.btn-primary {
-  background:linear-gradient(180deg, var(--primary2), var(--primary));
-  color:#fff;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.15) inset,
-    0 0 0 1px rgba(91,124,255,0.4),
-    0 10px 30px -10px rgba(91,124,255,0.6),
-    0 4px 12px rgba(91,124,255,0.25);
-}
-.btn-primary:hover {
-  transform:translateY(-1px);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.2) inset,
-    0 0 0 1px rgba(91,124,255,0.5),
-    0 16px 40px -10px rgba(91,124,255,0.75),
-    0 6px 16px rgba(91,124,255,0.35);
-}
-.btn-ghost {
-  background:rgba(255,255,255,0.04);
-  color:var(--text);
-  border:1px solid var(--border2);
-  backdrop-filter:blur(8px);
-}
-.btn-ghost:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); }
-.btn-outline { border:1px solid var(--border2); color:var(--text); background:transparent; }
-.btn-outline:hover { border-color:var(--primary); color:var(--primary2); }
-
-/* ─── CONTENT ─────────────────────────────────── */
-.content { position:relative; z-index:1; }
-
-/* ─── HERO ────────────────────────────────────── */
-.hero {
-  min-height:100vh;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:140px 24px 100px;
-  position:relative;
-}
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  background:linear-gradient(180deg, rgba(91,124,255,0.15), rgba(91,124,255,0.05));
-  border:1px solid rgba(91,124,255,0.2);
-  padding:6px 16px; border-radius:50px;
-  font-size:.78rem; font-weight:500; color:var(--muted2);
-  margin-bottom:32px;
-}
-.hero-badge .pulse {
-  width:7px; height:7px; border-radius:50%; background:var(--green);
-  box-shadow:0 0 12px var(--green); animation:pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity:1; transform:scale(1); }
-  50% { opacity:.6; transform:scale(0.85); }
-}
-.hero-badge span { color:var(--primary2); font-weight:600; }
-
-.hero h1 {
-  font-size:clamp(3.5rem, 10vw, 8.5rem);
-  font-weight:900; line-height:.88; letter-spacing:-.055em;
-  margin-bottom:14px; position:relative; z-index:2;
-}
-.hero h1 .line1 {
-  display:block;
-  background:linear-gradient(180deg, #fff 30%, rgba(154,163,194,0.4) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.hero h1 .line2 {
-  display:block;
-  font-weight:400; font-style:italic;
-  font-family:'Instrument Serif', serif;
-  font-size:.72em; letter-spacing:-.02em;
-  background:linear-gradient(135deg, var(--primary2) 10%, var(--purple) 60%, var(--accent) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-top:.1em;
-}
-
-.hero p.sub {
-  color:var(--muted2); font-size:1.1rem; max-width:620px;
-  line-height:1.7; margin:26px auto 36px;
-  font-weight:400;
-}
-.hero-ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-
-.hero-stats {
-  display:flex; justify-content:center; gap:50px;
-  margin-top:72px; flex-wrap:wrap;
-}
-.hero-stat { text-align:center; }
-.hero-stat .n {
-  font-family:'Instrument Serif', serif; font-style:italic;
-  font-size:2.4rem; color:#fff; font-weight:400;
-  background:linear-gradient(180deg, #fff 40%, rgba(154,163,194,0.5));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.hero-stat .l {
-  font-size:.75rem; color:var(--muted); letter-spacing:.08em;
-  text-transform:uppercase; margin-top:4px;
-}
-.hero-stat .sep {
-  width:1px; height:44px; background:linear-gradient(180deg, transparent, var(--border2), transparent);
-}
-
-/* ─── SECTION BASICS ─────────────────────────── */
-section { position:relative; padding:120px 40px; }
-.section-lead {
-  text-align:center; max-width:720px; margin:0 auto 80px;
-}
-.section-label {
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:.72rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
-  color:var(--primary2); margin-bottom:18px;
-}
-.section-label::before, .section-label::after {
-  content:''; width:24px; height:1px; background:var(--primary);
-  opacity:.5;
-}
-.section-title {
-  font-size:clamp(2.2rem, 5vw, 3.8rem); font-weight:800;
-  letter-spacing:-.035em; line-height:1.05; margin-bottom:20px;
-}
-.section-title .italic {
-  font-family:'Instrument Serif', serif; font-style:italic;
-  font-weight:400; color:var(--primary2);
-  font-size:1.04em;
-}
-.section-sub { color:var(--muted2); font-size:1.02rem; line-height:1.7; }
-
-/* ─── FEATURES ─────────────────────────────────── */
-.features-wrap { max-width:1240px; margin:0 auto; }
-
-.features-grid {
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:16px;
-}
-.feature {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:28px 26px;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(8px);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-}
-.feature::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg, transparent, var(--border2), transparent);
-}
-.feature:hover {
-  border-color:rgba(91,124,255,0.3);
-  transform:translateY(-3px);
-  background:rgba(18,24,48,0.75);
-}
-.feature:hover .f-icon { transform:scale(1.08) rotate(-4deg); }
-
-.f-icon {
-  width:48px; height:48px; border-radius:12px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.15rem; color:#fff; margin-bottom:18px;
-  background:linear-gradient(135deg, var(--primary), var(--purple));
-  box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(91,124,255,0.45);
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-}
-.f-icon.green  { background:linear-gradient(135deg, #10b981, #059669); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(16,185,129,0.45); }
-.f-icon.orange { background:linear-gradient(135deg, #f59e0b, #d97706); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(245,158,11,0.45); }
-.f-icon.purple { background:linear-gradient(135deg, #a78bfa, #7c3aed); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(167,139,250,0.45); }
-.f-icon.red    { background:linear-gradient(135deg, #ef4444, #dc2626); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(239,68,68,0.45); }
-.f-icon.cyan   { background:linear-gradient(135deg, #22d3ee, #06b6d4); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(34,211,238,0.45); }
-.f-icon.rose   { background:linear-gradient(135deg, #f43f5e, #e11d48); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(244,63,94,0.45); }
-.f-icon.sky    { background:linear-gradient(135deg, #38bdf8, #0ea5e9); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(56,189,248,0.45); }
-.f-icon.amber  { background:linear-gradient(135deg, #fbbf24, #d97706); box-shadow:0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 24px -6px rgba(251,191,36,0.45); }
-
-.feature h3 {
-  font-size:1.08rem; font-weight:700; letter-spacing:-.01em;
-  margin-bottom:8px; color:#fff;
-}
-.feature .tag {
-  position:absolute; top:18px; right:18px;
-  font-size:.62rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-  color:var(--muted); font-family:'JetBrains Mono', monospace;
-}
-.feature p {
-  color:var(--muted2); font-size:.86rem; line-height:1.65;
-  margin-bottom:14px;
-}
-.feature ul { list-style:none; }
-.feature li {
-  color:var(--muted); font-size:.78rem; line-height:1.7;
-  display:flex; align-items:flex-start; gap:8px;
-}
-.feature li::before {
-  content:''; width:4px; height:4px; border-radius:50%;
-  background:var(--primary2); margin-top:9px; flex-shrink:0;
-}
-
-/* ─── DIAGONAL DIVIDER ─────────────────────── */
-.divider {
-  height:1px; max-width:1240px; margin:0 auto;
-  background:linear-gradient(90deg, transparent, var(--border2), transparent);
-}
-
-/* ─── MOCKUP ─────────────────────────────────── */
-.mockup-wrap {
-  max-width:1100px; margin:80px auto 0;
-  perspective:2000px;
-}
-.mockup {
-  background:linear-gradient(180deg, #1a1f33, #12172a);
-  border:1px solid var(--border2);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.05) inset,
-    0 60px 120px -40px rgba(0,0,0,0.9),
-    0 0 100px rgba(91,124,255,0.1);
-  transform:rotateX(2deg);
-  transform-origin:top center;
-}
-.mockup-bar {
-  display:flex; align-items:center; gap:10px;
-  padding:14px 18px;
-  background:rgba(10,14,28,0.7);
-  border-bottom:1px solid var(--border);
-}
-.mb-dot { width:11px; height:11px; border-radius:50%; }
-.mb-dot.r { background:#ff5f56; }
-.mb-dot.y { background:#ffbd2e; }
-.mb-dot.g { background:#27c93f; }
-.mb-url {
-  margin-left:16px; background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
-  padding:5px 14px; border-radius:7px;
-  font-family:'JetBrains Mono', monospace;
-  font-size:.72rem; color:var(--muted2);
-  flex:1; max-width:360px;
-}
-.mb-url .d { color:var(--primary2); }
-
-.mockup-body { display:grid; grid-template-columns:240px 1fr; min-height:540px; }
-.mb-sidebar { background:rgba(8,12,24,0.6); padding:18px 0; border-right:1px solid var(--border); }
-.mb-server {
-  display:flex; align-items:center; gap:11px;
-  padding:4px 18px 18px;
-  border-bottom:1px solid var(--border); margin-bottom:14px;
-}
-.mb-si {
-  width:38px; height:38px; border-radius:10px;
-  background:linear-gradient(135deg, var(--primary), var(--purple));
-  display:flex; align-items:center; justify-content:center; font-size:.95rem; color:#fff;
-}
-.mb-sn { font-size:.78rem; font-weight:700; color:#fff; line-height:1.3; }
-.mb-sid { font-size:.62rem; color:var(--dim); margin-top:1px; font-family:'JetBrains Mono', monospace; }
-
-.mb-label {
-  font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--dim); padding:12px 18px 6px;
-}
-.mb-item {
-  display:flex; align-items:center; gap:10px;
-  padding:8px 18px; font-size:.78rem; color:var(--muted2);
-  border-left:2px solid transparent;
-  cursor:default;
-}
-.mb-item i { width:14px; text-align:center; font-size:.8rem; flex-shrink:0; color:var(--dim); }
-.mb-item:hover { background:rgba(255,255,255,0.03); color:#fff; }
-.mb-item.active {
-  background:linear-gradient(90deg, rgba(91,124,255,0.12), transparent);
-  color:#fff; border-left-color:var(--primary);
-}
-.mb-item.active i { color:var(--primary2); }
-
-.mb-main { padding:26px 30px; background:#12172a; }
-.mb-h1 {
-  font-size:1.4rem; font-weight:800; color:#fff;
-  letter-spacing:-.02em; margin-bottom:4px;
-}
-.mb-sub { font-size:.8rem; color:var(--muted); margin-bottom:22px; }
-
-.mb-card {
-  background:rgba(20,27,52,0.6);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:20px 22px; margin-bottom:14px;
-}
-.mb-card-title {
-  font-size:.88rem; font-weight:700; color:#fff;
-  display:flex; align-items:center; gap:9px; margin-bottom:6px;
-}
-.mb-card-title i { color:var(--primary2); }
-.mb-card-desc { font-size:.76rem; color:var(--muted); margin-bottom:16px; }
-
-.mb-modules { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
-.mb-mod {
-  display:flex; align-items:center; gap:10px;
-  background:rgba(10,14,28,0.55);
-  border:1px solid var(--border);
-  border-radius:9px; padding:10px 12px;
-}
-.mb-mod-ic {
-  width:30px; height:30px; border-radius:7px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:.78rem; color:#fff; flex-shrink:0;
-}
-.mb-mod-info { flex:1; min-width:0; }
-.mb-mod-name { font-size:.76rem; font-weight:700; color:#fff; }
-.mb-mod-desc { font-size:.64rem; color:var(--muted); margin-top:1px; }
-.mb-toggle {
-  width:30px; height:17px; border-radius:9px;
-  background:rgba(255,255,255,0.1); position:relative;
-  flex-shrink:0; transition:.2s;
-}
-.mb-toggle.on { background:var(--green); }
-.mb-toggle::after {
-  content:''; position:absolute; top:3px; left:3px;
-  width:11px; height:11px; border-radius:50%; background:#fff;
-  transition:.2s;
-}
-.mb-toggle.on::after { left:16px; }
-
-/* ─── MODULES COMPARISON TABLE ─────────── */
-.cmd-section {
-  padding:120px 40px;
-  position:relative;
-}
-.cmd-wrap { max-width:1100px; margin:0 auto; }
-
-.cmd-grid {
-  display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap:12px; margin-top:50px;
-}
-.cmd {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:18px 20px;
-  transition:all .25s;
-}
-.cmd:hover { border-color:rgba(91,124,255,0.3); background:rgba(20,27,52,0.75); }
-.cmd-name {
-  font-family:'JetBrains Mono', monospace;
-  font-size:.82rem; color:var(--primary2); font-weight:600;
-  margin-bottom:6px;
-}
-.cmd-desc { font-size:.76rem; color:var(--muted); line-height:1.55; }
-
-/* ─── CTA ────────────────────────────────── */
-.cta-section { padding:140px 40px; }
-.cta-box {
-  max-width:900px; margin:0 auto;
-  background:linear-gradient(135deg, rgba(91,124,255,0.08), rgba(167,139,250,0.05));
-  border:1px solid rgba(91,124,255,0.2);
-  border-radius:24px; padding:68px 48px;
-  text-align:center; position:relative; overflow:hidden;
-}
-.cta-box::before {
-  content:''; position:absolute; top:-50%; left:-20%;
-  width:140%; height:200%;
-  background:radial-gradient(circle at 50% 40%, rgba(91,124,255,0.15), transparent 60%);
-  pointer-events:none;
-}
-.cta-box h2 {
-  font-size:clamp(2rem, 4vw, 3rem); font-weight:800;
-  letter-spacing:-.035em; line-height:1.1; margin-bottom:16px;
-  position:relative;
-}
-.cta-box h2 .italic {
-  font-family:'Instrument Serif', serif; font-style:italic;
-  font-weight:400; color:var(--primary2);
-}
-.cta-box p {
-  color:var(--muted2); font-size:1.02rem;
-  max-width:520px; margin:0 auto 32px;
-  position:relative;
-}
-.cta-box .ctas { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; }
-
-/* ─── FOOTER ─────────────────────────────── */
-footer {
-  padding:60px 40px 36px;
-  border-top:1px solid var(--border);
-  background:rgba(5,7,15,0.6);
-  position:relative; z-index:1;
-}
-.footer-wrap { max-width:1240px; margin:0 auto; }
-.footer-top {
-  display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:48px;
-  padding-bottom:40px; border-bottom:1px solid var(--border);
-}
-.footer-brand-info { max-width:320px; }
-.footer-brand-info p {
-  color:var(--muted); font-size:.85rem; line-height:1.65; margin-top:14px;
-}
-.footer-col h4 {
-  font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:16px;
-}
-.footer-col a {
-  display:block; color:var(--text); text-decoration:none;
-  font-size:.88rem; margin-bottom:10px; transition:.2s;
-}
-.footer-col a:hover { color:var(--primary2); transform:translateX(2px); }
-.footer-bottom {
-  display:flex; justify-content:space-between; align-items:center;
-  padding-top:28px; flex-wrap:wrap; gap:16px;
-}
-.footer-copy { color:var(--dim); font-size:.78rem; }
-.footer-links { display:flex; gap:24px; }
-.footer-links a { color:var(--muted); font-size:.82rem; text-decoration:none; transition:.2s; }
-.footer-links a:hover { color:var(--primary2); }
-
-/* ─── MODAL ─────────────────────────────── */
-.modal { display:none; position:fixed; inset:0; z-index:999; background:rgba(0,0,0,0.85); backdrop-filter:blur(12px); }
-.modal.open { display:flex; align-items:flex-start; justify-content:center; padding:6% 20px; }
-.modal-box {
-  background:var(--bg2); border:1px solid var(--border2);
-  border-radius:18px; padding:44px; max-width:580px; width:100%;
-  position:relative; max-height:84vh; overflow-y:auto;
-}
-.modal-box.wide { max-width:860px; padding:48px 52px; }
-.modal-box h2 {
-  font-size:1.6rem; font-weight:800; margin-bottom:14px;
-  background:linear-gradient(180deg, #fff, var(--muted2));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.modal-box h3 { color:#fff; margin:24px 0 8px; font-size:1.05rem; font-weight:700; letter-spacing:-.01em; }
-.modal-box h4 { color:var(--text); margin:18px 0 6px; font-size:.92rem; font-weight:600; }
-.modal-box p { color:var(--muted2); font-size:.88rem; line-height:1.7; margin-bottom:10px; }
-.modal-box ul { color:var(--muted2); font-size:.86rem; line-height:1.65; padding-left:22px; margin:8px 0 14px; }
-.modal-box ul li { margin-bottom:5px; }
-.modal-box ul li strong { color:var(--text); }
-.modal-box a { color:var(--primary2); text-decoration:none; }
-.modal-box a:hover { text-decoration:underline; }
-.modal-box hr { border:0; border-top:1px solid var(--border); margin:22px 0; }
-.modal-box .small { font-size:.78rem; color:var(--dim); }
-.modal-box .ds-section {
-  background:rgba(91,124,255,0.04);
-  border:1px solid rgba(91,124,255,0.12);
-  border-radius:10px;
-  padding:14px 16px;
-  margin:14px 0;
-}
-.modal-box .ds-section h4 { margin-top:0; color:var(--primary2); }
-.modal-close {
-  position:absolute; top:16px; right:20px;
-  width:32px; height:32px; border-radius:8px;
-  background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  color:var(--muted2); font-size:1.1rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:.2s;
-}
-.modal-close:hover { background:rgba(255,255,255,0.08); color:#fff; }
-
-/* ─── COOKIE BANNER ─────────────────────── */
-.cookie-banner {
-  position:fixed; bottom:20px; left:20px; right:20px;
-  max-width:560px; margin:0 auto;
-  background:linear-gradient(180deg, rgba(13,18,38,0.98), rgba(8,12,28,0.98));
-  border:1px solid var(--border2);
-  border-radius:14px;
-  padding:22px 24px;
-  z-index:9000;
-  box-shadow: 0 0 0 1px rgba(91,124,255,0.15) inset, 0 24px 60px -16px rgba(0,0,0,0.7), 0 0 60px rgba(91,124,255,0.08);
-  backdrop-filter:blur(20px);
-  transform:translateY(140%);
-  opacity:0;
-  transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .35s;
-  pointer-events:none;
-}
-.cookie-banner.show { transform:translateY(0); opacity:1; pointer-events:auto; }
-.cookie-banner h3 {
-  font-size:.98rem; font-weight:700; color:#fff;
-  margin-bottom:6px;
-  display:flex; align-items:center; gap:8px;
-}
-.cookie-banner h3 i { color:var(--primary2); font-size:.9rem; }
-.cookie-banner p {
-  font-size:.83rem; color:var(--muted2); line-height:1.6;
-  margin-bottom:14px;
-}
-.cookie-banner p a { color:var(--primary2); text-decoration:underline; text-underline-offset:2px; }
-.cookie-banner-actions {
-  display:flex; gap:8px; flex-wrap:wrap;
-}
-.cookie-banner button {
-  flex:1; min-width:130px;
-  padding:9px 14px;
-  border:none; border-radius:8px;
-  font-family:'Satoshi', sans-serif; font-weight:600; font-size:.82rem;
-  cursor:pointer;
-  transition: all .2s;
-}
-.cb-accept {
-  background:linear-gradient(180deg, var(--primary2), var(--primary));
-  color:#fff;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset, 0 6px 18px -4px rgba(91,124,255,0.4);
-}
-.cb-accept:hover { transform:translateY(-1px); box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset, 0 10px 26px -4px rgba(91,124,255,0.55); }
-.cb-essential {
-  background:rgba(255,255,255,0.05);
-  color:var(--text);
-  border:1px solid var(--border2);
-}
-.cb-essential:hover { background:rgba(255,255,255,0.1); }
-.cb-settings {
-  background:transparent;
-  color:var(--muted2);
-  border:1px solid var(--border);
-}
-.cb-settings:hover { color:#fff; border-color:var(--border2); }
-
-@media (max-width:560px) {
-  .cookie-banner { left:12px; right:12px; bottom:12px; padding:18px 20px; }
-  .cookie-banner button { min-width:0; font-size:.78rem; padding:9px 10px; }
-}
-
-/* ─── REVEAL ANIMATIONS ─────────────────── */
-.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
-.reveal.in { opacity:1; transform:translateY(0); }
-
-/* ─── RESPONSIVE ─────────────────────── */
-@media (max-width: 960px) {
-  .nav { padding:0 20px; }
-  .nav-links { display:none; }
-  .hero { padding:120px 20px 80px; }
-  .hero-stats { gap:26px; }
-  .hero-stat .sep { display:none; }
-  section { padding:80px 20px; }
-  .features-grid { grid-template-columns:1fr; }
-  .cmd-grid { grid-template-columns:1fr 1fr; }
-  .mockup-body { grid-template-columns:1fr; min-height:auto; }
-  .mb-sidebar { display:none; }
-  .mockup { transform:none; }
-  .footer-top { grid-template-columns:1fr 1fr; gap:30px; }
-  .footer-brand-info { grid-column:1/-1; max-width:none; }
-  .cta-box { padding:48px 28px; }
-}
+:root{--bg:#05070f;--bg2:#080b1a;--card:rgba(13,18,38,.75);--card2:rgba(18,24,48,.55);--border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.11);--text:#eef1fb;--muted:#7681a0;--muted2:#9aa3c2;--dim:#4b5475;--primary:#5b7cff;--primary2:#7c8fff;--accent:#a4f0d0;--warn:#ffb547;--danger:#ff6868;--purple:#a78bfa;--green:#22d99a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:'Satoshi',system-ui,sans-serif;overflow-x:hidden;line-height:1.5}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}.glow1{position:fixed;top:-20%;left:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(91,124,255,.22) 0%,transparent 60%);filter:blur(80px);z-index:0;pointer-events:none}.glow2{position:fixed;bottom:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.18) 0%,transparent 60%);filter:blur(80px);z-index:0;pointer-events:none}
+.serif{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;letter-spacing:-.02em}.mono{font-family:'JetBrains Mono',monospace}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,7,15,.7);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-bottom:1px solid var(--border)}.nav-spacer{width:150px;height:1px;flex-shrink:0}.nav-links{display:flex;gap:6px}.nav-links a{color:var(--muted2);font-size:.88rem;font-weight:500;text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .2s}.nav-links a:hover{color:#fff;background:rgba(255,255,255,.05)}.nav-right{display:flex;gap:10px;align-items:center}
+.nav-logo{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.02em}.nav-logo .dot{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--purple));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px rgba(255,255,255,.1) inset,0 12px 30px -8px rgba(91,124,255,.5)}.nav-logo .brand span{color:var(--primary2)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:.88rem;text-decoration:none;cursor:pointer;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);white-space:nowrap}.btn-primary{background:linear-gradient(180deg,var(--primary2),var(--primary));color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.15) inset,0 0 0 1px rgba(91,124,255,.4),0 10px 30px -10px rgba(91,124,255,.6),0 4px 12px rgba(91,124,255,.25)}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 0 0 1px rgba(91,124,255,.5),0 16px 40px -10px rgba(91,124,255,.75),0 6px 16px rgba(91,124,255,.35)}.btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--border2);backdrop-filter:blur(8px)}.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}.btn-outline{border:1px solid var(--border2);color:var(--text);background:transparent}.btn-outline:hover{border-color:var(--primary);color:var(--primary2)}
+.content{position:relative;z-index:1}.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative}.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,rgba(91,124,255,.15),rgba(91,124,255,.05));border:1px solid rgba(91,124,255,.2);padding:6px 16px;border-radius:50px;font-size:.78rem;font-weight:500;color:var(--muted2);margin-bottom:32px}.hero-badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}.hero-badge span{color:var(--primary2);font-weight:600}.hero h1{font-size:clamp(3.5rem,10vw,8.5rem);font-weight:900;line-height:.88;letter-spacing:-.055em;margin-bottom:14px;position:relative;z-index:2}.hero h1 .line1{display:block;background:linear-gradient(180deg,#fff 30%,rgba(154,163,194,.4) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero h1 .line2{display:block;font-weight:400;font-style:italic;font-family:'Instrument Serif',serif;font-size:.72em;letter-spacing:-.02em;background:linear-gradient(135deg,var(--primary2) 10%,var(--purple) 60%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:.1em}.hero p.sub{color:var(--muted2);font-size:1.1rem;max-width:620px;line-height:1.7;margin:26px auto 36px;font-weight:400}.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}.hero-stats{display:flex;justify-content:center;gap:50px;margin-top:72px;flex-wrap:wrap}.hero-stat{text-align:center}.hero-stat .n{font-family:'Instrument Serif',serif;font-style:italic;font-size:2.4rem;color:#fff;font-weight:400;background:linear-gradient(180deg,#fff 40%,rgba(154,163,194,.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero-stat .l{font-size:.75rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}.hero-stat .sep{width:1px;height:44px;background:linear-gradient(180deg,transparent,var(--border2),transparent)}
+section{position:relative;padding:120px 40px}.section-lead{text-align:center;max-width:720px;margin:0 auto 80px}.section-label{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--primary2);margin-bottom:18px}.section-label::before,.section-label::after{content:'';width:24px;height:1px;background:var(--primary);opacity:.5}.section-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:20px}.section-title .italic{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--primary2);font-size:1.04em}.section-sub{color:var(--muted2);font-size:1.02rem;line-height:1.7}.divider{height:1px;max-width:1240px;margin:0 auto;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
+.trusted-section{padding:110px 0 80px;overflow:hidden}.trusted-lead{max-width:1100px;margin:0 auto 48px;padding:0 40px;text-align:center}.trusted-title{font-size:clamp(2.2rem,5.5vw,4.6rem);font-weight:900;letter-spacing:-.055em;line-height:1;color:#fff}.trusted-title span{background:linear-gradient(135deg,var(--primary2),var(--purple),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.trusted-sub{margin-top:16px;color:var(--muted2);font-size:1.02rem}.marquee-wrap{position:relative;display:flex;flex-direction:column;gap:14px;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}.marquee-row{display:flex;width:max-content;gap:14px;will-change:transform}.marquee-left{animation:marqueeLeft 38s linear infinite}.marquee-right{animation:marqueeRight 42s linear infinite}.marquee-wrap:hover .marquee-row{animation-play-state:paused}@keyframes marqueeLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}@keyframes marqueeRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}.server-card{min-width:320px;max-width:320px;display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 40px -24px rgba(0,0,0,.9);backdrop-filter:blur(12px)}.server-avatar{width:46px;height:46px;flex:0 0 46px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;letter-spacing:-.04em;background:linear-gradient(135deg,var(--primary),var(--purple));box-shadow:0 0 0 1px rgba(255,255,255,.14) inset,0 12px 24px -14px rgba(91,124,255,.8)}.server-card:nth-child(3n) .server-avatar{background:linear-gradient(135deg,#22d3ee,#5b7cff)}.server-card:nth-child(4n) .server-avatar{background:linear-gradient(135deg,#f59e0b,#ef4444)}.server-card:nth-child(5n) .server-avatar{background:linear-gradient(135deg,#22d99a,#06b6d4)}.server-info{min-width:0}.server-name{color:#fff;font-weight:800;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:235px}.server-members{color:var(--muted2);font-size:.82rem;margin-top:2px}
+.features-wrap{max-width:1240px;margin:0 auto}.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 26px;position:relative;overflow:hidden;backdrop-filter:blur(8px);transition:all .35s cubic-bezier(.4,0,.2,1)}.feature::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}.feature:hover{border-color:rgba(91,124,255,.3);transform:translateY(-3px);background:rgba(18,24,48,.75)}.feature:hover .f-icon{transform:scale(1.08) rotate(-4deg)}.f-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:#fff;margin-bottom:18px;background:linear-gradient(135deg,var(--primary),var(--purple));box-shadow:0 0 0 1px rgba(255,255,255,.1) inset,0 8px 24px -6px rgba(91,124,255,.45);transition:transform .4s cubic-bezier(.4,0,.2,1)}.f-icon.green{background:linear-gradient(135deg,#10b981,#059669)}.f-icon.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}.f-icon.purple{background:linear-gradient(135deg,#a78bfa,#7c3aed)}.f-icon.red{background:linear-gradient(135deg,#ef4444,#dc2626)}.f-icon.cyan{background:linear-gradient(135deg,#22d3ee,#06b6d4)}.f-icon.rose{background:linear-gradient(135deg,#f43f5e,#e11d48)}.f-icon.sky{background:linear-gradient(135deg,#38bdf8,#0ea5e9)}.f-icon.amber{background:linear-gradient(135deg,#fbbf24,#d97706)}.feature h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;margin-bottom:8px;color:#fff}.feature .tag{position:absolute;top:18px;right:18px;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace}.feature p{color:var(--muted2);font-size:.86rem;line-height:1.65;margin-bottom:14px}.feature ul{list-style:none}.feature li{color:var(--muted);font-size:.78rem;line-height:1.7;display:flex;align-items:flex-start;gap:8px}.feature li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--primary2);margin-top:9px;flex-shrink:0}
+.mockup-wrap{max-width:1100px;margin:80px auto 0;perspective:2000px}.mockup{background:linear-gradient(180deg,#1a1f33,#12172a);border:1px solid var(--border2);border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.05) inset,0 60px 120px -40px rgba(0,0,0,.9),0 0 100px rgba(91,124,255,.1);transform:rotateX(2deg);transform-origin:top center}.mockup-bar{display:flex;align-items:center;gap:10px;padding:14px 18px;background:rgba(10,14,28,.7);border-bottom:1px solid var(--border)}.mb-dot{width:11px;height:11px;border-radius:50%}.mb-dot.r{background:#ff5f56}.mb-dot.y{background:#ffbd2e}.mb-dot.g{background:#27c93f}.mb-url{margin-left:16px;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:5px 14px;border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted2);flex:1;max-width:360px}.mb-url .d{color:var(--primary2)}.mockup-body{display:grid;grid-template-columns:240px 1fr;min-height:540px}.mb-sidebar{background:rgba(8,12,24,.6);padding:18px 0;border-right:1px solid var(--border)}.mb-server{display:flex;align-items:center;gap:11px;padding:4px 18px 18px;border-bottom:1px solid var(--border);margin-bottom:14px}.mb-si{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.95rem;color:#fff}.mb-sn{font-size:.78rem;font-weight:700;color:#fff;line-height:1.3}.mb-sid{font-size:.62rem;color:var(--dim);margin-top:1px;font-family:'JetBrains Mono',monospace}.mb-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:12px 18px 6px}.mb-item{display:flex;align-items:center;gap:10px;padding:8px 18px;font-size:.78rem;color:var(--muted2);border-left:2px solid transparent;cursor:default}.mb-item i{width:14px;text-align:center;font-size:.8rem;flex-shrink:0;color:var(--dim)}.mb-item.active{background:linear-gradient(90deg,rgba(91,124,255,.12),transparent);color:#fff;border-left-color:var(--primary)}.mb-item.active i{color:var(--primary2)}.mb-main{padding:26px 30px;background:#12172a}.mb-h1{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:4px}.mb-sub{font-size:.8rem;color:var(--muted);margin-bottom:22px}.mb-card{background:rgba(20,27,52,.6);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:14px}.mb-card-title{font-size:.88rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:6px}.mb-card-title i{color:var(--primary2)}.mb-card-desc{font-size:.76rem;color:var(--muted);margin-bottom:16px}.mb-modules{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mb-mod{display:flex;align-items:center;gap:10px;background:rgba(10,14,28,.55);border:1px solid var(--border);border-radius:9px;padding:10px 12px}.mb-mod-ic{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;color:#fff;flex-shrink:0}.mb-mod-info{flex:1;min-width:0}.mb-mod-name{font-size:.76rem;font-weight:700;color:#fff}.mb-mod-desc{font-size:.64rem;color:var(--muted);margin-top:1px}.mb-toggle{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.1);position:relative;flex-shrink:0;transition:.2s}.mb-toggle.on{background:var(--green)}.mb-toggle::after{content:'';position:absolute;top:3px;left:3px;width:11px;height:11px;border-radius:50%;background:#fff;transition:.2s}.mb-toggle.on::after{left:16px}
+.cmd-section{padding:120px 40px}.cmd-wrap{max-width:1100px;margin:0 auto}.cmd-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-top:50px}.cmd{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:all .25s}.cmd:hover{border-color:rgba(91,124,255,.3);background:rgba(20,27,52,.75)}.cmd-name{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--primary2);font-weight:600;margin-bottom:6px}.cmd-desc{font-size:.76rem;color:var(--muted);line-height:1.55}
+.cta-section{padding:140px 40px}.cta-box{max-width:900px;margin:0 auto;background:linear-gradient(135deg,rgba(91,124,255,.08),rgba(167,139,250,.05));border:1px solid rgba(91,124,255,.2);border-radius:24px;padding:68px 48px;text-align:center;position:relative;overflow:hidden}.cta-box::before{content:'';position:absolute;top:-50%;left:-20%;width:140%;height:200%;background:radial-gradient(circle at 50% 40%,rgba(91,124,255,.15),transparent 60%);pointer-events:none}.cta-box h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.035em;line-height:1.1;margin-bottom:16px;position:relative}.cta-box h2 .italic{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--primary2)}.cta-box p{color:var(--muted2);font-size:1.02rem;max-width:520px;margin:0 auto 32px;position:relative}.cta-box .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+footer{padding:60px 40px 36px;border-top:1px solid var(--border);background:rgba(5,7,15,.6);position:relative;z-index:1}.footer-wrap{max-width:1240px;margin:0 auto}.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--border)}.footer-brand-info{max-width:320px}.footer-brand-info p{color:var(--muted);font-size:.85rem;line-height:1.65;margin-top:14px}.footer-col h4{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}.footer-col a{display:block;color:var(--text);text-decoration:none;font-size:.88rem;margin-bottom:10px;transition:.2s}.footer-col a:hover{color:var(--primary2);transform:translateX(2px)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:16px}.footer-copy{color:var(--dim);font-size:.78rem}.footer-links{display:flex;gap:24px}.footer-links a{color:var(--muted);font-size:.82rem;text-decoration:none;transition:.2s}.footer-links a:hover{color:var(--primary2)}
+.modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.85);backdrop-filter:blur(12px)}.modal.open{display:flex;align-items:flex-start;justify-content:center;padding:6% 20px}.modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:44px;max-width:580px;width:100%;position:relative;max-height:84vh;overflow-y:auto}.modal-box.wide{max-width:860px;padding:48px 52px}.modal-box h2{font-size:1.6rem;font-weight:800;margin-bottom:14px;background:linear-gradient(180deg,#fff,var(--muted2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.modal-box h3{color:#fff;margin:24px 0 8px;font-size:1.05rem;font-weight:700}.modal-box p,.modal-box li{color:var(--muted2);font-size:.88rem;line-height:1.7;margin-bottom:10px}.modal-box ul{padding-left:22px}.modal-box a{color:var(--primary2);text-decoration:none}.modal-close{position:absolute;top:16px;right:20px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}.modal-close:hover{background:rgba(255,255,255,.08);color:#fff}.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:560px;margin:0 auto;background:linear-gradient(180deg,rgba(13,18,38,.98),rgba(8,12,28,.98));border:1px solid var(--border2);border-radius:14px;padding:22px 24px;z-index:9000;box-shadow:0 24px 60px -16px rgba(0,0,0,.7);backdrop-filter:blur(20px);transform:translateY(140%);opacity:0;transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .35s;pointer-events:none}.cookie-banner.show{transform:translateY(0);opacity:1;pointer-events:auto}.cookie-banner h3{font-size:.98rem;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}.cookie-banner p{font-size:.83rem;color:var(--muted2);line-height:1.6;margin-bottom:14px}.cookie-banner-actions{display:flex;gap:8px;flex-wrap:wrap}.cookie-banner button{flex:1;min-width:130px;padding:9px 14px;border:none;border-radius:8px;font-family:'Satoshi',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}.cb-accept{background:linear-gradient(180deg,var(--primary2),var(--primary));color:#fff}.cb-essential{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border2)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}.reveal.in{opacity:1;transform:translateY(0)}
+@media (max-width:960px){.nav{padding:0 20px}.nav-spacer,.nav-links{display:none}.hero{padding:120px 20px 80px}.hero-stats{gap:26px}.hero-stat .sep{display:none}section{padding:80px 20px}.trusted-section{padding:80px 0 60px}.trusted-lead{padding:0 20px}.server-card{min-width:280px;max-width:280px}.features-grid{grid-template-columns:1fr}.cmd-grid{grid-template-columns:1fr 1fr}.mockup-body{grid-template-columns:1fr;min-height:auto}.mb-sidebar{display:none}.mockup{transform:none}.footer-top{grid-template-columns:1fr 1fr;gap:30px}.footer-brand-info{grid-column:1/-1;max-width:none}.cta-box{padding:48px 28px}}@media(max-width:560px){.cmd-grid{grid-template-columns:1fr}.cookie-banner{left:12px;right:12px;bottom:12px;padding:18px 20px}.footer-top{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- BACKGROUND -->
 <canvas id="stars"></canvas>
 <div class="glow1"></div>
 <div class="glow2"></div>
-<div class="grid-bg"></div>
 
-<!-- NAV -->
 <nav class="nav">
-  <a class="nav-logo" href="#">
-    <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
-    <div class="brand">Five<span>Base</span></div>
-  </a>
+  <div class="nav-spacer" aria-hidden="true"></div>
   <div class="nav-links">
+    <a href="#trusted">Server</a>
     <a href="#features">Features</a>
     <a href="#dashboard">Dashboard</a>
     <a href="#commands">Commands</a>
@@ -674,842 +48,156 @@ footer {
   </div>
   <div class="nav-right">
     <a href="https://dashboard.5base.de" class="btn btn-outline">Dashboard</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
-      Bot hinzufügen <i class="fa-solid fa-arrow-right"></i>
-    </a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">Bot hinzufügen <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </nav>
 
 <div class="content">
-
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">
-      <span class="pulse"></span>
-      <span>v1.2</span> · 12+ Module · FiveM ready
-    </div>
-    <h1>
-      <span class="line1">Der Bot für</span>
-      <span class="line2">deine Fraktion.</span>
-    </h1>
-    <p class="sub">
-      Zeiterfassung, Tickets, Dienstnummern, Personalakten, Urlaub, Termine und FiveM-Tablet —
-      alles in einem System. Speziell für staatliche Fraktionen auf GTA-RP-Servern.
-    </p>
+    <div class="hero-badge"><span class="pulse"></span><span>v1.2</span> · 13+ Module · FiveM ready</div>
+    <h1><span class="line1">Der Bot für</span><span class="line2">deine Fraktion.</span></h1>
+    <p class="sub">Zeiterfassung, Tickets, Dienstnummern, Personalakten, Urlaub, Termine, Upranks und FiveM-Tablet — alles in einem System. Speziell für staatliche Fraktionen auf GTA-RP-Servern.</p>
     <div class="hero-ctas">
-      <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
-        <i class="fa-brands fa-discord"></i> Bot hinzufügen
-      </a>
-      <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-ghost">
-        <i class="fa-solid fa-users"></i> Support-Server
-      </a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary"><i class="fa-brands fa-discord"></i> Bot hinzufügen</a>
+      <a href="https://discord.gg/jTNhxFJFYf" target="_blank" class="btn btn-ghost"><i class="fa-solid fa-users"></i> Support-Server</a>
     </div>
-
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="n">12+</div>
-        <div class="l">Module</div>
+      <div class="hero-stat"><div class="n">13+</div><div class="l">Module</div></div><div class="sep"></div>
+      <div class="hero-stat"><div class="n">100%</div><div class="l">Kostenlos</div></div><div class="sep"></div>
+      <div class="hero-stat"><div class="n">0€</div><div class="l">Für immer</div></div><div class="sep"></div>
+      <div class="hero-stat"><div class="n">Multi</div><div class="l">Fraktion</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="trusted" class="trusted-section">
+    <div class="trusted-lead reveal">
+      <h2 class="trusted-title">Diese Großen Server Nutzen Bereits <span>5Base</span></h2>
+      <p class="trusted-sub">Fraktionen und Communities, die FiveBase bereits für Verwaltung, Tickets, Personal und Dienstsysteme einsetzen.</p>
+    </div>
+    <div class="marquee-wrap reveal">
+      <div class="marquee-row marquee-left">
+        <div class="server-card"><div class="server-avatar">PD</div><div class="server-info"><div class="server-name">Polizei | Deutsches RP</div><div class="server-members">1108 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">MVB</div><div class="server-info"><div class="server-name">MVB | GermanLife-RP</div><div class="server-members">196 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">SAN</div><div class="server-info"><div class="server-name">Arztpraxis Sanctum x NRW Roleplay</div><div class="server-members">135 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">KFS</div><div class="server-info"><div class="server-name">ᴋöʟɴᴇʀ ꜰᴀʜʀꜱᴄʜᴜʟ ɢᴍʙʜ | ɴʀᴡʀᴘ</div><div class="server-members">99 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">BO</div><div class="server-info"><div class="server-name">Bochum RP Zivilpolizei</div><div class="server-members">83 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">NX</div><div class="server-info"><div class="server-name">NxTLvL Gaming</div><div class="server-members">60 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">PD</div><div class="server-info"><div class="server-name">Polizei | Deutsches RP</div><div class="server-members">1108 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">MVB</div><div class="server-info"><div class="server-name">MVB | GermanLife-RP</div><div class="server-members">196 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">SAN</div><div class="server-info"><div class="server-name">Arztpraxis Sanctum x NRW Roleplay</div><div class="server-members">135 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">KFS</div><div class="server-info"><div class="server-name">ᴋöʟɴᴇʀ ꜰᴀʜʀꜱᴄʜᴜʟ ɢᴍʙʜ | ɴʀᴡʀᴘ</div><div class="server-members">99 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">BO</div><div class="server-info"><div class="server-name">Bochum RP Zivilpolizei</div><div class="server-members">83 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">NX</div><div class="server-info"><div class="server-name">NxTLvL Gaming</div><div class="server-members">60 Mitglieder</div></div></div>
       </div>
-      <div class="sep"></div>
-      <div class="hero-stat">
-        <div class="n">100%</div>
-        <div class="l">Kostenlos</div>
-      </div>
-      <div class="sep"></div>
-      <div class="hero-stat">
-        <div class="n">0€</div>
-        <div class="l">Für immer</div>
-      </div>
-      <div class="sep"></div>
-      <div class="hero-stat">
-        <div class="n">Multi</div>
-        <div class="l">Fraktion</div>
+      <div class="marquee-row marquee-right">
+        <div class="server-card"><div class="server-avatar">MÖ</div><div class="server-info"><div class="server-name">EHRN | Restaurant zur Goldenen Möwe</div><div class="server-members">59 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">BD</div><div class="server-info"><div class="server-name">BULLDOGS / DRP</div><div class="server-members">57 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">UKD</div><div class="server-info"><div class="server-name">Security UKD | Deutsches Roleplay V2</div><div class="server-members">52 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">PD</div><div class="server-info"><div class="server-name">Polizei | Deutsches RP</div><div class="server-members">1108 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">SAN</div><div class="server-info"><div class="server-name">Arztpraxis Sanctum x NRW Roleplay</div><div class="server-members">135 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">GL</div><div class="server-info"><div class="server-name">MVB | GermanLife-RP</div><div class="server-members">196 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">MÖ</div><div class="server-info"><div class="server-name">EHRN | Restaurant zur Goldenen Möwe</div><div class="server-members">59 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">BD</div><div class="server-info"><div class="server-name">BULLDOGS / DRP</div><div class="server-members">57 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">UKD</div><div class="server-info"><div class="server-name">Security UKD | Deutsches Roleplay V2</div><div class="server-members">52 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">PD</div><div class="server-info"><div class="server-name">Polizei | Deutsches RP</div><div class="server-members">1108 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">SAN</div><div class="server-info"><div class="server-name">Arztpraxis Sanctum x NRW Roleplay</div><div class="server-members">135 Mitglieder</div></div></div>
+        <div class="server-card"><div class="server-avatar">GL</div><div class="server-info"><div class="server-name">MVB | GermanLife-RP</div><div class="server-members">196 Mitglieder</div></div></div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- FEATURES -->
   <section id="features">
     <div class="section-lead reveal">
       <div class="section-label">Features</div>
       <h2 class="section-title">Alles was deine Fraktion<br><span class="italic">wirklich braucht.</span></h2>
       <p class="section-sub">Aktuelle Module, Dashboard-Funktionen und FiveM-Anbindung greifen ineinander. Kein Feature-Bloat, keine bezahlten Premium-Versionen — nur Tools, die für GTA-RP-Fraktionen entwickelt wurden.</p>
     </div>
-
-    <div class="features-wrap">
-      <div class="features-grid">
-
-        <div class="feature reveal">
-          <div class="tag">01</div>
-          <div class="f-icon"><i class="fa-solid fa-stopwatch"></i></div>
-          <h3>Stempelsystem</h3>
-          <p>Automatische Zeiterfassung mit AFK-Check, Wochenberichten und Live-Topliste.</p>
-          <ul>
-            <li>Dienstbeginn / Dienstende per Button</li>
-            <li>Wöchentliche Auswertung je Rang</li>
-            <li>AFK-Erkennung mit Auto-Abmeldung</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">02</div>
-          <div class="f-icon purple"><i class="fa-solid fa-ticket"></i></div>
-          <h3>Ticketsystem</h3>
-          <p>Panel-basiertes Ticketsystem mit Kategorien, Claim-Funktion und Statistiken.</p>
-          <ul>
-            <li>Mehrere Panels mit Drag-&-Drop Kategorien</li>
-            <li>Live-Statistik-Embed alle 5 Min</li>
-            <li>Bewertungssystem nach Ticket-Close</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">03</div>
-          <div class="f-icon green"><i class="fa-solid fa-list-ol"></i></div>
-          <h3>Dienstnummern</h3>
-          <p>Nie wieder doppelte DNs. Live-Übersicht aus Nicknames, automatische Vergabe.</p>
-          <ul>
-            <li>Erkennt DN aus <span class="mono">[XX] Name</span></li>
-            <li>Frei/Vergeben/Blacklist Übersicht</li>
-            <li>Konfigurierbarer Nummernbereich</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">04</div>
-          <div class="f-icon orange"><i class="fa-solid fa-folder-open"></i></div>
-          <h3>Personal-System</h3>
-          <p>Digitale Personalakten mit Historie, Statistiken, Bildern und Rang-Synchronisation.</p>
-          <ul>
-            <li>Akten mit Historie & Statistiken</li>
-            <li>Bilder/Nachweise direkt in der Akte</li>
-            <li>Automatische Rang-Updates</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">NEU</div>
-          <div class="f-icon sky"><i class="fa-solid fa-umbrella-beach"></i></div>
-          <h3>Urlaubssystem</h3>
-          <p>Eigenes Urlaubsmodul mit Discord-Embed, Rollen-Automation und Dashboard-Steuerung.</p>
-          <ul>
-            <li>Eigener Sidebar-Bereich im Dashboard</li>
-            <li>Embed-Farbe per Auswahlmenü</li>
-            <li>Urlaubs-Embed senden/aktualisieren</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">05</div>
-          <div class="f-icon cyan"><i class="fa-solid fa-users-rectangle"></i></div>
-          <h3>Teamliste</h3>
-          <p>Live-Übersicht aller Mitarbeiter nach Rängen sortiert. Aktualisiert sich selbst.</p>
-          <ul>
-            <li>Multi-Message Support für große Teams</li>
-            <li>Hierarchische Sortierung</li>
-            <li>DN-Anzeige aus Nickname</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">06</div>
-          <div class="f-icon sky"><i class="fa-solid fa-user-plus"></i></div>
-          <h3>Einstellungs-System</h3>
-          <p>Bewerbungen mit Fragebogen und Quiz. Automatische Einstellung mit DN-Vergabe.</p>
-          <ul>
-            <li>Konfigurierbare Bewerbungsfelder</li>
-            <li>Optionales Quiz mit Ban-Funktion</li>
-            <li>Einstellung per <span class="mono">/einstellung</span></li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">07</div>
-          <div class="f-icon red"><i class="fa-solid fa-shield-halved"></i></div>
-          <h3>Moderation</h3>
-          <p>Auto-Mod, Welcome, Auto-Rollen und 6 separate Logging-Kanäle.</p>
-          <ul>
-            <li>Anti-Spam / Links / Caps / Mentions</li>
-            <li>Welcome-Embed Designer</li>
-            <li><span class="mono">/ban /kick /timeout /clear</span></li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">08</div>
-          <div class="f-icon rose"><i class="fa-solid fa-user-minus"></i></div>
-          <h3>Kündigungs-System</h3>
-          <p>Automatisiertes Offboarding. Ein Command entfernt Rollen, setzt Nickname zurück.</p>
-          <ul>
-            <li><span class="mono">/kuendigung @user</span></li>
-            <li>Entfernt alle Fraktions-Rollen</li>
-            <li>Dokumentiert in Personalakte</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">09</div>
-          <div class="f-icon amber"><i class="fa-solid fa-gavel"></i></div>
-          <h3>Abmahnungs-System</h3>
-          <p>Eskalations-basierte Abmahnungen mit Leveln, Ablaufdatum und Uprank-Sperre.</p>
-          <ul>
-            <li>Mehrere Abmahnungs-Stufen</li>
-            <li>Automatische Uprank-Sperre</li>
-            <li>Levels laufen automatisch ab</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal">
-          <div class="tag">10</div>
-          <div class="f-icon"><i class="fa-solid fa-calendar-check"></i></div>
-          <h3>Termin-System</h3>
-          <p>Besprechungen, Ausbildungen und Events planen. Mit RSVP und automatischen Erinnerungen.</p>
-          <ul>
-            <li>Termine mit Uhrzeit & Beschreibung</li>
-            <li>RSVP: Zusagen / Absagen / Vielleicht</li>
-            <li>Automatische Reminder-DMs</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(91,124,255,0.10), rgba(34,217,154,0.04)); border-color:rgba(91,124,255,0.28);">
-          <div class="tag">v1.2</div>
-          <div class="f-icon cyan"><i class="fa-solid fa-tablet-screen-button"></i></div>
-          <h3>FiveM Personal-Tablet</h3>
-          <p>Personalverwaltung direkt ingame öffnen — mit Tablet-Prop, Multi-Fraktions-Support und sicherer API.</p>
-          <ul>
-            <li>Personalakten, Bilder, Urlaub & Termine ingame</li>
-            <li>Mehrere Discords/Fraktionen pro FiveM-Server</li>
-            <li>API-Key pro Fraktion, Zugriff über Job</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(91,124,255,0.12), rgba(167,139,250,0.06)); border-color:rgba(91,124,255,0.25);">
-          <div class="tag">Setup</div>
-          <div class="f-icon" style="background:linear-gradient(135deg, var(--primary), var(--purple)); box-shadow:0 0 0 1px rgba(255,255,255,0.15) inset, 0 12px 32px -6px rgba(91,124,255,0.6);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <h3>Start-Guide Wizard</h3>
-          <p>Komplette Server-Einrichtung in 2 Minuten. Wähle eine Vorlage — fertig.</p>
-          <ul>
-            <li>7 offizielle Templates (LSPD, LSMD, ...)</li>
-            <li>Rollen, Channels & Panels automatisch</li>
-            <li>Sofort einsatzbereit</li>
-          </ul>
-        </div>
-
-        <div class="feature reveal" style="background:linear-gradient(135deg, rgba(34,217,154,0.08), rgba(34,217,154,0.02)); border-color:rgba(34,217,154,0.2);">
-          <div class="tag">NEU</div>
-          <div class="f-icon green"><i class="fa-solid fa-rotate"></i></div>
-          <h3>Auto-Backup</h3>
-          <p>Stündliche Datenbank-Backups. Daten-Integrität wird automatisch geprüft.</p>
-          <ul>
-            <li>Stündliche Backups (24h aufbewahrt)</li>
-            <li>Notfall-Wiederherstellung</li>
-            <li>Integritäts-Checks in Echtzeit</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
+    <div class="features-wrap"><div class="features-grid">
+      <div class="feature reveal"><div class="tag">01</div><div class="f-icon"><i class="fa-solid fa-stopwatch"></i></div><h3>Stempelsystem</h3><p>Automatische Zeiterfassung mit AFK-Check, Wochenberichten und Live-Topliste.</p><ul><li>Dienstbeginn / Dienstende per Button</li><li>Wöchentliche Auswertung je Rang</li><li>AFK-Erkennung mit Auto-Abmeldung</li></ul></div>
+      <div class="feature reveal"><div class="tag">02</div><div class="f-icon purple"><i class="fa-solid fa-ticket"></i></div><h3>Ticketsystem</h3><p>Panel-basiertes Ticketsystem mit Kategorien, Claim-Funktion und Statistiken.</p><ul><li>Mehrere Panels mit Drag-&-Drop Kategorien</li><li>Live-Statistik-Embed alle 5 Min</li><li>Bewertungssystem nach Ticket-Close</li></ul></div>
+      <div class="feature reveal"><div class="tag">03</div><div class="f-icon green"><i class="fa-solid fa-list-ol"></i></div><h3>Dienstnummern</h3><p>Nie wieder doppelte DNs. Live-Übersicht aus Nicknames, automatische Vergabe.</p><ul><li>Erkennt DN aus <span class="mono">[XX] Name</span></li><li>Frei/Vergeben/Blacklist Übersicht</li><li>Konfigurierbarer Nummernbereich</li></ul></div>
+      <div class="feature reveal"><div class="tag">04</div><div class="f-icon orange"><i class="fa-solid fa-folder-open"></i></div><h3>Personal-System</h3><p>Digitale Personalakten mit Historie, Statistiken, Bildern und Rang-Synchronisation.</p><ul><li>Akten mit Historie & Statistiken</li><li>Bilder/Nachweise direkt in der Akte</li><li>Automatische Rang-Updates</li></ul></div>
+      <div class="feature reveal" style="background:linear-gradient(135deg,rgba(91,124,255,.12),rgba(34,217,154,.05));border-color:rgba(91,124,255,.28)"><div class="tag">NEU</div><div class="f-icon" style="background:linear-gradient(135deg,var(--primary),var(--green))"><i class="fa-solid fa-arrow-up-right-dots"></i></div><h3>Uprank-System</h3><p>Beförderungsanfragen werden automatisch geprüft und anschließend vom Management bestätigt oder abgelehnt.</p><ul><li>Prüft Rang, Gesamtstunden & Wochenstunden</li><li>Berücksichtigt Rollen, Sperren, Urlaub & Cooldown</li><li>Aktualisiert Rollen, Akte, Historie und Ingame-Hinweis</li></ul></div>
+      <div class="feature reveal"><div class="tag">NEU</div><div class="f-icon sky"><i class="fa-solid fa-umbrella-beach"></i></div><h3>Urlaubssystem</h3><p>Eigenes Urlaubsmodul mit Discord-Embed, Rollen-Automation und Dashboard-Steuerung.</p><ul><li>Eigener Sidebar-Bereich im Dashboard</li><li>Embed-Farbe per Auswahlmenü</li><li>Urlaubs-Embed senden/aktualisieren</li></ul></div>
+      <div class="feature reveal"><div class="tag">05</div><div class="f-icon cyan"><i class="fa-solid fa-users-rectangle"></i></div><h3>Teamliste</h3><p>Live-Übersicht aller Mitarbeiter nach Rängen sortiert. Aktualisiert sich selbst.</p><ul><li>Multi-Message Support für große Teams</li><li>Hierarchische Sortierung</li><li>DN-Anzeige aus Nickname</li></ul></div>
+      <div class="feature reveal"><div class="tag">06</div><div class="f-icon sky"><i class="fa-solid fa-user-plus"></i></div><h3>Einstellungs-System</h3><p>Bewerbungen mit Fragebogen und Quiz. Automatische Einstellung mit DN-Vergabe.</p><ul><li>Konfigurierbare Bewerbungsfelder</li><li>Optionales Quiz mit Ban-Funktion</li><li>Einstellung per <span class="mono">/einstellung</span></li></ul></div>
+      <div class="feature reveal"><div class="tag">07</div><div class="f-icon red"><i class="fa-solid fa-shield-halved"></i></div><h3>Moderation</h3><p>Auto-Mod, Welcome, Auto-Rollen und 6 separate Logging-Kanäle.</p><ul><li>Anti-Spam / Links / Caps / Mentions</li><li>Welcome-Embed Designer</li><li><span class="mono">/ban /kick /timeout /clear</span></li></ul></div>
+      <div class="feature reveal"><div class="tag">08</div><div class="f-icon rose"><i class="fa-solid fa-user-minus"></i></div><h3>Kündigungs-System</h3><p>Automatisiertes Offboarding. Ein Command entfernt Rollen, setzt Nickname zurück.</p><ul><li><span class="mono">/kuendigung @user</span></li><li>Entfernt alle Fraktions-Rollen</li><li>Dokumentiert in Personalakte</li></ul></div>
+      <div class="feature reveal"><div class="tag">09</div><div class="f-icon amber"><i class="fa-solid fa-gavel"></i></div><h3>Abmahnungs-System</h3><p>Eskalations-basierte Abmahnungen mit Leveln, Ablaufdatum und Uprank-Sperre.</p><ul><li>Mehrere Abmahnungs-Stufen</li><li>Automatische Uprank-Sperre</li><li>Levels laufen automatisch ab</li></ul></div>
+      <div class="feature reveal"><div class="tag">10</div><div class="f-icon"><i class="fa-solid fa-calendar-check"></i></div><h3>Termin-System</h3><p>Besprechungen, Ausbildungen und Events planen. Mit RSVP und automatischen Erinnerungen.</p><ul><li>Termine mit Uhrzeit & Beschreibung</li><li>RSVP: Zusagen / Absagen / Vielleicht</li><li>Automatische Reminder-DMs</li></ul></div>
+      <div class="feature reveal" style="background:linear-gradient(135deg,rgba(91,124,255,.10),rgba(34,217,154,.04));border-color:rgba(91,124,255,.28)"><div class="tag">v1.2</div><div class="f-icon cyan"><i class="fa-solid fa-tablet-screen-button"></i></div><h3>FiveM Personal-Tablet</h3><p>Personalverwaltung direkt ingame öffnen — mit Tablet-Prop, Multi-Fraktions-Support und sicherer API.</p><ul><li>Personalakten, Bilder, Urlaub & Termine ingame</li><li>Mehrere Discords/Fraktionen pro FiveM-Server</li><li>API-Key pro Fraktion, Zugriff über Job</li></ul></div>
+      <div class="feature reveal" style="background:linear-gradient(135deg,rgba(91,124,255,.12),rgba(167,139,250,.06));border-color:rgba(91,124,255,.25)"><div class="tag">Setup</div><div class="f-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>Start-Guide Wizard</h3><p>Komplette Server-Einrichtung in 2 Minuten. Wähle eine Vorlage — fertig.</p><ul><li>7 offizielle Templates</li><li>Rollen, Channels & Panels automatisch</li><li>Sofort einsatzbereit</li></ul></div>
+      <div class="feature reveal" style="background:linear-gradient(135deg,rgba(34,217,154,.08),rgba(34,217,154,.02));border-color:rgba(34,217,154,.2)"><div class="tag">NEU</div><div class="f-icon green"><i class="fa-solid fa-rotate"></i></div><h3>Auto-Backup</h3><p>Stündliche Datenbank-Backups. Daten-Integrität wird automatisch geprüft.</p><ul><li>Stündliche Backups</li><li>Notfall-Wiederherstellung</li><li>Integritäts-Checks in Echtzeit</li></ul></div>
+    </div></div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- DASHBOARD MOCKUP -->
   <section id="dashboard">
-    <div class="section-lead reveal">
-      <div class="section-label">Dashboard</div>
-      <h2 class="section-title">Alles steuerbar aus<br>dem <span class="italic">Browser.</span></h2>
-      <p class="section-sub">Login mit Discord. Server wählen. Module aktivieren. Kein Code, keine JSONs — reine UI mit Auto-Save.</p>
-    </div>
-
-    <div class="mockup-wrap reveal">
-      <div class="mockup">
-        <div class="mockup-bar">
-          <div class="mb-dot r"></div>
-          <div class="mb-dot y"></div>
-          <div class="mb-dot g"></div>
-          <div class="mb-url"><i class="fa-solid fa-lock" style="color:var(--green); font-size:.65rem; margin-right:6px;"></i>dashboard.<span class="d">5base.de</span>/dashboard/1457779754647163145</div>
-        </div>
-
-        <div class="mockup-body">
-          <div class="mb-sidebar">
-            <div class="mb-server">
-              <div class="mb-si"><i class="fa-solid fa-shield-halved"></i></div>
-              <div>
-                <div class="mb-sn">5Base Fraktion</div>
-                <div class="mb-sid">145777...3145</div>
-              </div>
-            </div>
-            <div class="mb-label">Konfiguration</div>
-            <div class="mb-item active"><i class="fa-solid fa-gauge"></i> Dashboard</div>
-            <div class="mb-item"><i class="fa-solid fa-clock"></i> Stempeln</div>
-            <div class="mb-item"><i class="fa-solid fa-ticket"></i> Tickets</div>
-            <div class="mb-item"><i class="fa-solid fa-hashtag"></i> Dienstnummern</div>
-            <div class="mb-item"><i class="fa-solid fa-users"></i> Personal</div>
-            <div class="mb-item"><i class="fa-solid fa-umbrella-beach"></i> Urlaub</div>
-            <div class="mb-item"><i class="fa-solid fa-tablet-screen-button"></i> FiveM Tablet</div>
-            <div class="mb-item"><i class="fa-solid fa-list"></i> Teamliste</div>
-            <div class="mb-item"><i class="fa-solid fa-user-plus"></i> Einstellung</div>
-            <div class="mb-item"><i class="fa-solid fa-shield-halved"></i> Moderation</div>
-            <div class="mb-item"><i class="fa-solid fa-gavel"></i> Abmahnungen</div>
-            <div class="mb-item"><i class="fa-solid fa-calendar"></i> Termine</div>
-          </div>
-
-          <div class="mb-main">
-            <div class="mb-h1">Dashboard</div>
-            <div class="mb-sub">Willkommen. Aktiviere und konfiguriere deine Module.</div>
-
-            <div class="mb-card">
-              <div class="mb-card-title"><i class="fa-solid fa-cube"></i> Module aktivieren</div>
-              <div class="mb-card-desc">12+ Module und Schnittstellen, unabhängig voneinander schaltbar.</div>
-              <div class="mb-modules">
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#7c3aed);"><i class="fa-solid fa-clock"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Stempelsystem</div><div class="mb-mod-desc">Zeiterfassung</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);"><i class="fa-solid fa-ticket"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Ticket-System</div><div class="mb-mod-desc">Support-Tickets</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#10b981,#059669);"><i class="fa-solid fa-hashtag"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Dienstnummern</div><div class="mb-mod-desc">Auto-Vergabe</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fa-solid fa-users"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Personal</div><div class="mb-mod-desc">Akten & Bilder</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);"><i class="fa-solid fa-umbrella-beach"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Urlaub</div><div class="mb-mod-desc">Anträge & Embed</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#22d99a);"><i class="fa-solid fa-tablet-screen-button"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">FiveM Tablet</div><div class="mb-mod-desc">Ingame API</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#22d3ee,#06b6d4);"><i class="fa-solid fa-list"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Teamliste</div><div class="mb-mod-desc">Live-Status</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#ef4444,#dc2626);"><i class="fa-solid fa-shield-halved"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Moderation</div><div class="mb-mod-desc">Auto-Mod</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#fbbf24,#d97706);"><i class="fa-solid fa-gavel"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Abmahnungen</div><div class="mb-mod-desc">Mit Levels</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-                <div class="mb-mod">
-                  <div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#a78bfa);"><i class="fa-solid fa-calendar"></i></div>
-                  <div class="mb-mod-info"><div class="mb-mod-name">Termine</div><div class="mb-mod-desc">RSVP & Reminder</div></div>
-                  <div class="mb-toggle on"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="section-lead reveal"><div class="section-label">Dashboard</div><h2 class="section-title">Alles steuerbar aus<br>dem <span class="italic">Browser.</span></h2><p class="section-sub">Login mit Discord. Server wählen. Module aktivieren. Kein Code, keine JSONs — reine UI mit Auto-Save.</p></div>
+    <div class="mockup-wrap reveal"><div class="mockup"><div class="mockup-bar"><div class="mb-dot r"></div><div class="mb-dot y"></div><div class="mb-dot g"></div><div class="mb-url"><i class="fa-solid fa-lock" style="color:var(--green);font-size:.65rem;margin-right:6px"></i>dashboard.<span class="d">5base.de</span>/dashboard/1457779754647163145</div></div>
+      <div class="mockup-body"><div class="mb-sidebar">
+        <div class="mb-server"><div class="mb-si"><i class="fa-solid fa-shield-halved"></i></div><div><div class="mb-sn">5Base Fraktion</div><div class="mb-sid">145777...3145</div></div></div>
+        <div class="mb-label">Konfiguration</div><div class="mb-item active"><i class="fa-solid fa-gauge"></i> Dashboard</div><div class="mb-item"><i class="fa-solid fa-clock"></i> Stempeln</div><div class="mb-item"><i class="fa-solid fa-ticket"></i> Tickets</div><div class="mb-item"><i class="fa-solid fa-hashtag"></i> Dienstnummern</div><div class="mb-item"><i class="fa-solid fa-users"></i> Personal</div><div class="mb-item"><i class="fa-solid fa-arrow-up-right-dots"></i> Uprank-System</div><div class="mb-item"><i class="fa-solid fa-umbrella-beach"></i> Urlaub</div><div class="mb-item"><i class="fa-solid fa-tablet-screen-button"></i> FiveM Tablet</div><div class="mb-item"><i class="fa-solid fa-list"></i> Teamliste</div><div class="mb-item"><i class="fa-solid fa-user-plus"></i> Einstellung</div><div class="mb-item"><i class="fa-solid fa-shield-halved"></i> Moderation</div><div class="mb-item"><i class="fa-solid fa-gavel"></i> Abmahnungen</div><div class="mb-item"><i class="fa-solid fa-calendar"></i> Termine</div>
+      </div><div class="mb-main"><div class="mb-h1">Dashboard</div><div class="mb-sub">Willkommen. Aktiviere und konfiguriere deine Module.</div><div class="mb-card"><div class="mb-card-title"><i class="fa-solid fa-cube"></i> Module aktivieren</div><div class="mb-card-desc">13+ Module und Schnittstellen, unabhängig voneinander schaltbar.</div><div class="mb-modules">
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#7c3aed)"><i class="fa-solid fa-clock"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Stempelsystem</div><div class="mb-mod-desc">Zeiterfassung</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)"><i class="fa-solid fa-ticket"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Ticket-System</div><div class="mb-mod-desc">Support-Tickets</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#10b981,#059669)"><i class="fa-solid fa-hashtag"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Dienstnummern</div><div class="mb-mod-desc">Auto-Vergabe</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fa-solid fa-users"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Personal</div><div class="mb-mod-desc">Akten & Bilder</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#5b7cff,#22d99a)"><i class="fa-solid fa-arrow-up-right-dots"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Uprank-System</div><div class="mb-mod-desc">Beförderungen</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9)"><i class="fa-solid fa-umbrella-beach"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Urlaub</div><div class="mb-mod-desc">Anträge & Embed</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#22d3ee,#06b6d4)"><i class="fa-solid fa-list"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Teamliste</div><div class="mb-mod-desc">Live-Status</div></div><div class="mb-toggle on"></div></div>
+        <div class="mb-mod"><div class="mb-mod-ic" style="background:linear-gradient(135deg,#fbbf24,#d97706)"><i class="fa-solid fa-gavel"></i></div><div class="mb-mod-info"><div class="mb-mod-name">Abmahnungen</div><div class="mb-mod-desc">Mit Levels</div></div><div class="mb-toggle on"></div></div>
+      </div></div></div></div>
+    </div></div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- COMMANDS -->
   <section id="commands" class="cmd-section">
-    <div class="cmd-wrap">
-      <div class="section-lead reveal">
-        <div class="section-label">Commands</div>
-        <h2 class="section-title">Discord-Commands<br><span class="italic">für alles.</span></h2>
-        <p class="section-sub">Über 30 Slash-Commands plus Dashboard-Tools für Stempeln, Personal, Urlaub, Moderation, Termine und FiveM-Anbindung.</p>
-      </div>
-
+    <div class="cmd-wrap"><div class="section-lead reveal"><div class="section-label">Commands</div><h2 class="section-title">Discord-Commands<br><span class="italic">für alles.</span></h2><p class="section-sub">Über 30 Slash-Commands plus Dashboard-Tools für Stempeln, Personal, Urlaub, Moderation, Termine und FiveM-Anbindung.</p></div>
       <div class="cmd-grid reveal">
-        <div class="cmd"><div class="cmd-name">/einstellung</div><div class="cmd-desc">Neuer Mitarbeiter + Auto-DN</div></div>
-        <div class="cmd"><div class="cmd-name">/kuendigung</div><div class="cmd-desc">Offboarding in einem Klick</div></div>
-        <div class="cmd"><div class="cmd-name">/abmahnung erteilen</div><div class="cmd-desc">Mit Level-Eskalation</div></div>
-        <div class="cmd"><div class="cmd-name">/termin erstellen</div><div class="cmd-desc">Mit RSVP & Reminder</div></div>
-
-        <div class="cmd"><div class="cmd-name">/urlaub eintragen</div><div class="cmd-desc">Ohne Genehmigung</div></div>
-        <div class="cmd"><div class="cmd-name">/verwarnung erteilen</div><div class="cmd-desc">Für Personalakte</div></div>
-        <div class="cmd"><div class="cmd-name">/personal</div><div class="cmd-desc">Personalakte öffnen</div></div>
-        <div class="cmd"><div class="cmd-name">/teamlist update</div><div class="cmd-desc">Liste neu bauen</div></div>
-
-        <div class="cmd"><div class="cmd-name">/stempel stats</div><div class="cmd-desc">Deine Arbeitszeit</div></div>
-        <div class="cmd"><div class="cmd-name">/ban @user</div><div class="cmd-desc">Mit Grund & Tagen</div></div>
-        <div class="cmd"><div class="cmd-name">/timeout 10m</div><div class="cmd-desc">Flexible Dauer</div></div>
-        <div class="cmd"><div class="cmd-name">/clear 50</div><div class="cmd-desc">Nachrichten löschen</div></div>
-        <div class="cmd"><div class="cmd-name">Dashboard → FiveM Tablet</div><div class="cmd-desc">API-Key & Fraktionen verwalten</div></div>
-        <div class="cmd"><div class="cmd-name">/personaltablet</div><div class="cmd-desc">Ingame Tablet öffnen</div></div>
+        <div class="cmd"><div class="cmd-name">/einstellung</div><div class="cmd-desc">Neuer Mitarbeiter + Auto-DN</div></div><div class="cmd"><div class="cmd-name">/kuendigung</div><div class="cmd-desc">Offboarding in einem Klick</div></div><div class="cmd"><div class="cmd-name">/abmahnung erteilen</div><div class="cmd-desc">Mit Level-Eskalation</div></div><div class="cmd"><div class="cmd-name">/uprank panel</div><div class="cmd-desc">Beförderungsanfragen starten</div></div>
+        <div class="cmd"><div class="cmd-name">/urlaub eintragen</div><div class="cmd-desc">Ohne Genehmigung</div></div><div class="cmd"><div class="cmd-name">/abmahnung verlaengern</div><div class="cmd-desc">Abmahnung verlängern</div></div><div class="cmd"><div class="cmd-name">/personal</div><div class="cmd-desc">Personalakte öffnen</div></div><div class="cmd"><div class="cmd-name">/teamlist update</div><div class="cmd-desc">Liste neu bauen</div></div>
+        <div class="cmd"><div class="cmd-name">/stempel stats</div><div class="cmd-desc">Deine Arbeitszeit</div></div><div class="cmd"><div class="cmd-name">/ban @user</div><div class="cmd-desc">Mit Grund & Tagen</div></div><div class="cmd"><div class="cmd-name">/timeout 10m</div><div class="cmd-desc">Flexible Dauer</div></div><div class="cmd"><div class="cmd-name">/clear 50</div><div class="cmd-desc">Nachrichten löschen</div></div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box reveal">
-      <h2>Bereit, deine Fraktion<br><span class="italic">zu automatisieren?</span></h2>
-      <p>Lade FiveBase jetzt auf deinen Server. Einladung in 10 Sekunden, Setup in 2 Minuten dank Start-Guide-Wizard — und optional mit FiveM-Tablet direkt ingame nutzbar.</p>
-      <div class="ctas">
-        <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary">
-          <i class="fa-brands fa-discord"></i> Bot hinzufügen
-        </a>
-        <a href="wiki.html" class="btn btn-ghost">
-          <i class="fa-solid fa-book"></i> Wiki lesen
-        </a>
-      </div>
-    </div>
-  </section>
+  <section class="cta-section"><div class="cta-box reveal"><h2>Bereit, deine Fraktion<br><span class="italic">zu automatisieren?</span></h2><p>Lade FiveBase jetzt auf deinen Server. Einladung in 10 Sekunden, Setup in 2 Minuten dank Start-Guide-Wizard — und optional mit FiveM-Tablet direkt ingame nutzbar.</p><div class="ctas"><a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank" class="btn btn-primary"><i class="fa-brands fa-discord"></i> Bot hinzufügen</a><a href="wiki.html" class="btn btn-ghost"><i class="fa-solid fa-book"></i> Wiki lesen</a></div></div></section>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-wrap">
-      <div class="footer-top">
-        <div class="footer-brand-info">
-          <a class="nav-logo" href="#">
-            <div class="dot"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="brand">Five<span>Base</span></div>
-          </a>
-          <p>Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Mit Dashboard, Personalverwaltung, Urlaubssystem und FiveM-Tablet.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Produkt</h4>
-          <a href="#features">Features</a>
-          <a href="#dashboard">Dashboard</a>
-          <a href="#commands">Commands</a>
-          <a href="wiki.html">Wiki</a>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <a href="https://discord.gg/jTNhxFJFYf" target="_blank">Discord</a>
-          <a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank">Bot einladen</a>
-          <a href="https://dashboard.5base.de">Dashboard Login</a>
-        </div>
-        <div class="footer-col">
-          <h4>Rechtliches</h4>
-          <a href="#" id="openImp">Impressum</a>
-          <a href="#" id="openDs">Datenschutz</a>
-          <a href="#" id="openTos">Nutzungsbedingungen</a>
-          <a href="#" id="openCookieSettings">Cookie-Einstellungen</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 FiveBase · Made for GTA RP</div>
-        <div class="footer-links">
-          <a href="https://discord.gg/jTNhxFJFYf" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
-          <a href="wiki.html"><i class="fa-solid fa-book"></i> Wiki</a>
-        </div>
-      </div>
+    <div class="footer-wrap"><div class="footer-top"><div class="footer-brand-info"><a class="nav-logo" href="#"><div class="dot"><i class="fa-solid fa-shield-halved"></i></div><div class="brand">Five<span>Base</span></div></a><p>Der kostenlose Discord Bot für staatliche Fraktionen auf GTA RP Servern. Mit Dashboard, Personalverwaltung, Urlaubssystem, Uprank-System und FiveM-Tablet.</p></div>
+      <div class="footer-col"><h4>Produkt</h4><a href="#trusted">Server</a><a href="#features">Features</a><a href="#dashboard">Dashboard</a><a href="#commands">Commands</a><a href="wiki.html">Wiki</a></div>
+      <div class="footer-col"><h4>Community</h4><a href="https://discord.gg/jTNhxFJFYf" target="_blank">Discord</a><a href="https://discord.com/oauth2/authorize?client_id=1457480033034834024&permissions=8&integration_type=0&scope=bot" target="_blank">Bot einladen</a><a href="https://dashboard.5base.de">Dashboard Login</a></div>
+      <div class="footer-col"><h4>Rechtliches</h4><a href="#" id="openImp">Impressum</a><a href="#" id="openDs">Datenschutz</a><a href="#" id="openTos">Nutzungsbedingungen</a><a href="#" id="openCookieSettings">Cookie-Einstellungen</a></div></div>
+      <div class="footer-bottom"><div class="footer-copy">© 2026 FiveBase · Made for GTA RP</div><div class="footer-links"><a href="https://discord.gg/jTNhxFJFYf" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a><a href="wiki.html"><i class="fa-solid fa-book"></i> Wiki</a></div></div>
     </div>
   </footer>
-
 </div>
 
-<!-- IMPRESSUM MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose">×</button>
-    <h2>Impressum</h2>
-    <p><strong>Angaben gemäß § 5 DDG</strong></p>
-    <p>5base.de</p>
-    <h3>Betreiber</h3>
-    <p>Lias Lemke c/o Online-Impressum #7237<br>Europaring 90, 53757 Sankt Augustin</p>
-    <h3>Kontakt</h3>
-    <p>E-Mail: support@5base.de<br>Zweiter Kontaktweg: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">Discord</a></p>
-    <h3>Aufsichtsbehörde</h3>
-    <p>Medienanstalt Thüringen · Sitz: Deutschland</p>
-    <p style="color:var(--dim); font-size:.78rem; margin-top:18px;">Kein Umsatzsteuerausweis aufgrund Anwendung der Kleinunternehmerregelung gemäß § 19 UStG.</p>
-  </div>
-</div>
+<div id="modal" class="modal"><div class="modal-box"><button class="modal-close" id="modalClose">×</button><h2>Impressum</h2><p><strong>Angaben gemäß § 5 DDG</strong></p><p>5base.de</p><h3>Betreiber</h3><p>Lias Lemke c/o Online-Impressum #7237<br>Europaring 90, 53757 Sankt Augustin</p><h3>Kontakt</h3><p>E-Mail: support@5base.de<br>Zweiter Kontaktweg: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">Discord</a></p><h3>Aufsichtsbehörde</h3><p>Medienanstalt Thüringen · Sitz: Deutschland</p><p style="color:var(--dim);font-size:.78rem;margin-top:18px">Kein Umsatzsteuerausweis aufgrund Anwendung der Kleinunternehmerregelung gemäß § 19 UStG.</p></div></div>
 
-<!-- DATENSCHUTZ MODAL -->
-<div id="dsModal" class="modal">
-  <div class="modal-box wide">
-    <button class="modal-close" id="dsModalClose">×</button>
-    <h2>Datenschutzerklärung</h2>
-    <p class="small">Stand: Mai 2026</p>
+<div id="dsModal" class="modal"><div class="modal-box wide"><button class="modal-close" id="dsModalClose">×</button><h2>Datenschutzerklärung</h2><p class="small">Stand: Mai 2026</p><p>Diese Datenschutzerklärung erklärt, welche personenbezogenen Daten beim Besuch der Website 5base.de, beim Nutzen des Web-Dashboards und beim Einsatz des Discord-Bots FiveBase verarbeitet werden.</p><h3>Verantwortlicher</h3><p>Lias Lemke c/o Online-Impressum #7237<br>Europaring 90, 53757 Sankt Augustin<br>E-Mail: <a href="mailto:support@5base.de">support@5base.de</a></p><h3>Bot-Daten</h3><p>Für den Betrieb werden je nach Modul Discord-Serverdaten, Rollen-/Channel-IDs, Konfigurationen, Stempelzeiten, Personalakten, Tickets, Urlaubsanträge, Abmahnungen und weitere vom Server konfigurierte Daten gespeichert.</p><h3>Referenznennung</h3><p>Discord-Server, die FiveBase nutzen, können als Referenz oder Vorschau genannt werden. Es werden keine vertraulichen Inhalte wie Ticket-Inhalte, Personalakten, Stempelzeiten oder interne Channel-Inhalte veröffentlicht. Serverbetreiber können der Darstellung jederzeit per E-Mail oder Discord-Support widersprechen.</p><h3>Rechte</h3><p>Du hast Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. Zur Ausübung genügt eine E-Mail an support@5base.de.</p></div></div>
 
-    <p>Diese Datenschutzerklärung erklärt, welche personenbezogenen Daten beim Besuch der Website <strong>5base.de</strong>, beim Nutzen des Web-Dashboards (<strong>dashboard.5base.de</strong>) und beim Einsatz des Discord-Bots <strong>FiveBase</strong> verarbeitet werden, sowie deine Rechte als betroffene Person nach der Datenschutz-Grundverordnung (DSGVO).</p>
+<div id="tosModal" class="modal"><div class="modal-box wide"><button class="modal-close" id="tosModalClose">×</button><h2>Nutzungsbedingungen</h2><p class="small">Stand: Mai 2026</p><p>FiveBase stellt technische Funktionen zur Verwaltung von Discord-Servern und GTA-RP-Fraktionen bereit. Die Nutzung erfolgt auf eigene Verantwortung des jeweiligen Serverbetreibers.</p><h3>Referenznennung und Vorschau</h3><p>Mit der Nutzung von FiveBase erklärt sich der Serverbetreiber damit einverstanden, dass der Discord-Server als Referenz, Beispiel oder Vorschau auf FiveBase-Websites oder im Dashboard dargestellt werden kann. Es werden keine vertraulichen Inhalte veröffentlicht.</p><h3>Widerspruch</h3><p>Der Serverbetreiber kann der öffentlichen Darstellung jederzeit widersprechen. Eine formlose Nachricht an support@5base.de oder über den Discord-Support genügt.</p><h3>Verfügbarkeit</h3><p>FiveBase wird kostenlos bereitgestellt. Ein Anspruch auf dauerhafte Verfügbarkeit, bestimmte Funktionen oder fehlerfreien Betrieb besteht nicht.</p></div></div>
 
-    <hr>
-
-    <h3>1. Verantwortlicher</h3>
-    <p>Verantwortlich für die Datenverarbeitung im Sinne von Art. 4 Nr. 7 DSGVO ist:</p>
-    <p>
-      <strong>Lias Lemke</strong><br>
-      c/o Online-Impressum #7237<br>
-      Europaring 90, 53757 Sankt Augustin<br>
-      E-Mail: <a href="mailto:support@5base.de">support@5base.de</a><br>
-      Discord: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">discord.gg/VbnSmhMjpu</a>
-    </p>
-
-    <h3>2. Datenschutzbeauftragter</h3>
-    <p>Aufgrund der Größe des Projekts ist die Bestellung eines Datenschutzbeauftragten gesetzlich nicht erforderlich. Bei Fragen zum Datenschutz wende dich bitte direkt an den oben genannten Verantwortlichen.</p>
-
-    <h3>3. Erhebung und Verarbeitung von Daten</h3>
-
-    <div class="ds-section">
-      <h4>3.1 Beim Besuch der Website (5base.de)</h4>
-      <p>Beim Aufruf der Seiten <code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">5base.de</code> und <code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">5base.de/wiki.html</code> werden vom Webserver des Hostingproviders technisch notwendige Server-Logs erfasst:</p>
-      <ul>
-        <li>IP-Adresse (gekürzt bzw. anonymisiert)</li>
-        <li>Datum und Uhrzeit des Zugriffs</li>
-        <li>Aufgerufene URL und HTTP-Statuscode</li>
-        <li>Browser-Typ, Sprache und Betriebssystem</li>
-        <li>Referrer-URL (falls vorhanden)</li>
-      </ul>
-      <p><strong>Zweck:</strong> Bereitstellung der Website, Stabilität, Fehleranalyse, Sicherheit (z.B. Erkennung von DDoS-Angriffen).<br>
-      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb).<br>
-      <strong>Speicherdauer:</strong> Server-Logs werden nach maximal 7 Tagen automatisch gelöscht, soweit nicht aus Sicherheitsgründen länger erforderlich.</p>
-    </div>
-
-    <div class="ds-section">
-      <h4>3.2 Eingebundene Drittanbieter (Schriften & Icons)</h4>
-      <p>Die Website lädt Schriften (Google Fonts) und Icons (Font Awesome via Cloudflare) von externen Servern. Dabei wird beim ersten Aufruf deine IP-Adresse an Google bzw. Cloudflare übermittelt.</p>
-      <ul>
-        <li><strong>Google Fonts</strong> — Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</li>
-        <li><strong>Font Awesome (Cloudflare CDN)</strong> — Anbieter: Cloudflare Inc., 101 Townsend Street, San Francisco, CA 94107, USA</li>
-      </ul>
-      <p><strong>Zweck:</strong> Einheitliche und schnelle Darstellung der Schriften und Icons.<br>
-      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung über den Cookie-/Consent-Banner).<br>
-      <strong>Speicherdauer:</strong> Wird allein durch den Drittanbieter bestimmt. Auf die Verarbeitung dort haben wir keinen Einfluss.</p>
-    </div>
-
-    <div class="ds-section">
-      <h4>3.3 Login & Dashboard (dashboard.5base.de)</h4>
-      <p>Wenn du dich am Dashboard anmeldest, wird der OAuth2-Mechanismus von Discord genutzt. Dabei werden folgende Daten von Discord übermittelt und verarbeitet:</p>
-      <ul>
-        <li>Discord-User-ID</li>
-        <li>Discord-Username (inkl. Tag bzw. Discriminator)</li>
-        <li>Discord-Avatar-URL</li>
-        <li>Liste deiner Discord-Server (nur die ID, der Name und die Berechtigungen — zur Anzeige der verwaltbaren Server)</li>
-      </ul>
-      <p>Diese Daten werden in einer <strong>Server-Session</strong> auf unserem Hostsystem gespeichert. Ein <strong>technisch notwendiges Session-Cookie</strong> (<code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">connect.sid</code>) wird in deinem Browser gesetzt, damit du eingeloggt bleibst.</p>
-      <p><strong>Zweck:</strong> Authentifizierung, Bereitstellung der Dashboard-Funktionen, Zuordnung von Konfigurationsänderungen zu deinem Discord-Account.<br>
-      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung — Bereitstellung des Dashboards).<br>
-      <strong>Speicherdauer:</strong> Session-Cookies werden bei Logout oder spätestens nach 30 Tagen Inaktivität gelöscht.</p>
-    </div>
-
-    <div class="ds-section">
-      <h4>3.4 Bot-Daten (Discord-Server-Konfigurationen)</h4>
-      <p>Wenn du den FiveBase-Bot auf deinem Discord-Server einsetzt, werden Konfigurations- und Funktionsdaten gespeichert, die für den Betrieb der Bot-Funktionen erforderlich sind:</p>
-      <ul>
-        <li>Discord-Server-ID und Server-Name</li>
-        <li>Öffentlich sichtbare Serverdaten für Referenz- und Vorschauzwecke, sofern der Server FiveBase nutzt</li>
-        <li>Konfigurierte Rollen-, Channel- und Kategorie-IDs</li>
-        <li>Modul-Einstellungen (Stempelsystem, Tickets, Moderation usw.)</li>
-        <li>Stempel-Daten (Dienstzeiten der Mitarbeiter)</li>
-        <li>Personalakten, Urlaubseinträge, Verwarnungen, Abmahnungen</li>
-        <li>Ticket-Inhalte und Bewerbungs-Antworten</li>
-        <li>Discord-User-IDs der von Bot-Aktionen betroffenen Personen</li>
-      </ul>
-      <p><strong>Zweck:</strong> Bereitstellung der vom Server-Administrator konfigurierten Bot-Funktionen.<br>
-      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung gegenüber dem Server-Administrator), bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse des jeweiligen Server-Betreibers an Personalverwaltung).<br>
-      <strong>Verantwortlich für die Daten innerhalb eines Servers:</strong> Der jeweilige Server-Administrator. Wir stellen lediglich die technische Infrastruktur bereit.<br>
-      <strong>Speicherdauer:</strong> Solange der Bot auf dem Server eingesetzt wird, bzw. bis zur Löschanfrage durch den Server-Administrator.</p>
-    </div>
-
-    <div class="ds-section">
-      <h4>3.5 Referenznennung von Servern, die FiveBase nutzen</h4>
-      <p>Wir behalten uns vor, Discord-Server, die den FiveBase-Bot nutzen, auf unseren Websites, im Dashboard oder in Werbe-/Referenzbereichen als Beispiel oder Vorschau zu nennen. Dies dient dazu, die Nutzung von FiveBase transparent darzustellen und anderen Interessenten zu zeigen, welche Server bzw. Fraktionen FiveBase bereits einsetzen.</p>
-
-      <p>Dabei können insbesondere folgende öffentlich sichtbare oder technisch notwendige Serverdaten angezeigt werden:</p>
-      <ul>
-        <li>Discord-Servername</li>
-        <li>Server-Icon bzw. Logo, sofern öffentlich sichtbar</li>
-        <li>ungefähre Servergröße oder Mitgliederzahl</li>
-        <li>allgemeiner Hinweis, dass FiveBase auf diesem Server genutzt wird</li>
-        <li>optional ein öffentlicher Invite-Link, sofern dieser öffentlich verfügbar ist oder vom Server bereitgestellt wurde</li>
-      </ul>
-
-      <p>Es werden dabei <strong>keine vertraulichen Inhalte</strong> veröffentlicht. Insbesondere werden keine Ticket-Inhalte, Bewerbungsantworten, Personalakten, Stempelzeiten, Verwarnungen, Abmahnungen, Urlaubsanträge, internen Channel-Inhalte oder sonstige personenbezogene Verwaltungsdaten öffentlich angezeigt.</p>
-
-      <p><strong>Zweck:</strong> Darstellung von Referenzen, Produktvorschau, Vertrauensaufbau und Bewerbung von FiveBase.<br>
-      <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Außendarstellung und Vermarktung des Dienstes). Soweit ein Serverbetreiber ausdrücklich Daten oder Inhalte zur Veröffentlichung bereitstellt, erfolgt die Verarbeitung zusätzlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).</p>
-
-      <p>Serverbetreiber können der öffentlichen Darstellung ihres Servers jederzeit widersprechen. Eine formlose Nachricht an <a href="mailto:support@5base.de">support@5base.de</a> oder über unseren Discord-Support genügt. Nach Eingang des Widerspruchs entfernen wir den Server aus öffentlichen Referenzbereichen innerhalb angemessener Zeit.</p>
-    </div>
-
-    <h3>4. Empfänger der Daten</h3>
-    <p>Eine Weitergabe deiner personenbezogenen Daten an Dritte findet ausschließlich in folgendem Umfang statt:</p>
-    <ul>
-      <li><strong>Discord (Discord Inc., 444 De Haro Street, San Francisco, CA 94107, USA)</strong> — für die OAuth2-Anmeldung und sämtliche Bot-Interaktionen. Discord verarbeitet hierbei Daten gemäß <a href="https://discord.com/privacy" target="_blank">discord.com/privacy</a>.</li>
-      <li><strong>Hostingprovider</strong> — die Website und der Bot werden auf gemieteten Servern betrieben. Der Hoster verarbeitet ausschließlich technische Verbindungsdaten im Rahmen eines Auftragsverarbeitungsvertrags.</li>
-      <li><strong>Google Ireland Limited</strong> — bei aktivierter Einwilligung für die Auslieferung von Google Fonts.</li>
-      <li><strong>Cloudflare Inc.</strong> — bei aktivierter Einwilligung für die Auslieferung von Font Awesome.</li>
-    </ul>
-
-    <h3>5. Übermittlung in Drittländer</h3>
-    <p>Bei der Nutzung von Discord, Cloudflare und ggf. weiteren US-Diensten kann eine Übermittlung deiner Daten in die USA erfolgen. Diese Anbieter sind nach dem <strong>EU-US Data Privacy Framework</strong> zertifiziert, sodass ein angemessenes Datenschutzniveau im Sinne der DSGVO gewährleistet ist.</p>
-
-    <h3>6. Cookies</h3>
-    <p>Auf <strong>5base.de</strong> setzen wir keine eigenen Tracking-Cookies. Auf <strong>dashboard.5base.de</strong> wird ausschließlich ein <strong>technisch notwendiges Session-Cookie</strong> (<code style="background:rgba(255,255,255,0.05); padding:1px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:.78rem;">connect.sid</code>) gesetzt, das deine Login-Sitzung speichert. Dieses Cookie ist für die Funktion des Dashboards erforderlich und benötigt keine Einwilligung (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
-    <p>Externe Schriften und Icons (Google Fonts, Font Awesome) werden erst nach deiner Einwilligung über den Consent-Banner geladen. Diese Einwilligung kannst du jederzeit über den Link <strong>"Cookie-Einstellungen"</strong> im Footer widerrufen.</p>
-
-    <h3>7. Deine Rechte als betroffene Person</h3>
-    <p>Nach der DSGVO stehen dir folgende Rechte zu:</p>
-    <ul>
-      <li><strong>Auskunftsrecht (Art. 15 DSGVO):</strong> Du kannst Auskunft über die zu deiner Person gespeicherten Daten verlangen.</li>
-      <li><strong>Berichtigungsrecht (Art. 16 DSGVO):</strong> Du kannst die Berichtigung unrichtiger Daten verlangen.</li>
-      <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Du kannst die Löschung deiner Daten verlangen ("Recht auf Vergessenwerden").</li>
-      <li><strong>Recht auf Einschränkung (Art. 18 DSGVO):</strong> Du kannst die Einschränkung der Verarbeitung verlangen.</li>
-      <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Du kannst die zu deiner Person gespeicherten Daten in einem strukturierten, gängigen Format erhalten.</li>
-      <li><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Du kannst der Verarbeitung deiner Daten aus berechtigtem Interesse widersprechen.</li>
-      <li><strong>Widerrufsrecht (Art. 7 Abs. 3 DSGVO):</strong> Erteilte Einwilligungen kannst du jederzeit mit Wirkung für die Zukunft widerrufen.</li>
-    </ul>
-    <p>Zur Ausübung dieser Rechte genügt eine formlose E-Mail an <a href="mailto:support@5base.de">support@5base.de</a>.</p>
-
-    <h3>8. Beschwerderecht bei der Aufsichtsbehörde</h3>
-    <p>Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn du der Auffassung bist, dass die Verarbeitung deiner Daten gegen die DSGVO verstößt. Zuständig ist insbesondere die Aufsichtsbehörde des Bundeslandes, in dem du deinen Wohnsitz hast. Eine Liste aller deutschen Aufsichtsbehörden findest du unter:</p>
-    <p><a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html" target="_blank">bfdi.bund.de — Aufsichtsbehörden der Länder</a></p>
-
-    <h3>9. Pflicht zur Bereitstellung der Daten</h3>
-    <p>Die Bereitstellung deiner Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Du bist nicht verpflichtet, deine Daten zur Verfügung zu stellen. Die Nichtbereitstellung hat folgende Konsequenzen:</p>
-    <ul>
-      <li>Ohne Discord-Login ist eine Nutzung des Dashboards nicht möglich.</li>
-      <li>Ohne die für die Bot-Funktionen erforderlichen Daten kann der jeweilige Bot-Service nicht erbracht werden.</li>
-    </ul>
-
-    <h3>10. Datensicherheit</h3>
-    <p>Wir treffen technische und organisatorische Maßnahmen, um deine Daten gegen unbefugten Zugriff, Verlust oder Manipulation zu schützen. Dazu gehören insbesondere die HTTPS-Verschlüsselung der Datenübertragung sowie regelmäßige automatische Backups der Bot-Datenbank.</p>
-
-    <h3>11. Änderungen dieser Datenschutzerklärung</h3>
-    <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder bei Funktionserweiterungen des Bots zu aktualisieren. Die jeweils aktuelle Fassung kann jederzeit hier eingesehen werden.</p>
-
-    <p class="small" style="margin-top:24px;">© 2026 FiveBase</p>
-  </div>
-</div>
-
-<!-- NUTZUNGSBEDINGUNGEN MODAL -->
-<div id="tosModal" class="modal">
-  <div class="modal-box wide">
-    <button class="modal-close" id="tosModalClose">×</button>
-    <h2>Nutzungsbedingungen</h2>
-    <p class="small">Stand: Mai 2026</p>
-
-    <p>Diese Nutzungsbedingungen gelten für die Nutzung des Discord-Bots <strong>FiveBase</strong>, des Web-Dashboards unter <strong>dashboard.5base.de</strong> sowie der damit verbundenen FiveBase-Dienste.</p>
-
-    <hr>
-
-    <h3>1. Anbieter</h3>
-    <p>Anbieter des Dienstes ist:</p>
-    <p>
-      <strong>Lias Lemke</strong><br>
-      c/o Online-Impressum #7237<br>
-      Europaring 90, 53757 Sankt Augustin<br>
-      E-Mail: <a href="mailto:support@5base.de">support@5base.de</a><br>
-      Discord: <a href="https://discord.gg/VbnSmhMjpu" target="_blank">discord.gg/VbnSmhMjpu</a>
-    </p>
-
-    <h3>2. Nutzung von FiveBase</h3>
-    <p>FiveBase stellt technische Funktionen zur Verwaltung von Discord-Servern und GTA-RP-Fraktionen bereit. Dazu gehören unter anderem Zeiterfassung, Ticketsysteme, Dienstnummern, Personalverwaltung, Urlaubsverwaltung, Terminverwaltung, Moderationsfunktionen und optional FiveM-Anbindungen.</p>
-    <p>Die Nutzung erfolgt auf eigene Verantwortung des jeweiligen Serverbetreibers. Der Serverbetreiber ist dafür verantwortlich, dass der Bot entsprechend geltendem Recht, den Discord-Richtlinien und den eigenen internen Serverregeln genutzt wird.</p>
-
-    <h3>3. Referenznennung und Vorschau von Servern</h3>
-    <p>Mit der Nutzung von FiveBase erklärt sich der Serverbetreiber damit einverstanden, dass der jeweilige Discord-Server als Referenz, Beispiel oder Vorschau auf FiveBase-Websites, im Dashboard oder in Werbe-/Informationsbereichen dargestellt werden kann.</p>
-    <p>Dabei können insbesondere folgende öffentlich sichtbare oder technisch notwendige Daten angezeigt werden:</p>
-    <ul>
-      <li>Discord-Servername</li>
-      <li>Server-Icon bzw. Logo, sofern öffentlich sichtbar</li>
-      <li>ungefähre Mitgliederzahl oder Servergröße</li>
-      <li>allgemeiner Hinweis, dass FiveBase auf diesem Server genutzt wird</li>
-      <li>optional ein öffentlicher Invite-Link, sofern dieser öffentlich verfügbar ist oder vom Server bereitgestellt wurde</li>
-    </ul>
-    <p>Es werden keine vertraulichen Inhalte veröffentlicht. Insbesondere werden keine Ticket-Inhalte, Bewerbungsantworten, Personalakten, Stempelzeiten, Verwarnungen, Abmahnungen, Urlaubsanträge, internen Channel-Inhalte oder sonstige personenbezogene Verwaltungsdaten öffentlich angezeigt.</p>
-
-    <h3>4. Widerspruch gegen die Referenznennung</h3>
-    <p>Der Serverbetreiber kann der öffentlichen Darstellung seines Servers jederzeit widersprechen. Eine formlose Nachricht an <a href="mailto:support@5base.de">support@5base.de</a> oder über den Discord-Support genügt. Nach Eingang des Widerspruchs entfernen wir den Server aus öffentlichen Referenzbereichen innerhalb angemessener Zeit.</p>
-
-    <h3>5. Verfügbarkeit und Änderungen</h3>
-    <p>FiveBase wird kostenlos bereitgestellt. Ein Anspruch auf dauerhafte Verfügbarkeit, bestimmte Funktionen oder fehlerfreien Betrieb besteht nicht. Wir behalten uns vor, Funktionen zu ändern, zu erweitern, einzuschränken oder einzustellen, sofern dies aus technischen, organisatorischen oder rechtlichen Gründen erforderlich ist.</p>
-
-    <h3>6. Missbrauch</h3>
-    <p>Die Nutzung von FiveBase für rechtswidrige Zwecke, Spam, Missbrauch, Umgehung von Discord-Regeln oder zur Schädigung Dritter ist untersagt. Bei Verstößen können einzelne Server oder Nutzer vom Dienst ausgeschlossen werden.</p>
-
-    <h3>7. Datenschutz</h3>
-    <p>Informationen zur Verarbeitung personenbezogener Daten findest du in unserer <a href="#" id="tosOpenDs">Datenschutzerklärung</a>.</p>
-
-    <h3>8. Änderungen dieser Nutzungsbedingungen</h3>
-    <p>Wir behalten uns vor, diese Nutzungsbedingungen anzupassen, wenn sich Funktionen, technische Abläufe oder rechtliche Anforderungen ändern. Die aktuelle Fassung ist jederzeit auf dieser Website abrufbar.</p>
-
-    <p class="small" style="margin-top:24px;">© 2026 FiveBase</p>
-  </div>
-</div>
-
-<!-- COOKIE BANNER -->
-<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookie-Hinweis" aria-live="polite">
-  <h3><i class="fa-solid fa-cookie-bite"></i> Cookies & externe Inhalte</h3>
-  <p>Wir nutzen ein technisch notwendiges Session-Cookie für das Dashboard-Login. Zusätzlich laden wir Schriften (Google Fonts) und Icons (Font Awesome) von externen Anbietern. Mehr in unserer <a href="#" id="cbDsLink">Datenschutzerklärung</a>.</p>
-  <div class="cookie-banner-actions">
-    <button class="cb-essential" id="cbEssential">Nur notwendige</button>
-    <button class="cb-accept" id="cbAccept">Alle akzeptieren</button>
-  </div>
-</div>
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookie-Hinweis"><h3><i class="fa-solid fa-cookie-bite"></i> Cookies & externe Inhalte</h3><p>Wir nutzen ein technisch notwendiges Session-Cookie für das Dashboard-Login. Zusätzlich laden wir Schriften und Icons von externen Anbietern. Mehr in unserer <a href="#" id="cbDsLink">Datenschutzerklärung</a>.</p><div class="cookie-banner-actions"><button class="cb-essential" id="cbEssential">Nur notwendige</button><button class="cb-accept" id="cbAccept">Alle akzeptieren</button></div></div>
 
 <script>
-// ── STARS ────────────────────────────────
-(function(){
-  const c = document.getElementById('stars');
-  const x = c.getContext('2d');
-  let W,H,stars=[];
-  function resize(){ W=c.width=window.innerWidth; H=c.height=window.innerHeight; }
-  resize(); window.addEventListener('resize',resize);
-  for(let i=0;i<180;i++) stars.push({
-    x:Math.random(), y:Math.random(),
-    r:Math.random()*1.2+.2,
-    a:Math.random(),
-    da:(Math.random()-.5)*.004,
-  });
-  function draw(){
-    x.clearRect(0,0,W,H);
-    stars.forEach(s=>{
-      s.a+=s.da;
-      if(s.a<0)s.da=Math.abs(s.da);
-      if(s.a>1)s.da=-Math.abs(s.da);
-      x.beginPath();
-      x.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      x.fillStyle=`rgba(180,195,255,${s.a*.6})`;
-      x.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ── REVEAL ───────────────────────────────
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 60);
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// ── MODAL (IMPRESSUM) ────────────────────
-const modal = document.getElementById('modal');
-document.getElementById('openImp').addEventListener('click', e => {
-  e.preventDefault();
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
-document.getElementById('modalClose').addEventListener('click', () => {
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-});
-modal.addEventListener('click', e => {
-  if (e.target === modal) {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-});
-
-// ── DATENSCHUTZ MODAL ───────────────────
-const dsModal = document.getElementById('dsModal');
-function openDs(e) {
-  if (e) e.preventDefault();
-  dsModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeDs() {
-  dsModal.classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.getElementById('openDs').addEventListener('click', openDs);
-document.getElementById('cbDsLink').addEventListener('click', openDs);
-document.getElementById('dsModalClose').addEventListener('click', closeDs);
-dsModal.addEventListener('click', e => { if (e.target === dsModal) closeDs(); });
-
-// ── NUTZUNGSBEDINGUNGEN MODAL ───────────
-const tosModal = document.getElementById('tosModal');
-function openTos(e) {
-  if (e) e.preventDefault();
-  tosModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeTos() {
-  tosModal.classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.getElementById('openTos').addEventListener('click', openTos);
-document.getElementById('tosModalClose').addEventListener('click', closeTos);
-tosModal.addEventListener('click', e => { if (e.target === tosModal) closeTos(); });
-document.getElementById('tosOpenDs').addEventListener('click', e => {
-  e.preventDefault();
-  closeTos();
-  openDs();
-});
-
-// ── COOKIE BANNER ───────────────────────
-// 'accepted' = User hat alle Cookies akzeptiert (inkl. externer Fonts/Icons)
-// 'essential' = nur notwendige Cookies, externe Drittanbieter blockieren wir nicht aktiv,
-//               sind aber bereits geladen — wir empfehlen daher trotzdem die Variante mit
-//               selbst-gehosteten Fonts. Hier wird nur die Wahl persistiert.
-// null = keine Wahl getroffen, Banner anzeigen
-const COOKIE_KEY = 'fb_cookie_consent';
-const cookieBanner = document.getElementById('cookieBanner');
-
-function getConsent() {
-  try { return localStorage.getItem(COOKIE_KEY); }
-  catch (e) { return null; }
-}
-function setConsent(v) {
-  try { localStorage.setItem(COOKIE_KEY, v); }
-  catch (e) {}
-}
-function showBanner() {
-  cookieBanner.classList.add('show');
-}
-function hideBanner() {
-  cookieBanner.classList.remove('show');
-}
-
-// Banner nur anzeigen wenn noch keine Wahl getroffen
-if (!getConsent()) {
-  // Kleine Verzögerung damit der Banner nicht sofort beim Pageload aufpoppt
-  setTimeout(showBanner, 800);
-}
-
-document.getElementById('cbAccept').addEventListener('click', () => {
-  setConsent('accepted');
-  hideBanner();
-});
-document.getElementById('cbEssential').addEventListener('click', () => {
-  setConsent('essential');
-  hideBanner();
-});
-
-// "Cookie-Einstellungen" im Footer öffnet den Banner erneut
-document.getElementById('openCookieSettings').addEventListener('click', e => {
-  e.preventDefault();
-  showBanner();
-});
-
-// ── HASH NAVIGATION ─────────────────────
-// Erlaubt Links wie index.html#openDs, index.html#openImp oder index.html#openTos aus dem Wiki
-function handleHash() {
-  const h = location.hash;
-  if (h === '#openDs') openDs();
-  else if (h === '#openImp') {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  else if (h === '#openTos') openTos();
-}
-window.addEventListener('load', handleHash);
-window.addEventListener('hashchange', handleHash);
+(function(){const c=document.getElementById('stars');const x=c.getContext('2d');let W,H,stars=[];function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}resize();window.addEventListener('resize',resize);for(let i=0;i<180;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),da:(Math.random()-.5)*.004});function draw(){x.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.da;if(s.a<0)s.da=Math.abs(s.da);if(s.a>1)s.da=-Math.abs(s.da);x.beginPath();x.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);x.fillStyle=`rgba(180,195,255,${s.a*.6})`;x.fill()});requestAnimationFrame(draw)}draw()})();
+const io=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const modal=document.getElementById('modal');document.getElementById('openImp').addEventListener('click',e=>{e.preventDefault();modal.classList.add('open');document.body.style.overflow='hidden'});document.getElementById('modalClose').addEventListener('click',()=>{modal.classList.remove('open');document.body.style.overflow=''});modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');document.body.style.overflow=''}});
+const dsModal=document.getElementById('dsModal');function openDs(e){if(e)e.preventDefault();dsModal.classList.add('open');document.body.style.overflow='hidden'}function closeDs(){dsModal.classList.remove('open');document.body.style.overflow=''}document.getElementById('openDs').addEventListener('click',openDs);document.getElementById('cbDsLink').addEventListener('click',openDs);document.getElementById('dsModalClose').addEventListener('click',closeDs);dsModal.addEventListener('click',e=>{if(e.target===dsModal)closeDs()});
+const tosModal=document.getElementById('tosModal');function openTos(e){if(e)e.preventDefault();tosModal.classList.add('open');document.body.style.overflow='hidden'}function closeTos(){tosModal.classList.remove('open');document.body.style.overflow=''}document.getElementById('openTos').addEventListener('click',openTos);document.getElementById('tosModalClose').addEventListener('click',closeTos);tosModal.addEventListener('click',e=>{if(e.target===tosModal)closeTos()});
+const COOKIE_KEY='fb_cookie_consent';const cookieBanner=document.getElementById('cookieBanner');function getConsent(){try{return localStorage.getItem(COOKIE_KEY)}catch(e){return null}}function setConsent(v){try{localStorage.setItem(COOKIE_KEY,v)}catch(e){}}function showBanner(){cookieBanner.classList.add('show')}function hideBanner(){cookieBanner.classList.remove('show')}if(!getConsent())setTimeout(showBanner,800);document.getElementById('cbAccept').addEventListener('click',()=>{setConsent('accepted');hideBanner()});document.getElementById('cbEssential').addEventListener('click',()=>{setConsent('essential');hideBanner()});document.getElementById('openCookieSettings').addEventListener('click',e=>{e.preventDefault();showBanner()});
+function handleHash(){const h=location.hash;if(h==='#openDs')openDs();else if(h==='#openImp'){modal.classList.add('open');document.body.style.overflow='hidden'}else if(h==='#openTos')openTos()}window.addEventListener('load',handleHash);window.addEventListener('hashchange',handleHash);
 </script>
 </body>
 </html>
